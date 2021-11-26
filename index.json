@@ -1,0 +1,9 @@
+{
+	"PATHS_FROM_SCRIPTS": {
+		"BIRD_NAMES": "../data/names.txt",
+		"BIRD_INFO": "../data/taxa.csv",
+		"BIRD_TREE_IMG_DIR": "../data/thumbs",
+		"BIRD_PAGE_IMG_DIR": "../data/images",
+		"BIRD_HTML_DIR": "../species"
+	}
+}
