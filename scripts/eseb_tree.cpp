@@ -66,8 +66,11 @@ Tree create_random_tree( std::vector<std::string> const& names )
     return tree;
 }
 
-void make_svg_image_tree( Tree const& tree, std::string const& out_path )
-{
+void make_svg_image_tree(
+    Tree const& tree,
+    std::string const& out_path,
+    std::string const& placed_taxon = ""
+) {
     // Base path for the svg links. Set to relative to work with shifting dirs.
     // std::string const base_path = out_path;
     std::string const base_path = "../";
@@ -116,30 +119,32 @@ void make_svg_image_tree( Tree const& tree, std::string const& out_path )
     // Set edge strokes.
     std::vector<utils::SvgStroke> strokes;
     for( size_t i = 0; i < tree.edge_count(); ++i ) {
-        (void) i;
         auto stroke = SvgStroke();
         stroke.line_cap = utils::SvgStroke::LineCap::kRound;
         stroke.width = 6.0;
+
+        // If this is the placed taxon, make it dashed.
+        if( tree.edge_at(i).secondary_node().data<CommonNodeData>().name == placed_taxon ) {
+            stroke.color = Color( 0.92, 0.05, 0.45 );
+            stroke.dash_array = { 10, 10 };
+        }
+
         strokes.push_back( std::move( stroke ));
     }
     layout.set_edge_strokes( strokes );
 
-    // Write to file
+    // Write to file, either a generic tree, or a special named one for the placed taxon.
     std::ostringstream out;
     layout.to_svg_document().write( out );
-    utils::file_write( out.str(), out_path + "tree/tree.svg" );
+    if( placed_taxon.empty() ) {
+        utils::file_write( out.str(), out_path + "tree/tree.svg" );
+    } else {
+        utils::file_write( out.str(), out_path + "tree/tree_" + placed_taxon + ".svg" );
+    }
 }
 
-int main( int argc, char** argv )
+void base_tree_test()
 {
-    (void) argc;
-    (void) argv;
-
-    // Activate logging.
-    utils::Logging::log_to_stdout();
-    utils::Logging::details.time = true;
-    LOG_INFO << "started";
-
     // Input data. Hard coded for now.
     // if( argc != 2 ) {
     //     throw std::runtime_error( "need input files" );
@@ -163,6 +168,50 @@ int main( int argc, char** argv )
 
     // Make an svg tree out of it and save it.
     make_svg_image_tree( tree, base_path );
+}
+
+void base_placement_test()
+{
+    // Input data. Hard coded for now.
+    // if( argc != 2 ) {
+    //     throw std::runtime_error( "need input files" );
+    // }
+    std::string const base_path = "/home/lucas/Dropbox/GitHub/eseb-birds/";
+    std::string const jplace_file = base_path + "data/placement.jplace";
+
+    auto sample = JplaceReader().read( from_file( jplace_file ));
+    sort_placements_by_weight( sample );
+    for( size_t i = 0; i < sample.size(); ++i ) {
+        auto const& pquery = sample.at( i );
+        auto const& name = pquery.name_at(0).name;
+        // auto const& tree = sample.tree();
+        // auto const& place = pquery.placement_at(0);
+
+        // We make a blank copy of the sample with just the tree,
+        // and copy in only one pquery at a time.
+        auto copy = Sample( sample.tree() );
+        copy.add( pquery );
+
+        // Make a tree with the pquery attached to it.
+        auto const ltree = labelled_tree( copy );
+
+        // Make a picture.
+        make_svg_image_tree( ltree, base_path, name );
+    }
+}
+
+int main( int argc, char** argv )
+{
+    (void) argc;
+    (void) argv;
+
+    // Activate logging.
+    utils::Logging::log_to_stdout();
+    utils::Logging::details.time = true;
+    LOG_INFO << "started";
+
+    // base_tree_test();
+    base_placement_test();
 
     LOG_INFO << "finished";
     return 0;
