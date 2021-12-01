@@ -137,9 +137,9 @@ void make_svg_image_tree(
     std::ostringstream out;
     layout.to_svg_document().write( out );
     if( placed_taxon.empty() ) {
-        utils::file_write( out.str(), out_path + "tree/tree.svg" );
+        utils::file_write( out.str(), out_path + "data/trees/tree.svg" );
     } else {
-        utils::file_write( out.str(), out_path + "tree/tree_" + placed_taxon + ".svg" );
+        utils::file_write( out.str(), out_path + "data/trees/tree_" + placed_taxon + ".svg" );
     }
 }
 
@@ -151,7 +151,7 @@ void base_tree_test()
     // }
     std::string const base_path = "/home/lucas/Dropbox/GitHub/eseb-birds/";
     std::string const taxon_names_file = base_path + "data/names.txt";
-    std::string const newick_file = base_path + "tree/tree.newick";
+    std::string const newick_file = base_path + "data/trees/tree.newick";
 
     // Load the tree, or make it randomly.
     Tree tree;
