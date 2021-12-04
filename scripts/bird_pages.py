@@ -50,7 +50,7 @@ class BirdPage:
         '''
         file_name = os.path.join(
                 INDEX_DICT["PATHS_FROM_SCRIPTS"]["BIRD_HTML_DIR"],
-                f"{self.name}_alt.html")
+                f"{self.name}.html")
         return os.path.abspath(file_name)
 
 
@@ -60,8 +60,8 @@ class BirdPage:
         file_name = os.path.join(
                 INDEX_DICT["PATHS_FROM_SCRIPTS"]["BIRD_PAGE_IMG_DIR"],
                 f"{self.name}.png")
-        return os.path.abspath(file_name)
-
+        # return os.path.abspath(file_name)
+        return os.path.relpath(file_name, self.make_page_path())
 
     # HTML functions
     def initiate_html(self):
@@ -138,8 +138,8 @@ class BirdPage:
         from dominate.util import raw
         
         # get image location
-        # image_file = self.make_img_path()
-        image_file = self.data["Photolink"]
+        image_file = self.make_img_path()
+        # image_file = self.data["Photolink"]
         # get license information
         license_info = self.data["license notice for plain text "]
         # get license link
