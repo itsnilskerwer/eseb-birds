@@ -61,8 +61,7 @@ class BirdPage:
                 INDEX_DICT["PATHS_FROM_SCRIPTS"]["BIRD_PAGE_IMG_DIR"],
                 f"{self.name}.png")
         # return os.path.abspath(file_name)
-        return os.path.relpath(file_name, self.make_page_path())
-
+        return os.path.relpath(file_name, os.path.dirname(self.make_page_path()))
     # HTML functions
     def initiate_html(self):
         '''Initiate the dominate document.
@@ -148,7 +147,7 @@ class BirdPage:
             attr(id="image")
             with figure():
                 attr(id="habitus")
-                img(source=image_file,
+                img(src=image_file,
                         alt=license_info)
                 if isinstance(license_link, str):
                     figcaption(raw(license_link))

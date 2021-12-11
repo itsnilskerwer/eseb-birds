@@ -193,7 +193,7 @@ class PlacementPage:
             attr(id=attr_id)
             with figure():
                 attr(id=img_content)
-                img(source=image_path,
+                img(src=image_path,
                         alt=license_info)
                 if isinstance(license_link, str):
                     figcaption(raw(license_link))
