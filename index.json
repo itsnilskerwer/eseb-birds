@@ -1,13 +1,28 @@
 {
-	"PATHS_FROM_SCRIPTS": {
-		"BIRD_NAMES": "../data/names.txt",
-		"BIRD_INFO": "../data/taxa.csv",
-		"BIRD_TREE_IMG_DIR": "../data/thumbs",
-		"BIRD_PLACEMENT_IMG_DIR": "../data/trees",
-		"BIRD_PAGE_IMG_DIR": "../data/images",
-		"BIRD_HTML_DIR": "../species",
-		"START_AND_ERROR_HTML_DIR": "../core",
-		"PLACEMENT_HTML_DIR": "../placement",
-		"CSS_DIR": "../meta"
+	"EN": {
+		"PATHS_FROM_SCRIPTS": {
+			"BIRD_NAMES": "../data/names.txt",
+			"BIRD_INFO": "../data/taxa.csv",
+			"BIRD_TREE_IMG_DIR": "../data/thumbs",
+			"BIRD_PLACEMENT_IMG_DIR": "../data/trees",
+			"BIRD_PAGE_IMG_DIR": "../data/images",
+			"BIRD_HTML_DIR": "../public/en/species",
+			"START_AND_ERROR_HTML_DIR": "../public/en/core",
+			"PLACEMENT_HTML_DIR": "../public/en/placement",
+			"CSS_DIR": "../meta"
+		}
+	},
+	"GR": {
+		"PATHS_FROM_SCRIPTS": {
+			"BIRD_NAMES": "../data/names.txt",
+			"BIRD_INFO": "../data/taxa.csv",
+			"BIRD_TREE_IMG_DIR": "../data/thumbs",
+			"BIRD_PLACEMENT_IMG_DIR": "../data/trees",
+			"BIRD_PAGE_IMG_DIR": "../data/images",
+			"BIRD_HTML_DIR": "../public/gr/species",
+			"START_AND_ERROR_HTML_DIR": "../public/gr/core",
+			"PLACEMENT_HTML_DIR": "../public/gr/placement",
+			"CSS_DIR": "../meta"
+		}
 	}
 }
