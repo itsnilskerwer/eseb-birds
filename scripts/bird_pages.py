@@ -12,15 +12,15 @@ from __init__ import INDEX_DICT
 class BirdPage(AbstractPage):
     '''Builder class for a given bird species.
     '''
-    def __init__(self, bird_name):
+    def __init__(self, bird_name, language="EN"):
         '''Initiaize object with a given name.
         '''
-        assert self.check_name(bird_name), f"{bird_name} is not in list."
         self.name = bird_name
+
+        super().__init__(language=language)
+        
         self.get_data()
 
-        # initiate html page
-        super().__init__()
         return
     
     # helpers
@@ -41,6 +41,9 @@ class BirdPage(AbstractPage):
         '''
         # this can be edited.
         # so far, we simply take the latin name.
+        if not hasattr(self, "data"):
+            self.get_data()
+
         title = self.data.loc["Latin"]
         return title
     
@@ -48,7 +51,7 @@ class BirdPage(AbstractPage):
         '''Build name of path for html page.
         '''
         file_name = os.path.join(
-                INDEX_DICT["PATHS_FROM_SCRIPTS"]["BIRD_HTML_DIR"],
+                INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_HTML_DIR"],
                 f"{self.name}.html")
         return os.path.abspath(file_name)
 
@@ -57,9 +60,8 @@ class BirdPage(AbstractPage):
     def html_body(self):
         '''Build the body of the html document.
         '''
-        with self.doc:
-            self.define_header()
-            self.plot_with_info()
+        self.define_header()
+        self.plot_with_info()
         return
 
     def define_header(self):
@@ -103,14 +105,15 @@ class BirdPage(AbstractPage):
 
 ###############
 def main():
-    names_file = INDEX_DICT["PATHS_FROM_SCRIPTS"]["BIRD_NAMES"]
-    with open(names_file, "r") as nf:
-        names = nf.readlines()
-        for bird_name in names:
-            bird_name = bird_name.strip()
-            bp = BirdPage(bird_name)
-            bp.build_html()
-            bp.save_html(force=True)
+    for lang in ["EN", "GR"]:
+        names_file = INDEX_DICT[lang]["PATHS_FROM_SCRIPTS"]["BIRD_NAMES"]
+        with open(names_file, "r") as nf:
+            names = nf.readlines()
+            for bird_name in names:
+                bird_name = bird_name.strip()
+                bp = BirdPage(bird_name, language=lang)
+                bp.build_html()
+                bp.save_html(force=True)
     return
 
 if __name__ == "__main__":

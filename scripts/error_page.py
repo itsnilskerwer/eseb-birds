@@ -25,7 +25,7 @@ class ErrorPage(AbstractPage):
         '''Build name of path for html page.
         '''
         file_name = os.path.join(
-                INDEX_DICT["PATHS_FROM_SCRIPTS"]["START_AND_ERROR_HTML_DIR"],
+                INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["START_AND_ERROR_HTML_DIR"],
                 "error_page.html")
         return os.path.abspath(file_name)
 
@@ -34,9 +34,8 @@ class ErrorPage(AbstractPage):
     def html_body(self):
         '''Build the body of the html document.
         '''
-        with self.doc:
-            self.define_header()
-            self.define_backlink()
+        self.define_header()
+        self.define_backlink()
         return
 
     def define_header(self):
@@ -67,9 +66,10 @@ class ErrorPage(AbstractPage):
 
 ###############
 def main():
-    ep = ErrorPage()
-    ep.build_html()
-    ep.save_html(force=True)
+    for lang in ["EN", "GR"]:
+        ep = ErrorPage(language=lang)
+        ep.build_html()
+        ep.save_html(force=True)
     return
 
 if __name__ == "__main__":

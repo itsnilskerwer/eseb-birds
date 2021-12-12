@@ -25,7 +25,7 @@ class TitlePage(AbstractPage):
         '''Build name of path for html page.
         '''
         file_name = os.path.join(
-                INDEX_DICT["PATHS_FROM_SCRIPTS"]["START_AND_ERROR_HTML_DIR"],
+                INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["START_AND_ERROR_HTML_DIR"],
                 f"title.html")
         return os.path.abspath(file_name)
 
@@ -34,7 +34,7 @@ class TitlePage(AbstractPage):
         '''Build name of path for the tree image.
         '''
         file_name = os.path.join(
-                INDEX_DICT["PATHS_FROM_SCRIPTS"]["BIRD_PLACEMENT_IMG_DIR"],
+                INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_PLACEMENT_IMG_DIR"],
                 f"tree.svg")
         # return os.path.abspath(file_name)
         return os.path.relpath(file_name, os.path.dirname(self.make_page_path()))
@@ -43,11 +43,10 @@ class TitlePage(AbstractPage):
     def html_body(self):
         '''Build the body of the html document.
         '''
-        with self.doc:
-            self.define_header()
-            with div(cls="row"):
-                self.column1()
-                self.column2()
+        self.define_header()
+        with div(cls="row"):
+            self.column1()
+            self.column2()
         return
 
     def define_stylesheet(self):
@@ -55,7 +54,7 @@ class TitlePage(AbstractPage):
         '''
         # define path
         css_rawpath = os.path.join(
-                INDEX_DICT["PATHS_FROM_SCRIPTS"]["CSS_DIR"],
+                INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["CSS_DIR"],
                 'two_columns.css')
         css_path = os.path.relpath(os.path.abspath(css_rawpath),
                 os.path.dirname(self.make_page_path()))
@@ -100,6 +99,35 @@ class TitlePage(AbstractPage):
                 figcaption(raw(license_link))
         return
 
+    def link_phylogenetics_info(self):
+        '''Link out to page that informs about phylogenetics.
+        '''
+        from phylogenetics_page import PhylogeneticsPage
+        ip_abspath = PhylogeneticsPage(language=self.lang).make_page_path()
+        ip_path = os.path.relpath(ip_abspath, os.path.dirname(self.make_page_path()))
+        with form():
+            input_(
+                    type="button",
+                    value="What is a phylogenetic tree?",
+                    onclick=f"window.location.href='{ip_path}'")
+        return
+
+    def start_placement_game(self):
+        '''Forward to the start page of the placement game.
+        '''
+        from start_placement_page import StartPlacementPage
+        p("The laboratory in Volos received some bird paste from a plane"
+                " that should be identified. Can you help them?")
+        sp_abspath = StartPlacementPage(language=self.lang).make_page_path()
+        sp_path = os.path.relpath(sp_abspath, os.path.dirname(self.make_page_path()))
+        with form():
+            input_(
+                    type="button",
+                    value="Become a real bird researcher",
+                    onclick=f"window.location.href='{sp_path}'")
+        return
+
+
     def column1(self):
         '''Make the first column, which includes the tree image.
         '''
@@ -117,15 +145,18 @@ class TitlePage(AbstractPage):
                     "That is pretty fascinating, right? "
                     "Click on the images to find out more about the "
                     "bird on the image.")
+            self.link_phylogenetics_info()
+            self.start_placement_game()
         return
 # end TitlePage
 
 
 ###############
 def main():
-    tp = TitlePage()
-    tp.build_html()
-    tp.save_html(force=True)
+    for lang in ["EN", "GR"]:
+        tp = TitlePage(language=lang)
+        tp.build_html()
+        tp.save_html(force=True)
     return
 
 if __name__ == "__main__":

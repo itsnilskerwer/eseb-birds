@@ -43,11 +43,10 @@ class PhylogeneticsPage(AbstractPage):
     def html_body(self):
         '''Build the body of the html document.
         '''
-        with self.doc:
-            self.define_header()
-            with div(cls="row"):
-                self.column1()
-                self.column2()
+        self.define_header()
+        with div(cls="row"):
+            self.column1()
+            self.column2()
         return
 
     def define_stylesheet(self):

@@ -13,17 +13,12 @@ from __init__ import INDEX_DICT
 class RightPlacementPage(AbstractPage):
     '''Builder class for a given bird species.
     '''
-    def __init__(self, bird_name):
+    def __init__(self, bird_name, language="EN"):
         '''Initiaize object with a given name.
         '''
-        assert self.check_placementname(bird_name), (
-                f"{bird_name} is not in list of phylogenetic placement.")
- 
         self.name = bird_name
+        super().__init__(language=language)
         self.get_data()
-
-        # initiate html page
-        super().__init__()
         return
     
     # helpers
@@ -36,7 +31,7 @@ class RightPlacementPage(AbstractPage):
         '''Check if bird name occurs in the list of birds that should be
         phylogenetically placed.
         '''
-        return bird_name in get_placement_species_list()
+        return bird_name in get_placement_species_list(language=self.lang)
 
     def get_data(self):
         '''Select the data of the bird name from the whole `BIRD_DATA`.
@@ -50,6 +45,8 @@ class RightPlacementPage(AbstractPage):
         '''
         # this can be edited.
         # so far, we simply take the latin name.
+        if not hasattr(self, "data"):
+            self.get_data()
         title = self.data.loc["Latin"]
         return title
     
@@ -57,7 +54,7 @@ class RightPlacementPage(AbstractPage):
         '''Build name of path for html page.
         '''
         file_name = os.path.join(
-                INDEX_DICT["PATHS_FROM_SCRIPTS"]["PLACEMENT_HTML_DIR"],
+                INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["PLACEMENT_HTML_DIR"],
                 f"{self.name}_success.html")
         return os.path.abspath(file_name)
 
@@ -66,10 +63,9 @@ class RightPlacementPage(AbstractPage):
     def html_body(self):
         '''Build the body of the html document.
         '''
-        with self.doc:
-            self.define_header()
-            self.plot_with_info()
-
+        self.define_header()
+        self.plot_with_info()
+        return
 
     def define_header(self):
         '''Put together the name information about the bird species as header.
@@ -116,7 +112,7 @@ class RightPlacementPage(AbstractPage):
         '''Make a small button that brings the user to the info page.
         '''
         from bird_pages import BirdPage
-        bp = BirdPage(self.name)
+        bp = BirdPage(self.name, language=self.lang)
         bp_path = bp.make_page_path()
         with form():
             input_(
@@ -128,10 +124,10 @@ class RightPlacementPage(AbstractPage):
 
 
 # helpers
-def get_placement_species_list():
+def get_placement_species_list(language="EN"):
     '''Return a list of bird species that are used for the placement.
     '''
-    pm_dir = INDEX_DICT["PATHS_FROM_SCRIPTS"]["BIRD_PLACEMENT_IMG_DIR"]
+    pm_dir = INDEX_DICT[language]["PATHS_FROM_SCRIPTS"]["BIRD_PLACEMENT_IMG_DIR"]
     bird_sp_list = [
             fl.replace("tree_","").replace(".svg", "") for fl in 
             os.listdir(pm_dir) if fl.startswith("tree_")]
@@ -140,12 +136,13 @@ def get_placement_species_list():
 
 ###############
 def main():
-    bird_names = get_placement_species_list()
-    for bird_name in bird_names:
-        bird_name = bird_name.strip()
-        rp = RightPlacementPage(bird_name)
-        rp.build_html()
-        rp.save_html(force=True)
+    for lang in ["EN", "GR"]:
+        bird_names = get_placement_species_list(language=lang)
+        for bird_name in bird_names:
+            bird_name = bird_name.strip()
+            rp = RightPlacementPage(bird_name, language=lang)
+            rp.build_html()
+            rp.save_html(force=True)
     return
 
 if __name__ == "__main__":
