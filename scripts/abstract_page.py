@@ -81,7 +81,7 @@ class AbstractPage(ABC):
         '''Define the style sheet for the html head.
         '''
         # this can be extended. we do not use it yet.
-        # link(rel='stylesheet', href='style.css')
+        link(rel='stylesheet', href='../data/sequences/styles.css')
         return
 
     def define_jscript(self):
@@ -112,6 +112,8 @@ class AbstractPage(ABC):
         '''Save html document as a file.
         '''
         file_name = self.make_page_path()
+        parent_dir = os.path.dirname(file_name)
+        if not os.path.exists(parent_dir) : os.makedirs(parent_dir)
         if not os.path.exists(file_name) or force:
             with open(file_name, "w") as html_file:
                 html_file.write(str(self.doc))

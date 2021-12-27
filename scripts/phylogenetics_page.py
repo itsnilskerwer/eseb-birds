@@ -52,6 +52,7 @@ class PhylogeneticsPage(AbstractPage):
     def define_stylesheet(self):
         '''Define the style sheet for the html head.
         '''
+        super().define_stylesheet()
         # define path
         css_rawpath = os.path.join(
                 INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["CSS_DIR"],
