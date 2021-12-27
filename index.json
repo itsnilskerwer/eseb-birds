@@ -24,5 +24,15 @@
 			"PLACEMENT_HTML_DIR": "../public/gr/placement",
 			"CSS_DIR": "../meta"
 		}
-	}
+	},
+    "IMAGE_SOURCE_FILES": {
+        "ROOT": "../data/images_source",
+        "WIKI": "../data/images_source/ESEB gia web game_WIKI_photos",
+        "NHMC": "../data/images_source/ESEB gia web game _NHMC photos",
+        "CROPPED_IMGS": "../data"
+    },
+    "IMAGE_CROPPED_FILES": {
+        "CROPPED_IMGS": "../data/images_std",
+        "CROPPING_INDEX": "../data/images_std/cropping_index.csv"
+        }
 }
