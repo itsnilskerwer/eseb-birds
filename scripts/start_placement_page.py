@@ -108,13 +108,15 @@ class StartPlacementPage(AbstractPage):
     def show_sequences(self):
         '''Plot the unknown sequences.
         '''
+        from dominate.util import raw
         from placement_pages import PlacementPage
         new_birds = get_placement_species_list(language=self.lang)
         for bird in new_birds:
             pp = PlacementPage(bird, language=self.lang)
             pp_path = pp.make_page_path()
             with a(href=pp_path):
-                p(make_seq(bird))
+                #p(make_seq(bird))
+                raw(self.get_sequence(bird_name=bird))
         return
 
     def column1(self):
@@ -136,6 +138,7 @@ class StartPlacementPage(AbstractPage):
             self.define_seq_info_link()
         return
 # end TitlePage
+
 def get_placement_species_list(language="EN"):
     '''Return a list of bird species that are used for the placement.
     '''
@@ -146,11 +149,11 @@ def get_placement_species_list(language="EN"):
     return bird_sp_list
 
 def make_seq(bird_name, language="EN"):
-    '''Retrieve the sequence of a bird.
+    '''Retrieve a random sequence of a bird.
     '''
     from random import choice
     seq = "".join(
-            map(lambda x: choice("ATGC"), range(10)))
+             map(lambda x: choice("ATGC"), range(10)))
     return seq
 
 ###############
