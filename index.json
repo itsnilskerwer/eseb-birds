@@ -10,7 +10,8 @@
 			"BIRD_HTML_DIR": "../public/en/species",
 			"START_AND_ERROR_HTML_DIR": "../public/en/core",
 			"PLACEMENT_HTML_DIR": "../public/en/placement",
-			"CSS_DIR": "../meta"
+			"CSS_DIR": "../meta",
+			"SEQUENCES": "../data/sequences"
 		}
 	},
 	"GR": {
@@ -24,7 +25,8 @@
 			"BIRD_HTML_DIR": "../public/gr/species",
 			"START_AND_ERROR_HTML_DIR": "../public/gr/core",
 			"PLACEMENT_HTML_DIR": "../public/gr/placement",
-			"CSS_DIR": "../meta"
+			"CSS_DIR": "../meta",
+			"SEQUENCES": "../data/sequences"
 		}
 	},
     "IMAGE_SOURCE_FILES": {
