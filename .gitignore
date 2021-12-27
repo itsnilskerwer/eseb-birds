@@ -3,7 +3,10 @@ extern/
 species/
 data/images/
 data/thumbs/
-data
+data/
+
+# the html files
+public/
 
 # the ds store
 *.DS_Store
