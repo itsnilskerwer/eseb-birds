@@ -125,6 +125,27 @@ class AbstractPage(ABC):
         else:
             print(f"Html document {self.name}.html already exists.")
         return
+
+    def get_sequence(self, bird_name=None):
+        '''Load short sequence for bird.
+        '''
+        seq_file = os.path.join(
+                INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["SEQUENCES"],
+                "list.html")
+        seq = fetch_sequences(bird_name, seq_file)
+        return seq
+
 # end AbstractPage
 
 ###############
+def fetch_sequences(bird_alias, seq_html_path):
+    '''Fetch the html formatted sequence for a bird alias.
+    '''
+    with open(seq_html_path,"r") as sf:
+        lines = sf.readlines()
+        for line in lines:
+            if line.startswith("<dt>"):
+                short_line = line.replace("<dt>","")
+                name, seq = short_line.split("</dt>")
+                if name == bird_alias : return seq
+    raise ValueError(f"There is no sequence available for {bird_alias}.")
