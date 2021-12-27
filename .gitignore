@@ -1,1 +1,10 @@
 extern/
+# the pseudo data
+species/
+data/images/
+data/thumbs/
+data
+
+# the ds store
+*.DS_Store
+*/.DS_Store
