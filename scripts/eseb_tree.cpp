@@ -116,7 +116,7 @@ void make_svg_image_tree(
 
         // Also add a hyperlink to the taxon sub page, if its not the question image.
         // auto const html_file = base_path + "species/" + taxon + ".html";
-        auto const html_file = "../../public/" + lang + "/species/" + taxon + ".html";
+        auto const html_file = "../../../public/" + lang + "/species/" + taxon + ".html";
         // if( ! file_exists( html_file )) {
         //     LOG_WARN << "File not found: " << html_file;
         // }
