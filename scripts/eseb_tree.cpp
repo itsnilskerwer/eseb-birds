@@ -67,9 +67,11 @@ Tree create_random_tree( std::vector<std::string> const& names )
 }
 
 void make_svg_image_tree(
+    std::string const& lang,
     Tree const& tree,
     std::string const& out_path,
-    std::string const& placed_taxon = ""
+    std::string const& placed_taxon = "",
+    bool question_tree = false
 ) {
     // Base path for the svg links. Set to relative to work with shifting dirs.
     // std::string const base_path = out_path;
@@ -82,8 +84,9 @@ void make_svg_image_tree(
         node.data<CommonNodeData>().name = "";
     }
 
-    auto layout = tree::RectangularLayout( copy, tree::LayoutType::kPhylogram );
-    layout.height( 40.0 * tree.node_count() );
+    auto layout = tree::RectangularLayout( copy, tree::LayoutType::kCladogram );
+    layout.width( 500.0 );
+    layout.height( 45.0 * tree.node_count() );
 
     // Add node shapes
     std::vector<utils::SvgGroup> node_shapes;
@@ -94,25 +97,35 @@ void make_svg_image_tree(
         }
 
         // Use the taxon name to get the image, and add it.
+        // If this is a question mark tree though, and the node name is the placed one,
+        // use the question mark image instead.
         auto const& taxon = tree.node_at(i).data<CommonNodeData>().name;
-        auto const image_file = base_path + "data/thumbs/" + taxon + ".png";
+        // auto image_file = base_path + "data/thumbs/" + taxon + ".png";
+        auto image_file = "../../thumbs/" + taxon + ".png";
+        if( question_tree && taxon == placed_taxon ) {
+            image_file = "../../question.png";
+        }
+
         // if( ! file_exists( image_file )) {
         //     LOG_WARN << "File not found: " << image_file;
         // }
         node_shapes[i].add( utils::SvgImage(
             image_file,
-            10, -50, 100, 100
+            10, -50, 80, 80
         ));
 
-        // Also add a hyperlink to the taxon sub page.
-        auto const html_file = base_path + "species/" + taxon + ".html";
+        // Also add a hyperlink to the taxon sub page, if its not the question image.
+        // auto const html_file = base_path + "species/" + taxon + ".html";
+        auto const html_file = "../../public/" + lang + "/species/" + taxon + ".html";
         // if( ! file_exists( html_file )) {
         //     LOG_WARN << "File not found: " << html_file;
         // }
-        node_shapes[i].set_hyperlink({
-            { "href", html_file },
-            { "target", "_blank" }
-        });
+        if( !( question_tree && taxon == placed_taxon )) {
+            node_shapes[i].set_hyperlink({
+                { "href", html_file },
+                { "target", "_blank" }
+            });
+        }
     }
     layout.set_node_shapes( node_shapes );
 
@@ -124,8 +137,9 @@ void make_svg_image_tree(
         stroke.width = 6.0;
 
         // If this is the placed taxon, make it dashed.
-        if( tree.edge_at(i).secondary_node().data<CommonNodeData>().name == placed_taxon ) {
-            stroke.color = Color( 0.92, 0.05, 0.45 );
+        auto const taxon = tree.edge_at(i).secondary_node().data<CommonNodeData>().name;
+        if( question_tree && taxon == placed_taxon ) {
+            stroke.color = Color( 0.8, 0.175, 0.278 );
             stroke.dash_array = { 10, 10 };
         }
 
@@ -135,11 +149,16 @@ void make_svg_image_tree(
 
     // Write to file, either a generic tree, or a special named one for the placed taxon.
     std::ostringstream out;
-    layout.to_svg_document().write( out );
+    auto doc = layout.to_svg_document();
+    doc.margin.right += 120;
+    doc.margin.bottom += 20;
+    doc.write( out );
     if( placed_taxon.empty() ) {
-        utils::file_write( out.str(), out_path + "data/trees/tree.svg" );
+        utils::file_write( out.str(), out_path + "tree.svg" );
+    } else if( question_tree ) {
+        utils::file_write( out.str(), out_path + "tree_" + placed_taxon + "_question.svg" );
     } else {
-        utils::file_write( out.str(), out_path + "data/trees/tree_" + placed_taxon + ".svg" );
+        utils::file_write( out.str(), out_path + "tree_" + placed_taxon + "_answer.svg" );
     }
 }
 
@@ -167,7 +186,7 @@ void base_tree_test()
     }
 
     // Make an svg tree out of it and save it.
-    make_svg_image_tree( tree, base_path );
+    // make_svg_image_tree( tree, base_path );
 }
 
 void base_placement_test()
@@ -179,7 +198,12 @@ void base_placement_test()
     std::string const base_path = "/home/lucas/Dropbox/GitHub/eseb-birds/";
     std::string const jplace_file = base_path + "data/placement.jplace";
 
+    // Read file and make a tree without any placements.
     auto sample = JplaceReader().read( from_file( jplace_file ));
+    make_svg_image_tree( "en", sample.tree(), base_path + "data/trees/en/" );
+    make_svg_image_tree( "gr", sample.tree(), base_path + "data/trees/gr/" );
+
+    // Make individual trees for each placed sequence
     sort_placements_by_weight( sample );
     for( size_t i = 0; i < sample.size(); ++i ) {
         auto const& pquery = sample.at( i );
@@ -195,8 +219,12 @@ void base_placement_test()
         // Make a tree with the pquery attached to it.
         auto const ltree = labelled_tree( copy );
 
-        // Make a picture.
-        make_svg_image_tree( ltree, base_path, name );
+        // Make a picture. Both languages, and each with red line and question mark,
+        // and with resolved normal image
+        make_svg_image_tree( "en", ltree, base_path + "data/trees/en/", name, true );
+        make_svg_image_tree( "gr", ltree, base_path + "data/trees/gr/", name, true );
+        make_svg_image_tree( "en", ltree, base_path + "data/trees/en/", name, false );
+        make_svg_image_tree( "gr", ltree, base_path + "data/trees/gr/", name, false );
     }
 }
 
@@ -209,6 +237,9 @@ int main( int argc, char** argv )
     utils::Logging::log_to_stdout();
     utils::Logging::details.time = true;
     LOG_INFO << "started";
+
+    // allow to re-do files
+    genesis::utils::Options::get().allow_file_overwriting( true );
 
     // base_tree_test();
     base_placement_test();
