@@ -135,6 +135,35 @@ class AbstractPage(ABC):
         seq = fetch_sequences(bird_name, seq_file)
         return seq
 
+    def paste_svg(self, svg_file_name):
+        '''Paste the code of a svg file into the html code.
+        '''
+        from dominate.svg import svg
+        from dominate.util import raw
+        #assert os.path.exists(svg_file_name), f"Image {svg_file_name} does not exist."
+        with open(svg_file_name, "r") as image:
+            svg_base_dir = os.path.dirname(svg_file_name)
+            for line in image.readlines():
+                std_line = self.standardize_path(line, svg_base_dir)
+                raw(std_line)
+        return
+
+    def standardize_path(self, svg_line, svg_base_dir):
+        '''Change the path link of a line within an svg image.
+        '''
+        import regex as re
+        LINK_RE = 'href\=\"([^\"]*)\"'
+        match = re.search(LINK_RE, svg_line)
+
+        # as the internal path of the svg file could be different
+        # from our html file, we reassign all links...
+        if not match : return svg_line
+        link = match[1]
+        link_abs = os.path.abspath(os.path.join(svg_base_dir, link))
+        std_path = os.path.dirname(self.make_page_path())
+        link_rel = os.path.relpath(link_abs, std_path)
+        print(std_path, link_abs, link_rel, end = "\n")
+        return svg_line.replace(link, link_rel)
 # end AbstractPage
 
 ###############
