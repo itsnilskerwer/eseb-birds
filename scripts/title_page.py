@@ -30,13 +30,13 @@ class TitlePage(AbstractPage):
         return os.path.abspath(file_name)
 
 
-    def make_tree_img_path(self):
+    def make_tree_img_path(self, non_relative=False):
         '''Build name of path for the tree image.
         '''
         file_name = os.path.join(
                 INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_PLACEMENT_IMG_DIR"],
                 f"tree.svg")
-        # return os.path.abspath(file_name)
+        if non_relative : return os.path.abspath(file_name)
         return os.path.relpath(file_name, os.path.dirname(self.make_page_path()))
 
     # HTML functions
@@ -93,11 +93,12 @@ class TitlePage(AbstractPage):
         with div():
             attr_id = "image"
             attr(id=attr_id)
-            with figure():
-                attr(id=img_content)
-                img(src=image_path,
-                        alt=license_info)
-                figcaption(raw(license_link))
+#            with figure():
+#                attr(id=img_content)
+#                img(src=image_path,
+#                        alt=license_info)
+            self.paste_svg(image_path)
+#            figcaption(raw(license_link))
         return
 
     def link_phylogenetics_info(self):
@@ -133,7 +134,8 @@ class TitlePage(AbstractPage):
         '''Make the first column, which includes the tree image.
         '''
         with div(cls="column"):
-            tree_path = self.make_tree_img_path()
+            # tree_path = self.make_tree_img_path(non_relative=False)
+            tree_path = self.make_tree_img_path(non_relative=True)
             self.plot_with_info(tree_path)
         return
 
