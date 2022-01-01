@@ -138,6 +138,17 @@ class AbstractPage(ABC):
 # end AbstractPage
 
 ###############
+# helpers
+def get_placement_species_list(language="EN"):
+    '''Return a list of bird species that are used for the placement.
+    '''
+    pm_dir = INDEX_DICT[language]["PATHS_FROM_SCRIPTS"]["BIRD_PLACEMENT_IMG_DIR"]
+    bird_sp_list = [
+            fl.replace("tree_","").replace("_question.svg", "") for fl in
+            os.listdir(pm_dir) if fl.endswith("_question.svg")]
+    return bird_sp_list
+
+
 def fetch_sequences(bird_alias, seq_html_path):
     '''Fetch the html formatted sequence for a bird alias.
     '''

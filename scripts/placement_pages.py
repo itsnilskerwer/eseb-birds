@@ -8,6 +8,7 @@ import os
 import pandas as pd
 
 from abstract_page import AbstractPage
+from abstract_page import get_placement_species_list
 from __init__ import INDEX_DICT
 
 class PlacementPage(AbstractPage):
@@ -81,7 +82,7 @@ class PlacementPage(AbstractPage):
 
         file_name = os.path.join(
                 INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_PLACEMENT_IMG_DIR"],
-                f"tree_{bird_name}.svg")
+                f"tree_{bird_name}_question.svg")
         # return os.path.abspath(file_name)
         return os.path.relpath(file_name, os.path.dirname(self.make_page_path()))
 
@@ -195,14 +196,6 @@ class PlacementPage(AbstractPage):
 # end PlacementPage
 
 # helper
-def get_placement_species_list(language="EN"):
-    '''Return a list of bird species that are used for the placement.
-    '''
-    pm_dir = INDEX_DICT[language]["PATHS_FROM_SCRIPTS"]["BIRD_PLACEMENT_IMG_DIR"]
-    bird_sp_list = [
-            fl.replace("tree_","").replace(".svg", "") for fl in 
-            os.listdir(pm_dir) if fl.startswith("tree_")]
-    return bird_sp_list
 
 ###############
 def main():

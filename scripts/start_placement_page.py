@@ -7,6 +7,7 @@ import os
 import pandas as pd
 
 from abstract_page import AbstractPage
+from abstract_page import get_placement_species_list
 from __init__ import INDEX_DICT
 
 class StartPlacementPage(AbstractPage):
@@ -139,15 +140,7 @@ class StartPlacementPage(AbstractPage):
         return
 # end TitlePage
 
-def get_placement_species_list(language="EN"):
-    '''Return a list of bird species that are used for the placement.
-    '''
-    pm_dir = INDEX_DICT[language]["PATHS_FROM_SCRIPTS"]["BIRD_PLACEMENT_IMG_DIR"]
-    bird_sp_list = [
-            fl.replace("tree_","").replace(".svg", "") for fl in
-            os.listdir(pm_dir) if fl.startswith("tree_")]
-    return bird_sp_list
-
+# helpers
 def make_seq(bird_name, language="EN"):
     '''Retrieve a random sequence of a bird.
     '''
