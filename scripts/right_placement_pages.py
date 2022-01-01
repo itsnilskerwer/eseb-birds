@@ -59,13 +59,45 @@ class RightPlacementPage(AbstractPage):
                 f"{self.name}_success.html")
         return os.path.abspath(file_name)
 
+    def make_tree_img_path(self, bird_name):
+        '''Build name of path for a bird image.
+        '''
+        assert self.check_name(bird_name), f"{bird_name} is not in list."
+
+        file_name = os.path.join(
+                INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_PLACEMENT_IMG_DIR"],
+                f"tree_{bird_name}_answer.svg")
+        return os.path.relpath(file_name, os.path.dirname(self.make_page_path()))
 
     # HTML functions
     def html_body(self):
         '''Build the body of the html document.
         '''
         self.define_header()
-        self.plot_with_info()
+        with div(cls="row"):
+            self.column1()
+            self.column2()
+        return
+
+    def column1(self):
+        '''Make the first column, which includes the tree image.
+        '''
+        with div(cls="column"):
+            tree_path = self.make_tree_img_path(self.name)
+            self.plot_with_info(tree_path)
+        return
+
+    def column2(self):
+        '''Make the second column, which includes the images of birds to place.
+        '''
+        # make subtitle 
+        page_subtitle = ("You are a great researcher. Your dry "
+            "lab team approved that this bird fits into the "
+            "phylogenetic placement")
+        
+        with div(cls="column"):
+            p(page_subtitle)
+            self.define_infopagelink()
         return
 
     def define_header(self):
@@ -73,35 +105,27 @@ class RightPlacementPage(AbstractPage):
         '''
         # make a large title with name as species
         page_title = f"Successfully placed: {self.data.loc['Name']}"
-        # make subtitle of latin name in italics
-        page_subtitle = ("You are a great researcher. Your dry "
-            "lab team approved that this bird fits into the "
-            "phylogenetic placement")
-        
         with div():
             attr(id="header")
             h1(page_title)
-            h2(em(page_subtitle))
-            self.define_infopagelink()
         return
 
-    def plot_with_info(self):
+    def plot_with_info(self, image_path):
         '''Add image to html document and annotate it with background info.
         '''
         from dominate.util import raw
-        
-        # get image location
-        image_file = self.make_img_path()
-        # image_file = self.data["Photolink"]
-        # get license information
-        license_info = self.data["license notice for plain text "]
-        # get license link
-        license_link = self.data["license notice HTML (https://lizenzhinweisgenerator.de/)"]
+        # we use this as image alternativ text
+        license_info = "Right placement in tree."
+        # this is the image caption
+        license_link = "Our wet lab sent us this data after sequencing of the bird."
+        # it is a tree
+        img_content = "tree"
         with div():
-            attr(id="image")
+            attr_id = "image"
+            attr(id=attr_id)
             with figure():
-                attr(id="habitus")
-                img(src=image_file,
+                attr(id=img_content)
+                img(src=image_path,
                         alt=license_info)
                 if isinstance(license_link, str):
                     figcaption(raw(license_link))

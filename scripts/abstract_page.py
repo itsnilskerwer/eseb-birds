@@ -87,10 +87,10 @@ class AbstractPage(ABC):
                 os.path.join(
                 INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["CSS_DIR"],
                 'two_columns.css')]
-        for i, css_raw_path in enumerate(css_rawpaths):
+        for i, css_rawpath in enumerate(css_rawpaths):
             css_path = os.path.relpath(os.path.abspath(css_rawpath),
                     os.path.dirname(self.make_page_path()))
-            link(rel=f'stylesheet{i}', href=css_path)
+            link(rel=f'stylesheet', href=css_path)
 
         return
 
@@ -169,7 +169,6 @@ class AbstractPage(ABC):
         link_abs = os.path.abspath(os.path.join(svg_base_dir, link))
         std_path = os.path.dirname(self.make_page_path())
         link_rel = os.path.relpath(link_abs, std_path)
-        print(std_path, link_abs, link_rel, end = "\n")
         return svg_line.replace(link, link_rel)
 # end AbstractPage
 

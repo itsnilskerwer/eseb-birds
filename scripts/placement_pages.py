@@ -109,22 +109,6 @@ class PlacementPage(AbstractPage):
             self.column2()
         return
 
-
-    def define_stylesheet(self):
-        '''Define the style sheet for the html head.
-        '''
-        super().define_stylesheet()
-        # define path
-        css_rawpath = os.path.join(
-                INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["CSS_DIR"],
-                'two_columns.css')
-        css_path = os.path.relpath(os.path.abspath(css_rawpath),
-                os.path.dirname(self.make_page_path()))
-        # set stylesheet for two columns
-        link(rel='stylesheet', href=css_path)
-        return
-
-
     def define_header(self):
         '''Put together the name information about the bird species as header.
         '''
