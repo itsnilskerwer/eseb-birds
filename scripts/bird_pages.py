@@ -62,6 +62,11 @@ class BirdPage(AbstractPage):
         '''
         self.define_header()
         self.plot_with_info()
+        
+        try:
+            with details():
+                self.show_seq()
+        except ValueError : return
         return
 
     def define_header(self):
@@ -101,6 +106,30 @@ class BirdPage(AbstractPage):
                 else:  # for missing data
                     figcaption("Missing.")
         return
+
+    def show_seq(self):
+        '''Add the large sequence to the HMTL document.
+        '''
+        from dominate.util import raw
+        try : seq = self.load_long_sequence()
+        except FileNotFoundError : return False
+        else : raw(seq)
+        return True
+
+    def load_long_sequence(self):
+        '''Obtain the long nucleotide sequence of a given bird species.
+        '''
+        seq_file = os.path.join(
+                INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["SEQUENCES"],
+                f"{self.name}.html")
+        body = []
+        body_bool = False
+        with open(seq_file, "r") as html:
+            for line in html.readlines():
+                if line.startswith("</body>") : return "".join(body)
+                if body_bool : body.append(line)
+                elif line.startswith("<body>") : body_bool = True
+        raise RuntimeError("Html file is not proper in its structure.")
 # end BirdPage
 
 ###############
