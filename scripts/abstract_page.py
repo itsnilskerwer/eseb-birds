@@ -80,13 +80,20 @@ class AbstractPage(ABC):
     def define_stylesheet(self):
         '''Define the style sheet for the html head.
         '''
-        css_rawpath = os.path.join(
+        css_rawpaths = [
+                os.path.join(
                 INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["SEQUENCES"],
-                "styles.css")
-        css_path = os.path.relpath(os.path.abspath(css_rawpath),
-                os.path.dirname(self.make_page_path()))
-        # this can be extended. we do not use it yet.
-        link(rel='stylesheet', href=css_path)
+                "styles.css"),
+                os.path.join(
+                INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["CSS_DIR"],
+                'two_columns.css')]
+        for i, css_raw_path in enumerate(css_rawpaths):
+            css_path = os.path.relpath(os.path.abspath(css_rawpath),
+                    os.path.dirname(self.make_page_path()))
+            link(rel=f'stylesheet{i}', href=css_path)
+
+        return
+
         return
 
     def define_jscript(self):
