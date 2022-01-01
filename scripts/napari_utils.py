@@ -240,7 +240,7 @@ def rescale_to_square(image, square_pixel_size=550):
     rescaled_image = resize(
         image, 
         (square_pixel_size, square_pixel_size),
-        anti_aliasing=False)
+        anti_aliasing=True)
     return rescaled_image
 
 # overall helpers
