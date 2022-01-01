@@ -9,5 +9,8 @@ data/
 public/
 
 # the ds store
-*.DS_Store
-*/.DS_Store
+.DS_Store
+
+# py and ipynb caches
+__pycache__
+.ipynb_checkpoints
