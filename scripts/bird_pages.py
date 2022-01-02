@@ -65,6 +65,7 @@ class BirdPage(AbstractPage):
         
         try:
             with details():
+                summary("Show DNA sequence")
                 self.show_seq()
         except ValueError : return
         return
