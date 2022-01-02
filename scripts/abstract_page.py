@@ -91,9 +91,6 @@ class AbstractPage(ABC):
             css_path = os.path.relpath(os.path.abspath(css_rawpath),
                     os.path.dirname(self.make_page_path()))
             link(rel=f'stylesheet', href=css_path)
-
-        return
-
         return
 
     def define_jscript(self):
@@ -170,6 +167,30 @@ class AbstractPage(ABC):
         std_path = os.path.dirname(self.make_page_path())
         link_rel = os.path.relpath(link_abs, std_path)
         return svg_line.replace(link, link_rel)
+
+    def show_seq(self):
+        '''Add the large sequence to the HMTL document.
+        '''
+        from dominate.util import raw
+        try : seq = self.load_long_sequence()
+        except FileNotFoundError : return False
+        else : raw(seq)
+        return True
+
+    def load_long_sequence(self):
+        '''Obtain the long nucleotide sequence of a given bird species.
+        '''
+        seq_file = os.path.join(
+                INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["SEQUENCES"],
+                f"{self.name}.html")
+        body = []
+        body_bool = False
+        with open(seq_file, "r") as html:
+            for line in html.readlines():
+                if line.startswith("</body>") : return "".join(body)
+                if body_bool : body.append(line)
+                elif line.startswith("<body>") : body_bool = True
+        raise RuntimeError("Html file is not proper in its structure.")
 # end AbstractPage
 
 ###############
