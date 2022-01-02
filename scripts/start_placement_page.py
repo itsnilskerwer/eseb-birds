@@ -84,6 +84,14 @@ class StartPlacementPage(AbstractPage):
     def define_seq_info_link(self):
         '''Link to information page about DNA and sequencing.
         '''
+        from sequences_page import SequencesPage
+        ip_abspath = SequencesPage(language=self.lang).make_page_path()
+        ip_path = os.path.relpath(ip_abspath, os.path.dirname(self.make_page_path()))
+        with form():
+            input_(
+                    type="button",
+                    value="What are such sequences?",
+                    onclick=f"window.location.href='{ip_path}'")
         return
 
     def plot_with_info(self, image_path):
