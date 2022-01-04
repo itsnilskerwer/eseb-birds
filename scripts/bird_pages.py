@@ -101,6 +101,7 @@ class BirdPage(AbstractPage):
             with figure():
                 attr(id="habitus")
                 img(src=image_file,
+                        style="max-width: 60%;",
                         alt=license_info)
                 if isinstance(license_link, str):
                     figcaption(raw(license_link))
