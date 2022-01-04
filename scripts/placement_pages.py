@@ -152,7 +152,7 @@ class PlacementPage(AbstractPage):
                 with figure():
                     attr(id=img_content)
                     img(src=image_path,
-                            style="max-heigth: 20%;",
+                            style="max-width: 30%;",
                             alt=license_info)
                     if isinstance(license_link, str):
                         figcaption(raw(license_link))
