@@ -93,12 +93,8 @@ class TitlePage(AbstractPage):
         with div():
             attr_id = "image"
             attr(id=attr_id)
-#            with figure():
-#                attr(id=img_content)
-#                img(src=image_path,
-#                        alt=license_info)
             self.paste_svg(image_path)
-#            figcaption(raw(license_link))
+            figcaption(raw(license_link))
         return
 
     def link_phylogenetics_info(self):
