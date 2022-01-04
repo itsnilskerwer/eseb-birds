@@ -75,7 +75,7 @@ class PlacementPage(AbstractPage):
         return os.path.relpath(file_name, os.path.dirname(self.make_page_path()))
 
 
-    def make_tree_img_path(self, bird_name):
+    def make_tree_img_path(self, bird_name, non_relative=False):
         '''Build name of path for a bird image.
         '''
         assert self.check_name(bird_name), f"{bird_name} is not in list."
@@ -83,7 +83,7 @@ class PlacementPage(AbstractPage):
         file_name = os.path.join(
                 INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_PLACEMENT_IMG_DIR"],
                 f"tree_{bird_name}_question.svg")
-        # return os.path.abspath(file_name)
+        if non_relative : return os.path.abspath(file_name)
         return os.path.relpath(file_name, os.path.dirname(self.make_page_path()))
 
     def make_img_link(self, bird_name):
@@ -147,21 +147,24 @@ class PlacementPage(AbstractPage):
             if count is not None : attr_id = f"image{count}"
             else : attr_id = "image"
             attr(id=attr_id)
-            with figure():
-                attr(id=img_content)
-                img(src=image_path,
-                        alt=license_info)
-                if isinstance(license_link, str):
-                    figcaption(raw(license_link))
-                else:  # for missing data
-                    figcaption("Missing.")
+            if tree : self.paste_svg(image_path)
+            else:
+                with figure():
+                    attr(id=img_content)
+                    img(src=image_path,
+                            style="max-heigth: 20%;",
+                            alt=license_info)
+                    if isinstance(license_link, str):
+                        figcaption(raw(license_link))
+                    else:  # for missing data
+                        figcaption("Missing.")
         return
 
     def column1(self):
         '''Make the first column, which includes the tree image.
         '''
         with div(cls="column"):
-            tree_path = self.make_tree_img_path(self.name)
+            tree_path = self.make_tree_img_path(self.name, non_relative=True)
             self.plot_with_info(tree_path, tree=True)
         return
 

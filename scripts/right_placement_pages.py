@@ -59,7 +59,7 @@ class RightPlacementPage(AbstractPage):
                 f"{self.name}_success.html")
         return os.path.abspath(file_name)
 
-    def make_tree_img_path(self, bird_name):
+    def make_tree_img_path(self, bird_name, non_relative=False):
         '''Build name of path for a bird image.
         '''
         assert self.check_name(bird_name), f"{bird_name} is not in list."
@@ -67,6 +67,7 @@ class RightPlacementPage(AbstractPage):
         file_name = os.path.join(
                 INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_PLACEMENT_IMG_DIR"],
                 f"tree_{bird_name}_answer.svg")
+        if non_relative : return os.path.abspath(file_name)
         return os.path.relpath(file_name, os.path.dirname(self.make_page_path()))
 
     # HTML functions
@@ -83,7 +84,7 @@ class RightPlacementPage(AbstractPage):
         '''Make the first column, which includes the tree image.
         '''
         with div(cls="column"):
-            tree_path = self.make_tree_img_path(self.name)
+            tree_path = self.make_tree_img_path(self.name, non_relative=True)
             self.plot_with_info(tree_path)
         return
 
@@ -123,14 +124,11 @@ class RightPlacementPage(AbstractPage):
         with div():
             attr_id = "image"
             attr(id=attr_id)
-            with figure():
-                attr(id=img_content)
-                img(src=image_path,
-                        alt=license_info)
-                if isinstance(license_link, str):
-                    figcaption(raw(license_link))
-                else:  # for missing data
-                    figcaption("Missing.")
+            self.paste_svg(image_path)
+            if isinstance(license_link, str):
+                figcaption(raw(license_link))
+            else:  # for missing data
+                figcaption("Missing.")
         return
 
     def define_infopagelink(self):
