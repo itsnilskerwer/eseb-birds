@@ -119,7 +119,7 @@ class StartPlacementPage(AbstractPage):
         new_birds = get_placement_species_list(language=self.lang)
         for bird in new_birds:
             pp = PlacementPage(bird, language=self.lang)
-            pp_path = pp.make_page_path()
+            pp_path = os.path.relpath(pp.make_page_path(), os.path.dirname(self.make_page_path()))
             with a(href=pp_path):
                 #p(make_seq(bird))
                 raw(self.get_sequence(bird_name=bird))

@@ -136,7 +136,7 @@ class RightPlacementPage(AbstractPage):
         '''
         from bird_pages import BirdPage
         bp = BirdPage(self.name, language=self.lang)
-        bp_path = bp.make_page_path()
+        bp_path = os.path.relpath(bp.make_page_path(), os.path.dirname(self.make_page_path()))
         with form():
             input_(
                     type="button",
