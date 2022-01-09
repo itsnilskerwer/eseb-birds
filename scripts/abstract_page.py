@@ -107,17 +107,19 @@ class AbstractPage(ABC):
         '''Add the links between greek and english.
         '''
         langlink = lambda lg: os.path.relpath(
-                undef_path.replace(self.lang.lower(), lg.lower()), 
+                undef_path.replace(f"/{self.lang.lower()}/", f"/{lg.lower()}/"), 
                 os.path.dirname(undef_path))
         undef_path = self.make_page_path()
         
         with div(cls="language_choice"):
+            p("Change language:")
             with a(href=langlink("GR")):
-                if self.lang == "EN" : p("Greek")
-                else : p("Elliniká")
+                if self.lang == "EN" : span("Greek")
+                else : span("Elliniká")
+            span(" 🐣 ")
             with a(href=langlink("EN")):
-                if self.lang == "EN" : p("English")
-                else : p("Agglike")
+                if self.lang == "EN" : span("English")
+                else : span("Agglike")
         return
 
     def save_html(self, force=False):
