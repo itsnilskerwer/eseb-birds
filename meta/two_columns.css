@@ -6,6 +6,13 @@ body {
   background-attachment: fixed;
 }
 
+figure {
+  text-align: center;
+  font-style: italic;
+  font-size: smaller;
+  border: thin silver solid;
+}
+
 .row {
   display: flex;
 }
