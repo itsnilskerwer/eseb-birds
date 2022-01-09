@@ -14,11 +14,12 @@ from __init__ import INDEX_DICT
 class RightPlacementPage(AbstractPage):
     '''Builder class for a given bird species.
     '''
-    def __init__(self, bird_name, language="EN"):
+    def __init__(self, bird_name, language="EN", stop_html_init=False):
         '''Initiaize object with a given name.
         '''
         self.name = bird_name
-        super().__init__(language=language)
+        
+        super().__init__(language=language, stop_html_init=stop_html_init)
         self.get_data()
         return
     
@@ -94,11 +95,13 @@ class RightPlacementPage(AbstractPage):
         # make subtitle 
         page_subtitle = ("You are a great researcher. Your dry "
             "lab team approved that this bird fits into the "
-            "phylogenetic placement")
+            "phylogenetic placement.")
         
         with div(cls="column"):
             p(page_subtitle)
             self.define_infopagelink()
+            p("Do you want to continue doing research?")
+            self.define_startplacmentlink()
         return
 
     def define_header(self):
@@ -135,7 +138,7 @@ class RightPlacementPage(AbstractPage):
         '''Make a small button that brings the user to the info page.
         '''
         from bird_pages import BirdPage
-        bp = BirdPage(self.name, language=self.lang)
+        bp = BirdPage(self.name, language=self.lang, stop_html_init=True)
         bp_path = os.path.relpath(bp.make_page_path(), os.path.dirname(self.make_page_path()))
         with form():
             input_(
@@ -143,6 +146,20 @@ class RightPlacementPage(AbstractPage):
                     value="Learn more about this bird...",
                     onclick=f"window.location.href='{bp_path}'")
         return
+
+    def define_startplacmentlink(self):
+        '''Make a small button that brings the user back to the start page for PPs.
+        '''
+        from start_placement_page import StartPlacementPage
+        sp = StartPlacementPage(language=self.lang, stop_html_init=True)
+        sp_path = os.path.relpath(sp.make_page_path(), os.path.dirname(self.make_page_path()))
+        with form():
+            input_(
+                    type="button",
+                    value="Continue with another phylogenetic placement.",
+                    onclick=f"window.location.href='{sp_path}'")
+        return
+
 # end RightPlacementPage
 
 
