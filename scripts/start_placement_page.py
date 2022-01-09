@@ -118,11 +118,16 @@ class StartPlacementPage(AbstractPage):
         from placement_pages import PlacementPage
         new_birds = get_placement_species_list(language=self.lang)
         for bird in new_birds:
-            pp = PlacementPage(bird, language=self.lang)
+            pp = PlacementPage(bird, language=self.lang, stop_html_init=True)
             pp_path = os.path.relpath(pp.make_page_path(), os.path.dirname(self.make_page_path()))
             with a(href=pp_path):
                 #p(make_seq(bird))
-                raw(self.get_sequence(bird_name=bird))
+                sequence = self.get_sequence(bird_name=bird)
+                sequence = sequence.replace('<dd><span',
+                        '<dd>~~~<span')
+                sequence = sequence.replace('</span></dd>',
+                        '</span>~~~</dd>')
+                raw(f"{sequence}<br>")
         return
 
     def column1(self):

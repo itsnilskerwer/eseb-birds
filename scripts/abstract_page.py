@@ -11,12 +11,15 @@ from __init__ import INDEX_DICT
 class AbstractPage(ABC):
     '''Builder class for a given bird species.
     '''
-    def __init__(self, language="EN"):
+    def __init__(self, language="EN", stop_html_init=False):
         '''Initiaize object with a given name.
         '''
         self.BIRD_DATA = pd.read_csv(INDEX_DICT[language]["PATHS_FROM_SCRIPTS"]["BIRD_INFO"])
         
         self.lang = language
+
+        if stop_html_init : return
+
         # initiate html page
         self.initiate_html()
         return

@@ -12,12 +12,12 @@ from __init__ import INDEX_DICT
 class BirdPage(AbstractPage):
     '''Builder class for a given bird species.
     '''
-    def __init__(self, bird_name, language="EN"):
+    def __init__(self, bird_name, language="EN", stop_html_init=False):
         '''Initiaize object with a given name.
         '''
         self.name = bird_name
 
-        super().__init__(language=language)
+        super().__init__(language=language, stop_html_init=stop_html_init)
         
         self.get_data()
 

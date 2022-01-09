@@ -12,10 +12,10 @@ from __init__ import INDEX_DICT
 class SequencesPage(AbstractPage):
     '''Builder class for the info page about dna and sequences.
     '''
-    def __init__(self, language="EN"):
+    def __init__(self, language="EN", stop_html_init=False):
         '''Initialize with use of an example bird.
         '''
-        super().__init__(language=language)
+        super().__init__(language=language, stop_html_init=stop_html_init)
         EXAMPLE_BIRD = "PELCR"
         self.name = EXAMPLE_BIRD
         return

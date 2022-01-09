@@ -101,7 +101,7 @@ class TitlePage(AbstractPage):
         '''Link out to page that informs about phylogenetics.
         '''
         from phylogenetics_page import PhylogeneticsPage
-        ip_abspath = PhylogeneticsPage(language=self.lang).make_page_path()
+        ip_abspath = PhylogeneticsPage(language=self.lang, stop_html_init=True).make_page_path()
         ip_path = os.path.relpath(ip_abspath, os.path.dirname(self.make_page_path()))
         with form():
             input_(
@@ -116,7 +116,7 @@ class TitlePage(AbstractPage):
         from start_placement_page import StartPlacementPage
         p("The laboratory in Volos received some bird paste from a plane"
                 " that should be identified. Can you help them?")
-        sp_abspath = StartPlacementPage(language=self.lang).make_page_path()
+        sp_abspath = StartPlacementPage(language=self.lang, stop_html_init=True).make_page_path()
         sp_path = os.path.relpath(sp_abspath, os.path.dirname(self.make_page_path()))
         with form():
             input_(
