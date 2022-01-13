@@ -1,9 +1,9 @@
 extern/
 # the pseudo data
 species/
-data/images/
-data/thumbs/
-data/
+acanthis/images/
+acanthis/thumbs/
+acanthis/
 
 # the html files
 public/

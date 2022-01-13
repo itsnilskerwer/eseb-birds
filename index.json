@@ -1,42 +1,42 @@
 {
 	"EN": {
 		"PATHS_FROM_SCRIPTS": {
-			"BIRD_NAMES": "../data/names.txt",
-			"BIRD_INFO": "../data/taxa.csv",
-			"BIRD_TREE_IMG_DIR": "../data/thumbs",
-			"BIRD_PLACEMENT_IMG_DIR": "../data/trees/en",
-			"BIRD_PAGE_IMG_DIR_OLD": "../data/images",
-			"BIRD_PAGE_IMG_DIR": "../data/images_std",
+			"BIRD_NAMES": "../acanthis/names.txt",
+			"BIRD_INFO": "../acanthis/taxa.csv",
+			"BIRD_TREE_IMG_DIR": "../acanthis/thumbs",
+			"BIRD_PLACEMENT_IMG_DIR": "../acanthis/trees/en",
+			"BIRD_PAGE_IMG_DIR_OLD": "../acanthis/images",
+			"BIRD_PAGE_IMG_DIR": "../acanthis/images_std",
 			"BIRD_HTML_DIR": "../public/en/species",
 			"START_AND_ERROR_HTML_DIR": "../public/en/core",
 			"PLACEMENT_HTML_DIR": "../public/en/placement",
 			"CSS_DIR": "../meta",
-			"SEQUENCES": "../data/sequences"
+			"SEQUENCES": "../acanthis/sequences"
 		}
 	},
 	"GR": {
 		"PATHS_FROM_SCRIPTS": {
-			"BIRD_NAMES": "../data/names.txt",
-			"BIRD_INFO": "../data/taxa.csv",
-			"BIRD_TREE_IMG_DIR": "../data/thumbs",
-			"BIRD_PLACEMENT_IMG_DIR": "../data/trees/gr",
-			"BIRD_PAGE_IMG_DIR_OLD": "../data/images",
-			"BIRD_PAGE_IMG_DIR": "../data/images_std",
+			"BIRD_NAMES": "../acanthis/names.txt",
+			"BIRD_INFO": "../acanthis/taxa.csv",
+			"BIRD_TREE_IMG_DIR": "../acanthis/thumbs",
+			"BIRD_PLACEMENT_IMG_DIR": "../acanthis/trees/gr",
+			"BIRD_PAGE_IMG_DIR_OLD": "../acanthis/images",
+			"BIRD_PAGE_IMG_DIR": "../acanthis/images_std",
 			"BIRD_HTML_DIR": "../public/gr/species",
 			"START_AND_ERROR_HTML_DIR": "../public/gr/core",
 			"PLACEMENT_HTML_DIR": "../public/gr/placement",
 			"CSS_DIR": "../meta",
-			"SEQUENCES": "../data/sequences"
+			"SEQUENCES": "../acanthis/sequences"
 		}
 	},
     "IMAGE_SOURCE_FILES": {
-        "ROOT": "../data/images_source",
-        "WIKI": "../data/images_source/ESEB gia web game_WIKI_photos",
-        "NHMC": "../data/images_source/ESEB gia web game _NHMC photos",
-        "CROPPED_IMGS": "../data"
+        "ROOT": "../acanthis/images_source",
+        "WIKI": "../acanthis/images_source/ESEB gia web game_WIKI_photos",
+        "NHMC": "../acanthis/images_source/ESEB gia web game _NHMC photos",
+        "CROPPED_IMGS": "../acanthis"
     },
     "IMAGE_CROPPED_FILES": {
-        "CROPPED_IMGS": "../data/images_std",
-        "CROPPING_INDEX": "../data/images_std/cropping_index.csv"
+        "CROPPED_IMGS": "../acanthis/images_std",
+        "CROPPING_INDEX": "../acanthis/images_std/cropping_index.csv"
         }
 }
