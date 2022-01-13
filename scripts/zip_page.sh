@@ -6,16 +6,16 @@ PDIR=$1
 
 [[ ! -d ${PDIR} ]] && mkdir ${PDIR}
 
-for FL in `ls ../data | grep -v 'images_'`
+for FL in `ls ../acanthis | grep -v 'images_'`
 do
-	[[ ! -d "${PDIR}/data/" ]] && mkdir "${PDIR}/data/"
-	cp -r "../data/${FL}" "${PDIR}/data"	
+	[[ ! -d "${PDIR}/acanthis/" ]] && mkdir "${PDIR}/acanthis/"
+	cp -r "../acanthis/${FL}" "${PDIR}/acanthis"	
 done
 
-for FL in `ls ../data/images_std | grep -v 'raw' | grep -v 'csv'`
+for FL in `ls ../acanthis/images_std | grep -v 'raw' | grep -v 'csv'`
 do
-	[[ ! -d "${PDIR}/data/images_std" ]] && mkdir "${PDIR}/data/images_std"
-	cp -r "../data/images_std/${FL}" "${PDIR}/data/images_std"	
+	[[ ! -d "${PDIR}/acanthis/images_std" ]] && mkdir "${PDIR}/acanthis/images_std"
+	cp -r "../acanthis/images_std/${FL}" "${PDIR}/acanthis/images_std"	
 done
 
 [[ ! -d "${PDIR}/meta" ]] && mkdir "${PDIR}/meta"
