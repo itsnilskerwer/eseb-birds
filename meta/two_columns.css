@@ -10,7 +10,6 @@ figure {
   text-align: center;
   font-style: italic;
   font-size: smaller;
-  border: thin silver solid;
 }
 
 .row {
@@ -19,4 +18,32 @@ figure {
 
 .column {
   flex: 50%;
+}
+
+/* this is for hovering */
+img {
+  position: absolute;
+}
+
+.bird:hover {
+  opacity:0.60;
+}
+
+.bird-off:hover {
+  opacity:0.60;
+}
+
+.hide {
+  display: none;
+  z-index: 2;
+}
+
+.bird:hover + .hide {
+  display: block;
+  color: blue;
+}
+
+.bird-off:hover + .hide {
+  display: none;
+  z-index: 2;
 }
