@@ -117,6 +117,8 @@ class RightPlacementPage(AbstractPage):
     def plot_with_info(self, image_path):
         '''Add image to html document and annotate it with background info.
         '''
+        from rephrase_svg import TightSVG
+        from io import StringIO
         from dominate.util import raw
         # we use this as image alternativ text
         license_info = "Right placement in tree."
@@ -127,7 +129,9 @@ class RightPlacementPage(AbstractPage):
         with div():
             attr_id = "image"
             attr(id=attr_id)
-            self.paste_svg(image_path)
+            tsvg = TightSVG(image_path)
+            svg_io = StringIO(tsvg.rephrase())
+            self.paste_svg_io(image_path, svg_io)
             if isinstance(license_link, str):
                 figcaption(raw(license_link))
             else:  # for missing data

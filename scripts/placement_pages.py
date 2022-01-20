@@ -126,6 +126,8 @@ class PlacementPage(AbstractPage):
     def plot_with_info(self, image_path, bird_name=None, tree=False, count=None):
         '''Add image to html document and annotate it with background info.
         '''
+        from io import StringIO
+        from rephrase_svg import TightSVG
         from dominate.util import raw
         if not tree: 
             data = self.BIRD_DATA[self.BIRD_DATA["CODE"]==bird_name].squeeze()
@@ -147,7 +149,10 @@ class PlacementPage(AbstractPage):
             if count is not None : attr_id = f"image{count}"
             else : attr_id = "image"
             attr(id=attr_id)
-            if tree : self.paste_svg(image_path)
+            if tree:
+                tsvg = TightSVG(image_path)
+                svg_io = StringIO(tsvg.rephrase())
+                self.paste_svg_io(image_path, svg_io)
             else:
                 with figure():
                     attr(id=img_content)

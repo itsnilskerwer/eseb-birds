@@ -98,6 +98,8 @@ class StartPlacementPage(AbstractPage):
         '''Add image to html document and annotate it with background info.
         '''
         from dominate.util import raw
+        from io import StringIO
+        from rephrase_svg import TightSVG
         # we use this as image alternativ text
         license_info = "These are the birds we already know from greece."
         # this is the image caption
@@ -107,7 +109,9 @@ class StartPlacementPage(AbstractPage):
         with div():
             attr_id = "image"
             attr(id=attr_id)
-            self.paste_svg(image_path)    
+            tsvg = TightSVG(image_path)
+            svg_io = StringIO(tsvg.rephrase())
+            self.paste_svg_io(image_path, svg_io)
             figcaption(raw(license_link))
         return
 
