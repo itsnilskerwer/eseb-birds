@@ -21,7 +21,7 @@ figure {
 }
 
 /* this is for hovering */
-img {
+.hide>img {
   position: absolute;
 }
 
