@@ -83,7 +83,9 @@ class TitlePage(AbstractPage):
     def plot_with_info(self, image_path):
         '''Add image to html document and annotate it with background info.
         '''
+        from io import StringIO
         from dominate.util import raw
+        from rephrase_svg import TightSVG
         # we use this as image alternativ text
         license_info = "Phylogeny of birds with outgroup."
         # this is the image caption
@@ -93,7 +95,10 @@ class TitlePage(AbstractPage):
         with div():
             attr_id = "image"
             attr(id=attr_id)
-            self.paste_svg(image_path)
+            # we rephrease the svg
+            tsvg = TightSVG(image_path)
+            svg_io = StringIO(tsvg.rephrase())
+            self.paste_svg_io(image_path, svg_io)
             figcaption(raw(license_link))
         return
 

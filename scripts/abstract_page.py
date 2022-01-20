@@ -157,6 +157,19 @@ class AbstractPage(ABC):
                 raw(std_line)
         return
 
+    
+    def paste_svg_io(self, svg_file_name, svg_io):
+        '''Paste the code of a svg file into the html code.
+        '''
+        from dominate.svg import svg
+        from dominate.util import raw
+        svg_base_dir = os.path.dirname(svg_file_name)
+        for line in svg_io.readlines():
+            std_line = self.standardize_path(line, svg_base_dir)
+            raw(std_line)
+        return
+
+
     def standardize_path(self, svg_line, svg_base_dir):
         '''Change the path link of a line within an svg image.
         '''
