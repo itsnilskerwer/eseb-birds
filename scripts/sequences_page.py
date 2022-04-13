@@ -69,25 +69,31 @@ class SequencesPage(AbstractPage):
         '''Put together the name information about the bird species as header.
         '''
         # make a large title with name as species
-        page_title = f"Trees that reflect evolutionary history"
+        if self.lang == "EN" :
+            page_title = f"What are DNA sequences?"
+        else :
+            page_title = f"Τι είναι οι αλληλουχίες DNA;"
         # make subtitle of latin name in italics
-        page_subtitle = (
-                "Let us tell you a bit about phylogenetics...")
         
         with div():
             attr(id="header")
-            h1(page_title)
-            h2(em(page_subtitle))
+            h1(page_title)        
         return
 
     def define_backlink(self):
         '''Make a small button that returns the user to the last page.
         '''
         with form():
-            input_(
+            if self.lang == "EN" :
+                input_(
                     type="button",
-                    value="Okay, now I know sequences, take me back.",
+                    value="Okay, now I know what DNA is, let's go back. ",
                     onclick="history.back()")
+            else :
+               input_(
+                    type="button",
+                    value="Εντάξει, τώρα ξέρω τι είναι το DNA, ας πάμε πίσω.",
+                    onclick="history.back()") 
         return
 
 
@@ -98,7 +104,10 @@ class SequencesPage(AbstractPage):
         # we use this as image alternativ text
         license_info = "Phylogeny of birds with outgroup."
         # this is the image caption
-        license_link = "A tree full of birds."
+        if self.lang == "EN" :
+            license_link = "A tree full of birds."
+        else :
+            license_link = "Ένα δέντρο γεμάτο πουλιά."
         # it is a tree
         img_content = "tree"
         with div():
@@ -115,14 +124,20 @@ class SequencesPage(AbstractPage):
         '''Make the first column, which includes the tree image.
         '''
         with div(cls="column"):
-            p("DNA sequences are pretty chemical...\n...\n")
-            
-            p("After sequencing we can imagine the DNA like"
-                    " a word of different letters. Here is an example "
-                    "of the sequence of some genes of the brown pelican.")
+            if self.lang == "EN" :
+                p("After sequencing we can imagine the DNA like"
+                  " a word comprising the letters A, C, G, and T. Here is an example "
+                  "of a part of the DNA of the brown pelican.")
+            else:
+                p("Μετά την αλληλουχίση μπορούμε να φανταστούμε το DNA σαν"
+                  "μια λέξη που περιλαμβάνει τα γράμματα A, C, G και T. Παρακάτω είναι ένα παράδειγμα"
+                   "ενός μέρους του DNA του καφέ πελεκάνου.")
             try:
                 with details():
-                    summary("Show DNA sequence of brown pelican")
+                    if self.lang == "EN" :
+                        summary("Show DNA sequence of brown pelican")
+                    else :
+                        summary("Εμφάνιση αλληλουχίας DNA του καφέ πελεκάνου")
                     self.show_seq()
             except ValueError : pass
             

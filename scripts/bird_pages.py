@@ -65,18 +65,25 @@ class BirdPage(AbstractPage):
         
         try:
             with details():
-                summary("Show DNA sequence")
-                self.show_seq()
+                 if self.lang == "EN" :
+                     summary("Show DNA sequence")
+                 else :
+                      summary("Εμφάνιση αλληλουχίας DNA")
+                      
+            self.show_seq()
         except ValueError : return
         return
 
     def define_header(self):
         '''Put together the name information about the bird species as header.
         '''
-        # make a large title with name as species
-        page_title = f"Species: {self.data.loc['Name']}"
-        # make subtitle of latin name in italics
-        page_subtitle = self.data.loc["Latin"]
+
+        if self.lang == "EN" :
+            page_title = f"Species: {self.data.loc['Name']}"    
+            page_subtitle = self.data.loc["Latin"]
+        else :
+            page_title = f"Είδος: {self.data.loc['Name']}"    
+            page_subtitle = self.data.loc["Latin"]
         
         with div():
             attr(id="header")

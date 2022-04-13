@@ -112,10 +112,14 @@ class PlacementPage(AbstractPage):
     def define_header(self):
         '''Put together the name information about the bird species as header.
         '''
-        # make a large title with name as species
-        page_title = f"Phylogenetic placement"
-        # make subtitle of latin name in italics
-        page_subtitle = "Which bird could be placed here on the tree?"
+        if self.lang == "EN" :
+            # make a large title with name as species
+            page_title = f"Phylogenetic placement"
+            # make subtitle of latin name in italics
+            page_subtitle = "Which bird could be placed here on the tree?"
+        else :
+            page_title = f"Φυλογενετική τοποθέτηση"
+            page_subtitle = "Ποιο πουλί θα μπορούσε να τοποθετηθεί εδώ στο δέντρο;"
         
         with div():
             attr(id="header")
@@ -138,10 +142,13 @@ class PlacementPage(AbstractPage):
             # content of image is habitus
             img_content = "habitus"
         else:
-            # we use this as image alternativ text
+            # we use this as image alternativ text            
             license_info = "Phylogenetic tree for placement."
             # this is the image caption
-            license_link = "Our wet lab sent us this data after sequencing of the bird."
+            if self.lang == "EN" :
+                license_link = "The molecular lab sent us this data after sequencing of the bird."
+            else :
+                license_link = "Το μοριακό εργαστήριο μας έστειλε αυτά τα δεδομένα με το DNA του πουλιού."
             # it is a tree
             img_content = "tree"
         with div():
@@ -178,7 +185,11 @@ class PlacementPage(AbstractPage):
         '''Make the second column, which includes the images of birds to place.
         '''
         with div(cls="column"):
-            p("Which bird could it be that fits into the tree?")
+            if self.lang == "EN" :
+                p("Which among the following birds might fits on the marked position in the tree?")
+            else :
+                p("Ποιο από τα παρακάτω πουλιά ταιριάζει στη σημειωμένη θέση στο δέντρο;")
+                
             for i, bird_name in enumerate(get_placement_species_list(language=self.lang)):
                 img_path = self.make_img_path(bird_name)
                 img_link = self.make_img_link(bird_name)

@@ -42,9 +42,12 @@ class ErrorPage(AbstractPage):
         '''Put together the name information about the bird species as header.
         '''
         # make a large title that encourages children
-        page_title = "Try again ;-)"
-        # make subtitle to swear in greek
-        page_subtitle = "σκατά, it was the wrong bird."
+        if self.lang == "EN" :
+            page_title = "Try again ;-)"
+            page_subtitle = "... it was the wrong bird."
+        else :
+            page_title = "Προσπάθησε ξανά ;-)"
+            page_subtitle = "... ήταν το λάθος πουλί.."
         
         with div():
             attr(id="header")
@@ -57,9 +60,15 @@ class ErrorPage(AbstractPage):
         '''Make a small button that returns the user to the last page.
         '''
         with form():
-            input_(
+            if self.lang == "EN" :
+                input_(
                     type="button",
                     value="You can do it next time!",
+                    onclick="history.back()")
+            else :
+                input_(
+                    type="button",
+                    value="Θα τα καταφέρεις την επόμενη φορά!",
                     onclick="history.back()")
         return
 # end ErrorPage

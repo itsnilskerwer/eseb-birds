@@ -67,12 +67,18 @@ class TitlePage(AbstractPage):
     def define_header(self):
         '''Put together the name information about the bird species as header.
         '''
-        # make a large title with name as species
-        page_title = f"Phylogeny of birdso of the world"
-        # make subtitle of latin name in italics
-        page_subtitle = (
-                "Our research team found out, how the birds ",
-                "of the world relate to each other.")
+    
+        if self.lang == "EN" :
+            # make a large title with name as species
+            page_title = f"A phylogeny showing the evolutionary history of birds around the world"
+            page_subtitle = (
+                "A research team found out, how birds ",
+                "around the world are related to each other.")
+        else :
+            page_title = f"Ένα φυλογενετικό δεντρό μας δείχνει την εξελικτική ιστορία των πτηνών σε όλο τον κόσμο"
+            page_subtitle = (
+                "Μια ερευνητική ομάδα ανακάλυψε πώς σχετίζονται ",
+                "μεταξύ τους τα πουλιά σε όλο τον κόσμο.")
         
         with div():
             attr(id="header")
@@ -89,7 +95,10 @@ class TitlePage(AbstractPage):
         # we use this as image alternativ text
         license_info = "Phylogeny of birds with outgroup."
         # this is the image caption
-        license_link = "A tree full of birds."
+        if self.lang == "EN" :
+            license_link = "A tree full of birds."
+        else :
+            license_link = "Ένα δέντρο γεμάτο πουλιά."
         # it is a tree
         img_content = "tree"
         with div():
@@ -109,25 +118,45 @@ class TitlePage(AbstractPage):
         ip_abspath = PhylogeneticsPage(language=self.lang, stop_html_init=True).make_page_path()
         ip_path = os.path.relpath(ip_abspath, os.path.dirname(self.make_page_path()))
         with form():
-            input_(
+            if self.lang == "EN" :
+                input_(
                     type="button",
                     value="What is a phylogenetic tree?",
                     onclick=f"window.location.href='{ip_path}'")
+            else :
+                input_(
+                    type="button",
+                    value="Τι είναι ένα φυλογενετικό δέντρο;",
+                    onclick=f"window.location.href='{ip_path}'")
+                
         return
 
     def start_placement_game(self):
         '''Forward to the start page of the placement game.
         '''
         from start_placement_page import StartPlacementPage
-        p("The laboratory in Volos received some bird paste from a plane"
-                " that should be identified. Can you help them?")
+        if self.lang == "EN" :
+            p("The molecular laboratory received a bird sample from a plane"
+              " that should be identified. Can you help them?")
+        else :
+            p("Το μοριακό εργαστήριο έλαβε δείγμα πουλιού από αεροπλάνο"
+              " που πρέπει να αναγνωριστεί. Μπορείτε να τους βοηθήσετε;")
+
+            
         sp_abspath = StartPlacementPage(language=self.lang, stop_html_init=True).make_page_path()
         sp_path = os.path.relpath(sp_abspath, os.path.dirname(self.make_page_path()))
         with form():
-            input_(
+            if self.lang == "EN" :
+                input_(
                     type="button",
-                    value="Become a real bird researcher",
+                    value="Become a real bird researcher",                                
                     onclick=f"window.location.href='{sp_path}'")
+            else :
+               input_(
+                    type="button",
+                    value="Γίνε ένας πραγματικός ερευνητής πουλιών",                                
+                    onclick=f"window.location.href='{sp_path}'") 
+                
         return
 
 
@@ -145,10 +174,16 @@ class TitlePage(AbstractPage):
         '''Make the second column, which includes the images of birds to place.
         '''
         with div(cls="column"):
-            p("Do you see, which birds are closely realted to each other? "
-                    "That is pretty fascinating, right? "
-                    "Click on the images to find out more about the "
-                    "bird on the image.")
+            if self.lang == "EN" : 
+                p("Do you see, which birds are closely realted to each other? "
+                  "That is fascinating, right? "
+                  "Click on the images to find out more about the "
+                  "bird on the image.")
+            else:
+                p("Βλέπεις ποια πουλιά είναι συγγενικά μεταξύ τους; "
+                  "Αυτό είναι συναρπαστικό, σωστά;"
+                  "Κάνε κλικ στις εικόνες για να μάθεις περισσότερα "
+                  "για το πουλί στην εικόνα.")
             self.link_phylogenetics_info()
             self.start_placement_game()
         return
