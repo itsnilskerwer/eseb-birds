@@ -92,15 +92,22 @@ class RightPlacementPage(AbstractPage):
     def column2(self):
         '''Make the second column, which includes the images of birds to place.
         '''
-        # make subtitle 
-        page_subtitle = ("You are a great researcher. Your dry "
-            "lab team approved that this bird fits into the "
-            "phylogenetic placement.")
+        # make subtitle
+        if self.lang == "EN" :
+            page_subtitle = ("You are a great researcher. Our computer analysis "
+                             "confirms that this bird fits into the marked position.")
+        else :
+             page_subtitle = ("Είσαι σπουδαίος ερευνητής. Η ανάλυσή μας στον υπολογιστή"
+                              "επιβεβαιώνει ότι αυτό το πουλί ταιριάζει στη σημειωμένη θέση.")
+        
         
         with div(cls="column"):
             p(page_subtitle)
             self.define_infopagelink()
-            p("Do you want to continue doing research?")
+            if self.lang == "EN" :
+                p("Do you want to continue doing research?")
+            else :
+                p("Θέλεις να συνεχίσεις την έρευνα;")
             self.define_startplacmentlink()
         return
 
@@ -108,7 +115,10 @@ class RightPlacementPage(AbstractPage):
         '''Put together the name information about the bird species as header.
         '''
         # make a large title with name as species
-        page_title = f"Successfully placed: {self.data.loc['Name']}"
+        if self.lang == "EN" :
+            page_title = f"Successfully placed: {self.data.loc['Name']}"
+        else :
+            page_title = f"Τοποθετήθηκε με επιτυχία: {self.data.loc['Name']}"
         with div():
             attr(id="header")
             h1(page_title)
@@ -121,9 +131,17 @@ class RightPlacementPage(AbstractPage):
         from io import StringIO
         from dominate.util import raw
         # we use this as image alternativ text
-        license_info = "Right placement in tree."
+        if self.lang == "EN" :
+            license_info = "Correct placement in tree."
+        else :
+             license_info = "Σωστή τοποθέτηση σto δέντρο."
         # this is the image caption
-        license_link = "Our wet lab sent us this data after sequencing of the bird."
+
+        if self.lang == "EN" :
+            license_link = "The molecular lab sent us this data after sequencing of the bird."
+        else :
+            license_link = "Το μοριακό εργαστήριο μας έστειλε αυτά τα δεδομένα με το DNA του πουλιού."
+        
         # it is a tree
         img_content = "tree"
         with div():
@@ -145,9 +163,15 @@ class RightPlacementPage(AbstractPage):
         bp = BirdPage(self.name, language=self.lang, stop_html_init=True)
         bp_path = os.path.relpath(bp.make_page_path(), os.path.dirname(self.make_page_path()))
         with form():
-            input_(
+            if self.lang == "EN" :
+                input_(
                     type="button",
                     value="Learn more about this bird...",
+                    onclick=f"window.location.href='{bp_path}'")
+            else :
+                input_(
+                    type="button",
+                    value="Μάθε περισσότερα για αυτό το πουλί...",
                     onclick=f"window.location.href='{bp_path}'")
         return
 
@@ -158,10 +182,16 @@ class RightPlacementPage(AbstractPage):
         sp = StartPlacementPage(language=self.lang, stop_html_init=True)
         sp_path = os.path.relpath(sp.make_page_path(), os.path.dirname(self.make_page_path()))
         with form():
-            input_(
-                    type="button",
-                    value="Continue with another phylogenetic placement.",
-                    onclick=f"window.location.href='{sp_path}'")
+             if self.lang == "EN" :
+                 input_(
+                     type="button",
+                     value="Continue with another phylogenetic placement.",
+                     onclick=f"window.location.href='{sp_path}'")
+             else :
+                 input_(
+                     type="button",
+                     value="Συνέχισε με άλλη φυλογενετική τοποθέτηση.",
+                     onclick=f"window.location.href='{sp_path}'") 
         return
 
 # end RightPlacementPage

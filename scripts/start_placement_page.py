@@ -68,12 +68,18 @@ class StartPlacementPage(AbstractPage):
     def define_header(self):
         '''Put together the name information about the bird species as header.
         '''
-        # make a large title with name as species
-        page_title = f"Phylogeny of birdso of the world"
-        # make subtitle of latin name in italics
-        page_subtitle = (
-                "Our research team found out, how the birds ",
-                "of the world relate to each other.")
+        
+        if self.lang == "EN" :
+            # make a large title with name as species
+            page_title = f"A phylogeny showing the evolutionary history of birds around the world"
+            page_subtitle = (
+                "A research team found out, how birds ",
+                "around the world are related to each other.")
+        else :
+            page_title = f"Ένα φυλογενετικό δεντρό μας δείχνει την εξελικτική ιστορία των πτηνών σε όλο τον κόσμο"
+            page_subtitle = (
+                "Μια ερευνητική ομάδα ανακάλυψε πώς σχετίζονται ",
+                "μεταξύ τους τα πουλιά σε όλο τον κόσμο.")
         
         with div():
             attr(id="header")
@@ -88,9 +94,15 @@ class StartPlacementPage(AbstractPage):
         ip_abspath = SequencesPage(language=self.lang).make_page_path()
         ip_path = os.path.relpath(ip_abspath, os.path.dirname(self.make_page_path()))
         with form():
-            input_(
+            if self.lang == "EN" :
+                input_(
                     type="button",
-                    value="What are such sequences?",
+                    value="What are these sequences?",
+                    onclick=f"window.location.href='{ip_path}'")
+            else :
+                input_(
+                    type="button",
+                    value="Τι είναι αυτές οι ακολουθίες/γραμματοσειρές;",
                     onclick=f"window.location.href='{ip_path}'")
         return
 
@@ -103,7 +115,10 @@ class StartPlacementPage(AbstractPage):
         # we use this as image alternativ text
         license_info = "These are the birds we already know from greece."
         # this is the image caption
-        license_link = "A tree full of birds."
+        if self.lang == "EN" :
+            license_link = "A tree full of birds."
+        else :
+            license_link = "Ένα δέντρο γεμάτο πουλιά."
         # it is a tree
         img_content = "tree"
         with div():
@@ -147,8 +162,12 @@ class StartPlacementPage(AbstractPage):
         '''Make the second column, which includes the images of birds to place.
         '''
         with div(cls="column"):
-            p("Our fieldworkes got some fresh bird paste from an air plane. "
-                    "The sequencing obtained these sequences")
+            if self.lang == "EN" :
+                p("Our colleagues at the airport obtained a bird sample from an air plane. "
+                  "The molecular sequencing yielded the following DNA sequences:")
+            else :
+                p("Οι συνάδελφοί μας στο αεροδρόμιο έλαβαν δείγμα πουλιού από αεροπλάνο. "
+                   "Η μοριακή ανάλυση έδωσε τις ακόλουθες αλληλουχίες DNA:")
             self.show_sequences()
             self.define_seq_info_link()
         return
