@@ -112,11 +112,13 @@ class PlacementPage(AbstractPage):
     def define_header(self):
         '''Put together the name information about the bird species as header.
         '''
+        from dominate.util import raw
+
         if self.lang == "EN" :
             # make a large title with name as species
             page_title = f"Phylogenetic placement"
             # make subtitle of latin name in italics
-            page_subtitle = "Which bird could be placed here on the tree?"
+            page_subtitle = "Which bird belongs this sequence? Your team found a placement in the tree."
         else :
             page_title = f"Φυλογενετική τοποθέτηση"
             page_subtitle = "Ποιο πουλί θα μπορούσε να τοποθετηθεί εδώ στο δέντρο;"
@@ -125,6 +127,14 @@ class PlacementPage(AbstractPage):
             attr(id="header")
             h1(page_title)
             h2(em(page_subtitle))
+            
+            # adding the sequence
+            sequence = self.get_sequence(bird_name=self.name)
+            sequence = sequence.replace('<dd><span',
+                    '<dd>~~~<span')
+            sequence = sequence.replace('</span></dd>',
+                    '</span>~~~</dd>')
+            h2(raw(f"{sequence}<br>"))
         return
 
     def plot_with_info(self, image_path, bird_name=None, tree=False, count=None):
@@ -186,7 +196,7 @@ class PlacementPage(AbstractPage):
         '''
         with div(cls="column"):
             if self.lang == "EN" :
-                p("Which among the following birds might fits on the marked position in the tree?")
+                p("Which among the following birds might fit on the marked position in the tree?")
             else :
                 p("Ποιο από τα παρακάτω πουλιά ταιριάζει στη σημειωμένη θέση στο δέντρο;")
                 
