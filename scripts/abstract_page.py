@@ -112,9 +112,9 @@ class AbstractPage(ABC):
         undef_path = self.make_page_path()
         
         with div(cls="language_choice"):
-            with a(href=langlink("GR")):
-                if self.lang == "EN" : p("Change language:")
-                else : p("Άλλαξε γλώσσα")
+            if self.lang == "EN" : p("Change language:")
+            else : p("Άλλαξε γλώσσα")
+            
             with a(href=langlink("GR")):
                 if self.lang == "EN" : span("Greek")
                 else : span("Ελληνικά")
