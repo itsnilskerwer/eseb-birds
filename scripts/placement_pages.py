@@ -118,10 +118,10 @@ class PlacementPage(AbstractPage):
             # make a large title with name as species
             page_title = f"Phylogenetic placement"
             # make subtitle of latin name in italics
-            page_subtitle = "Which bird belongs this sequence? Your team found a placement in the tree."
+            page_subtitle = "To which bird does this sequence belong? Your Bioinformatics team found a placement in the tree."
         else :
             page_title = f"Φυλογενετική τοποθέτηση"
-            page_subtitle = "Ποιο πουλί θα μπορούσε να τοποθετηθεί εδώ στο δέντρο;"
+            page_subtitle = "Σε ποιο πουλί ανήκει αυτή η αλληλουχία; Η ομάδα Βιοπληροφορικής βρήκε μια τοποθέτηση στο δέντρο για σένα."
         
         with div():
             attr(id="header")
