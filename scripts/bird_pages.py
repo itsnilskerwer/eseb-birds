@@ -69,8 +69,7 @@ class BirdPage(AbstractPage):
                      summary("Show DNA sequence")
                  else :
                       summary("Εμφάνιση αλληλουχίας DNA")
-                      
-            self.show_seq()
+                 self.show_seq()
         except ValueError : return
         return
 
