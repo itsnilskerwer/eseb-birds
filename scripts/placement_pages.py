@@ -167,7 +167,7 @@ class PlacementPage(AbstractPage):
             else : attr_id = "image"
             attr(id=attr_id)
             if tree:
-                tsvg = TightSVG(image_path)
+                tsvg = TightSVG(image_path, language=self.lang)
                 svg_io = StringIO(tsvg.rephrase())
                 self.paste_svg_io(image_path, svg_io)
             else:

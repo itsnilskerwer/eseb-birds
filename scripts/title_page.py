@@ -105,7 +105,7 @@ class TitlePage(AbstractPage):
             attr_id = "image"
             attr(id=attr_id)
             # we rephrease the svg
-            tsvg = TightSVG(image_path)
+            tsvg = TightSVG(image_path, language=self.lang)
             svg_io = StringIO(tsvg.rephrase())
             self.paste_svg_io(image_path, svg_io)
             figcaption(raw(license_link))

@@ -120,7 +120,7 @@ class PhylogeneticsPage(AbstractPage):
         with div():
             attr_id = "image"
             attr(id=attr_id)
-            tsvg = TightSVG(image_path)
+            tsvg = TightSVG(image_path, language=self.lang)
             svg_io = StringIO(tsvg.rephrase())
             self.paste_svg_io(image_path, svg_io)
             figcaption(raw(license_link))
