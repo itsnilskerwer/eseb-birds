@@ -11,13 +11,14 @@ from __init__ import INDEX_DICT
 class TightSVG:
     '''This class alows to append a tree svg with notes, etc.
     '''
-    def __init__(self, svg_path):
+    def __init__(self, svg_path, language="EN"):
         '''Initialize from svg_file.
         '''
         if not os.path.exists(svg_path):
             raise FileNotFoundError(f"File '{svg_path}' does not exist.")
         self.file = svg_path
         self.get_max_length()
+        self.lang = language
         return
 
     def get_max_length(self):
@@ -92,7 +93,7 @@ class TightSVG:
         
         profile_elements = []
         for a_el in self.a_elements():
-            a_inst = ATeam(a_el)
+            a_inst = ATeam(a_el, language=self.lang)
 
             if a_inst.bird_alias == "question" : profile_elements.append(a_inst.write_str())
             # simple element labelling and copying
