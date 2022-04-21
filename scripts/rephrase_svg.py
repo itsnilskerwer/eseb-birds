@@ -88,7 +88,10 @@ class TightSVG:
     def build_profiles(self, image_scale_factor=4, font_size=20, max_character_per_line=40, correction=4):
         '''Build Bird profiles within a given svg image.
         '''
-        TOPICS = ["Distribution", "Wingspan", "Weight", "Diet", "Genome size", "Nice to know"]
+        if self.lang == "EN" :
+            TOPICS = ["Distribution", "Wingspan", "Weight", "Diet", "Genome size", "Nice to know"]
+        else :
+            TOPICS = ["Κατανομή", "Ανοιγμα φτερών", "Βάρος", "Διατροφή", "Μέγεθος γονιδιώματος", "Καλό να γνωρίζω"]
         first_line_correction = len(f'<tspan font-weight="bold">:</tspan>')
         
         profile_elements = []
@@ -136,8 +139,12 @@ class TightSVG:
             # add sequence
             y_shift += font_size+5
             seq = a_inst.get_sequence(bird_name=a_inst.bird_alias).strip().replace("<dd>","").replace("</dd>", "").replace("span", "tspan")
-            a_inst.add_text(f'<tspan font-weight="bold">DNA fragment::</tspan>  ..{seq}..', label="seq", x=a_inst.img_x, y=y_shift,
-                    color="black", font_size=f"{font_size}px", foregone_element=foregone_label)
+            if self.lang == "EN" :
+                a_inst.add_text(f'<tspan font-weight="bold">DNA fragment:</tspan>  ..{seq}..', label="seq", x=a_inst.img_x, y=y_shift,
+                                color="black", font_size=f"{font_size}px", foregone_element=foregone_label)
+            else :
+                a_inst.add_text(f'<tspan font-weight="bold">κομμάτι του DNA:</tspan>  ..{seq}..', label="seq", x=a_inst.img_x, y=y_shift,
+                                color="black", font_size=f"{font_size}px", foregone_element=foregone_label)
             y_shift += int((font_size+5)*1.2)+font_size
 
             # obtain rectangle coordinates
