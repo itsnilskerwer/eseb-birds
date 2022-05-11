@@ -47,7 +47,7 @@ class ErrorPage(AbstractPage):
             page_subtitle = "... it was the wrong bird."
         else :
             page_title = "Προσπάθησε ξανά ;-)"
-            page_subtitle = "... ήταν το λάθος πουλί.."
+            page_subtitle = "... ήταν το λάθος πουλί."
         
         with div():
             attr(id="header")
