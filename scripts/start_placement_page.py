@@ -71,12 +71,12 @@ class StartPlacementPage(AbstractPage):
         
         if self.lang == "EN" :
             # make a large title with name as species
-            page_title = f"A phylogeny showing the evolutionary history of birds around the world"
+            page_title = f"Aerial Collisions"
             page_subtitle = (
                 "A research team found out, how birds ",
                 "around the world are related to each other.")
         else :
-            page_title = f"Ένα φυλογενετικό δεντρό μας δείχνει την εξελικτική ιστορία των πτηνών σε όλο τον κόσμο"
+            page_title = f"Εναέριες Συγκρούσεις"
             page_subtitle = (
                 "Μια ερευνητική ομάδα ανακάλυψε πώς σχετίζονται ",
                 "μεταξύ τους τα πουλιά σε όλο τον κόσμο.")
