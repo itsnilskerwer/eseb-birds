@@ -136,7 +136,7 @@ class StartPlacementPage(AbstractPage):
         from dominate.util import raw
         from placement_pages import PlacementPage
         new_birds = get_placement_species_list(language=self.lang)
-        for bird in new_birds:
+        for i, bird in enumerate(new_birds, start=1):
             pp = PlacementPage(bird, language=self.lang, stop_html_init=True)
             pp_path = os.path.relpath(pp.make_page_path(), os.path.dirname(self.make_page_path()))
             with a(href=pp_path):
@@ -146,7 +146,7 @@ class StartPlacementPage(AbstractPage):
                         '<dd>~~~<span')
                 sequence = sequence.replace('</span></dd>',
                         '</span>~~~</dd>')
-                raw(f"{sequence}<br>")
+                raw(f"{i}) {sequence}<br>")
         return
 
     def column1(self):
@@ -161,15 +161,25 @@ class StartPlacementPage(AbstractPage):
     def column2(self):
         '''Make the second column, which includes the images of birds to place.
         '''
+        from dominate.util import raw
         with div(cls="column"):
             if self.lang == "EN" :
-                p("Our colleagues at the airport obtained a bird sample from an air plane. "
+                p("Our colleagues at the airport obtained a bird sample from an airplane. "
                   "The molecular sequencing yielded the following DNA sequences:")
             else :
                 p("Οι συνάδελφοί μας στο αεροδρόμιο έλαβαν δείγμα πουλιού από αεροπλάνο. "
                    "Η μοριακή ανάλυση έδωσε τις ακόλουθες αλληλουχίες DNA:")
             self.show_sequences()
             self.define_seq_info_link()
+
+            # sequence video
+            if self.lang == "EN":
+                p("Are you curious about the airplane samples? Watch this short movie:")
+            else:
+                p("ALEXIS PLEASE TRANSLATE")
+            raw('<iframe width="560" height="315" src="https://www.youtube.com/embed/jXPf-nHdoxo" '
+                    'title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; '
+                    'clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
         return
 # end TitlePage
 
