@@ -88,10 +88,12 @@ class TightSVG:
     def build_profiles(self, image_scale_factor=4, font_size=20, max_character_per_line=40, correction=4):
         '''Build Bird profiles within a given svg image.
         '''
+        TOPICS_KEYS = ["Distribution", "Wingspan", "Weight", "Diet", "Genome size"]
         if self.lang == "EN" :
-            TOPICS = ["Distribution", "Wingspan", "Weight", "Diet", "Genome size", "Nice to know"]
+            topics =dict(zip(TOPICS_KEYS, TOPICS_KEYS))
         else :
-            TOPICS = ["Κατανομή", "Ανοιγμα φτερών", "Βάρος", "Διατροφή", "Μέγεθος γονιδιώματος", "Καλό να γνωρίζω"]
+            TOPICS_GR = ["Κατανομή", "Ανοιγμα φτερών", "Βάρος", "Διατροφή", "Μέγεθος γονιδιώματος"]  # , "Καλό να γνωρίζω"]
+            topics = dict(zip(TOPICS_KEYS, TOPICS_GR))
         first_line_correction = len(f'<tspan font-weight="bold">:</tspan>')
         
         profile_elements = []
@@ -120,9 +122,9 @@ class TightSVG:
             y_shift += +int((font_size+5)*1.2)
 
             ## tabular data is added line after line
-            for i, topic in enumerate(TOPICS):
+            for i, topic in enumerate(TOPICS_KEYS):
                 topic_id = topic.lower().replace(" ", "_")
-                header = f'<tspan font-weight="bold">{topic}:</tspan>'
+                header = f'<tspan font-weight="bold">{topics[topic]}:</tspan>'
                 topic_str = f"{header}{''.join([' ']*correction)}{a_inst.data.loc[topic_id]}"
                 lines = break_line(topic_str, max_character_per_line, correction=correction,
                                    firstline_correction=first_line_correction-correction)
