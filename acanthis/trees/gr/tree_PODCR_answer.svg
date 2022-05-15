@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="665" height="3710" style="background:#ffffffff">
-<!-- Created with genesis v0.25.0 (http://genesis-lib.org) on 2021-12-30 at 12:00:40 -->
+<!-- Created with genesis v0.26.1 (http://genesis-lib.org) on 2022-05-15 at 12:14:09 -->
     <g transform="translate( 20, 70)" >
         <g>
-            <line x1="470.588" y1="2340" x2="500" y2="2340" stroke="#000000" stroke-opacity="1" stroke-width="6" stroke-linecap="round" />
-            <line x1="470.588" y1="2295" x2="470.588" y2="2340" stroke="#000000" stroke-opacity="1" stroke-width="6" stroke-linecap="round" />
+            <line x1="470.588" y1="2340" x2="500" y2="2340" stroke="#cc2d47" stroke-opacity="1" stroke-width="6" stroke-linecap="round" />
+            <line x1="470.588" y1="2295" x2="470.588" y2="2340" stroke="#cc2d47" stroke-opacity="1" stroke-width="6" stroke-linecap="round" />
             <line x1="441.176" y1="2295" x2="470.588" y2="2295" stroke="#000000" stroke-opacity="1" stroke-width="6" stroke-linecap="round" />
             <line x1="441.176" y1="2227.5" x2="441.176" y2="2295" stroke="#000000" stroke-opacity="1" stroke-width="6" stroke-linecap="round" />
             <line x1="441.176" y1="0" x2="500" y2="0" stroke="#000000" stroke-opacity="1" stroke-width="6" stroke-linecap="round" />
@@ -365,7 +365,10 @@
             </a>
             <a target="_blank" href="../../../public/gr/species/PODCR.html">
                 <g transform="translate( 500, 2340 )">
-                    <image x="10" y="-50" width="80" height="80" xlink:href="../../thumbs/PODCR.png" />
+                    <g>
+                        <image x="10" y="-50" width="80" height="80" xlink:href="../../thumbs/PODCR.png" />
+                        <rect x="10" y="-50" width="80" height="80" stroke="#cc2d47" stroke-opacity="1" stroke-width="6" fill="none" />
+                    </g>
                 </g>
             </a>
         </g>

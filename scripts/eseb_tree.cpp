@@ -109,10 +109,28 @@ void make_svg_image_tree(
         // if( ! file_exists( image_file )) {
         //     LOG_WARN << "File not found: " << image_file;
         // }
-        node_shapes[i].add( utils::SvgImage(
-            image_file,
-            10, -50, 80, 80
-        ));
+        if( ! question_tree && taxon == placed_taxon ) {
+            auto group = utils::SvgGroup();
+            group.add( utils::SvgImage(
+                image_file,
+                10, -50, 80, 80
+            ));
+            auto stroke = SvgStroke();
+            stroke.width = 6.0;
+            stroke.color = Color( 0.8, 0.175, 0.278 );
+            group.add(
+                utils::SvgRect(
+                    10, -50, 80, 80,
+                    stroke, utils::SvgFill( utils::SvgFill::Type::kNone )
+                )
+            );
+            node_shapes[i].add( group );
+        } else {
+            node_shapes[i].add( utils::SvgImage(
+                image_file,
+                10, -50, 80, 80
+            ));
+        }
 
         // Also add a hyperlink to the taxon sub page, if its not the question image.
         // auto const html_file = base_path + "species/" + taxon + ".html";
@@ -141,6 +159,9 @@ void make_svg_image_tree(
         if( question_tree && taxon == placed_taxon ) {
             stroke.color = Color( 0.8, 0.175, 0.278 );
             stroke.dash_array = { 10, 10 };
+        }
+        if( ! question_tree && taxon == placed_taxon && ! taxon.empty() ) {
+            stroke.color = Color( 0.8, 0.175, 0.278 );
         }
 
         strokes.push_back( std::move( stroke ));
