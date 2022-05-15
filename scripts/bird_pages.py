@@ -60,9 +60,16 @@ class BirdPage(AbstractPage):
     def html_body(self):
         '''Build the body of the html document.
         '''
+        # header
         self.define_header()
-        self.plot_with_info()
         
+        # image
+        self.plot_with_info()
+
+        # text
+        p(self.data.loc["text"])
+
+        # sequence
         try:
             with details():
                  if self.lang == "EN" :
