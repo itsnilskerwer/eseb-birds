@@ -14,7 +14,7 @@ class AbstractPage(ABC):
     def __init__(self, language="EN", stop_html_init=False):
         '''Initiaize object with a given name.
         '''
-        self.BIRD_DATA = pd.read_csv(INDEX_DICT[language]["PATHS_FROM_SCRIPTS"]["BIRD_INFO"])
+        self.BIRD_DATA = pd.read_csv(INDEX_DICT[language]["PATHS_FROM_SCRIPTS"]["BIRD_INFO"], sep=";")
         
         self.lang = language
 
