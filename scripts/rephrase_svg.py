@@ -217,8 +217,7 @@ class ATeam(AbstractPage):
         '''
         self.img_x, self.img_y = [int(v) for v in 
                 re.search('image x="([\-0-9]*)" y="([\-0-9]*)"', self.lines["img1"]).groups()]
-        self.img_dims = {k : int(val) for k, val in zip(["width", "height"], re.search(
-            'width="([\-0-9]*)" height="([\-0-9]*)"', self.lines["img1"]).groups())}
+        self.img_dims = {k : int(val) for k, val in zip(["width", "height"], re.search('width="([\-0-9]*)" height="([\-0-9]*)"', self.lines["img1"]).groups())}
         return
 
     def add_class(self, class_label="bird", element="g1"):
