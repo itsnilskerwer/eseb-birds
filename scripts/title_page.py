@@ -141,6 +141,15 @@ class TitlePage(AbstractPage):
         else :
             p("Το μοριακό εργαστήριο έλαβε δείγμα πουλιού από αεροπλάνο"
               " που πρέπει να αναγνωριστεί. Μπορείτε να τους βοηθήσετε;")
+        
+        # sequence video
+        if self.lang == "EN":
+            p("Where do the DNA samples come from? Watch this short movie!")
+        else:
+            p("Από πού προέρχονται τα δείγματα DNA; Δες  αυτή τη μικρή ταινία!")
+        raw('<iframe width="560" height="315" src="https://www.youtube.com/embed/jXPf-nHdoxo" '
+                'title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; '
+                'clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
 
             
         sp_abspath = StartPlacementPage(language=self.lang, stop_html_init=True).make_page_path()
