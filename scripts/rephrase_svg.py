@@ -19,7 +19,6 @@ class TightSVG:
         self.file = svg_path
         self.get_max_length()
         self.lang = language
-        print(svg_path, self.lang)
         return
 
     def get_max_length(self):
@@ -221,7 +220,6 @@ class ATeam(AbstractPage):
     def get_img_position(self):
         '''Obtain position and size of image.
         '''
-        print(self.lines)
         self.img_x, self.img_y = [int(v) for v in 
                 re.search('image x="([\-0-9]*)" y="([\-0-9]*)"', self.lines["img1"]).groups()]
         self.img_dims = {k : int(val) for k, val in zip(["width", "height"], re.search(
