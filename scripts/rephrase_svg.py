@@ -19,6 +19,7 @@ class TightSVG:
         self.file = svg_path
         self.get_max_length()
         self.lang = language
+        print(svg_path, self.lang)
         return
 
     def get_max_length(self):
@@ -186,6 +187,7 @@ class ATeam(AbstractPage):
         '''
         super().__init__(language=language, stop_html_init=True)
         self.index = ["a", "g1", "img1", "/g1", "/a"]
+        self.ext_index = ["a", "g1", "g2", "img1", "/g2", "/g1", "/a"]
         self.str = a_str
         self.split_str()
         
@@ -201,8 +203,12 @@ class ATeam(AbstractPage):
     def split_str(self):
         '''Split up string into elements.
         '''
+        G2_INDICATOR = "<g>"
         self.lines = {k : ln for ln, k in
                 zip(self.str.split("\n"), self.index)}
+        if G2_INDICATOR in  self.lines["img1"]:
+            self.lines = {k : ln for ln, k in
+                    zip(self.str.split("\n"), self.ext_index)}
         return
 
     def get_position(self):
@@ -215,6 +221,7 @@ class ATeam(AbstractPage):
     def get_img_position(self):
         '''Obtain position and size of image.
         '''
+        print(self.lines)
         self.img_x, self.img_y = [int(v) for v in 
                 re.search('image x="([\-0-9]*)" y="([\-0-9]*)"', self.lines["img1"]).groups()]
         self.img_dims = {k : int(val) for k, val in zip(["width", "height"], re.search(
