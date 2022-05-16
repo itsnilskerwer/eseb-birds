@@ -171,15 +171,6 @@ class StartPlacementPage(AbstractPage):
                    "Η μοριακή ανάλυση έδωσε τις ακόλουθες αλληλουχίες DNA:")
             self.show_sequences()
             self.define_seq_info_link()
-
-            # sequence video
-            if self.lang == "EN":
-                p("Where do the DNA samples come from? Watch this short movie!")
-            else:
-                p("Από πού προέρχονται τα δείγματα DNA; Δες  αυτή τη μικρή ταινία!")
-            raw('<iframe width="560" height="315" src="https://www.youtube.com/embed/jXPf-nHdoxo" '
-                    'title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; '
-                    'clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
         return
 # end TitlePage
 
