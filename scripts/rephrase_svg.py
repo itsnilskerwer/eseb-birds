@@ -186,6 +186,8 @@ class ATeam(AbstractPage):
         '''
         super().__init__(language=language, stop_html_init=True)
         self.index = ["a", "g1", "img1", "/g1", "/a"]
+        self.ext_index = ["a", "g1", "ge", "img1", "redrect", "/ge", "/g1", "/a"]
+        self.ext = False
         self.str = a_str
         self.split_str()
         
@@ -201,8 +203,13 @@ class ATeam(AbstractPage):
     def split_str(self):
         '''Split up string into elements.
         '''
+        G2_INDICATOR = "<g>"
         self.lines = {k : ln for ln, k in
                 zip(self.str.split("\n"), self.index)}
+        if G2_INDICATOR in  self.lines["img1"]:
+            self.ext = True
+            self.lines = {k : ln for ln, k in
+                    zip(self.str.split("\n"), self.ext_index)}
         return
 
     def get_position(self):
@@ -232,7 +239,10 @@ class ATeam(AbstractPage):
         '''
         g2_index = ["g2", "img2", "/g2"]
         g1_end = self.get_key_index("/g1")
-        self.index = self.index[:g1_end+1] + g2_index + self.index[g1_end+1:]
+        if self.ext :
+            self.ext_index = self.ext_index[:g1_end+1] + g2_index + self.ext_index[g1_end+1:]
+        else : self.index = self.index[:g1_end+1] + g2_index + self.index[g1_end+1:]
+        
         for k1, k2 in zip(["g1", "img1", "/g1"], g2_index):
             self.lines[k2] = str(self.lines[k1])
         return
@@ -240,13 +250,17 @@ class ATeam(AbstractPage):
     def get_key_index(self, key):
         '''Obtain numeric index of a key of the lines dict.
         '''
-        indx = [i for i, k in enumerate(self.index) if k==key][0]
+        if self.ext:
+            indx = [i for i, k in enumerate(self.ext_index) if k==key][0]
+        else : indx = [i for i, k in enumerate(self.index) if k==key][0]
         return indx
 
     def write_str(self):
         '''Write a string to print out.
         '''
-        out = "\n".join([self.lines[i] for i in self.index])
+        if self.ext:
+            out = "\n".join([self.lines[i] for i in self.ext_index])
+        else : out = "\n".join([self.lines[i] for i in self.index])
         return out
 
     def change_position(self, new_x, new_y, element_name="g2"):
@@ -282,7 +296,9 @@ class ATeam(AbstractPage):
         '''
         # update index and lines dict
         indx = self.get_key_index(foregone_element)
-        self.index = self.index[:indx+1] + [new_key] + self.index[indx+1:]
+        if self.ext:
+            self.ext_index = self.ext_index[:indx+1] + [new_key] + self.ext_index[indx+1:]
+        else : self.index = self.index[:indx+1] + [new_key] + self.index[indx+1:]
         # use tabs of foregeone element
         if tabbed : tabs = self.lines[foregone_element].split("<")[0]
         else : tabs = ""
