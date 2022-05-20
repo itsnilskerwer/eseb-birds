@@ -135,6 +135,8 @@ class TitlePage(AbstractPage):
         '''Forward to the start page of the placement game.
         '''
         from start_placement_page import StartPlacementPage
+        from dominate.util import raw
+
         if self.lang == "EN" :
             p("The molecular laboratory received a bird sample from a plane"
               " that should be identified. Can you help them?")
@@ -161,9 +163,9 @@ class TitlePage(AbstractPage):
             p("Where do the DNA samples come from? Watch this short movie!")
         else:
             p("Από πού προέρχονται τα δείγματα DNA; Δες αυτή τη μικρή ταινία!")
-        #raw('<iframe width="560" height="315" src="https://www.youtube.com/embed/jXPf-nHdoxo" '
-         #       'title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; '
-          #      'clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
+        raw('<iframe width="560" height="315" src="https://www.youtube.com/embed/jXPf-nHdoxo" '
+                'title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; '
+                'clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
         return
 
 
