@@ -88,11 +88,13 @@ class TightSVG:
     def build_profiles(self, image_scale_factor=4, font_size=20, max_character_per_line=40, correction=4):
         '''Build Bird profiles within a given svg image.
         '''
-        TOPICS_KEYS = ["Distribution", "Wingspan", "Weight", "Diet", "Genome size"]
+        #TOPICS_KEYS = ["Distribution", "Wingspan", "Weight", "Diet", "Genome size"]
+        TOPICS_KEYS = ["Distribution", "Wingspan", "Weight", "Diet"]
         if self.lang == "EN" :
             topics =dict(zip(TOPICS_KEYS, TOPICS_KEYS))
         else :
-            TOPICS_GR = ["Κατανομή", "Ανοιγμα φτερών", "Βάρος", "Διατροφή", "Μέγεθος γονιδιώματος"]  # , "Καλό να γνωρίζω"]
+            #TOPICS_GR = ["Κατανομή", "Ανοιγμα φτερών", "Βάρος", "Διατροφή", "Μέγεθος γονιδιώματος"]  # , "Καλό να γνωρίζω"]
+            TOPICS_GR = ["Κατανομή", "Ανοιγμα φτερών", "Βάρος", "Διατροφή"]
             topics = dict(zip(TOPICS_KEYS, TOPICS_GR))
         first_line_correction = len(f'<tspan font-weight="bold">:</tspan>')
         
