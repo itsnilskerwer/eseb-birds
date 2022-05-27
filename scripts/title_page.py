@@ -70,7 +70,7 @@ class TitlePage(AbstractPage):
     
         if self.lang == "EN" :
             # make a large title with name as species
-            page_title = f"Aerial Collisons"
+            page_title = f"Aerial Collisions"
             page_subtitle = (
                 "A research team found out, how birds ",
                 "around the world are related to each other.")
@@ -161,9 +161,12 @@ class TitlePage(AbstractPage):
         # sequence video
         if self.lang == "EN":
             p("Where do the DNA samples come from? Watch this short movie!")
+            raw('<iframe width="560" height="315" src="https://www.youtube.com/embed/jXPf-nHdoxo?cc_load_policy=1&cc_lang_pref=en" '
+                'title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; '
+                'clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
         else:
-            p("Από πού προέρχονται τα δείγματα DNA; Δες αυτή τη μικρή ταινία!")
-        raw('<iframe width="560" height="315" src="https://www.youtube.com/embed/jXPf-nHdoxo" '
+            p("Από πού προέρχονται τα δείγματα DNA; Δες αυτή τη μικρή ταινία!")            
+            raw('<iframe width="560" height="315" src="https://www.youtube.com/embed/jXPf-nHdoxo?cc_load_policy=1&cc_lang_pref=gr" '
                 'title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; '
                 'clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
         return
