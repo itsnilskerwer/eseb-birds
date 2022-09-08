@@ -1,0 +1,38 @@
+urltitle:
+  description:
+    Title for html page welcoming to the lab.
+  FILL_IN:
+    Welcome to the bird sequencing lab.
+
+header:
+  description:
+    Header stating it is about aerial collisions.
+  FILL_IN:
+    Aerial Collisions
+
+subheader:
+  description:
+    A subtitle that elaborates that a team of researchers found out about the relationships of birds around the planet.
+  FILL_IN:
+    A research team found out, how birds around the world are related to each other.
+
+maintext:
+  description:
+    The text tells that the bird sample leaded to the depicted set of sequences. Attention, as there is a colon in the text, please use the quotation marks in this FILL_IN section.
+  FILL_IN:
+    "Our colleagues at the airport obtained a bird sample from an airplane. The molecular sequencing yielded the following DNA sequences:"
+
+button:
+  description:
+    Button that asks what these sequences are.
+  FILL_IN:
+    What are these sequences?
+
+imgtext:
+  description:
+    Caption for the tree image just stating that it is a tree full of birds.
+  FILL_IN:
+    A tree full of birds.
+
+
+

@@ -4,6 +4,7 @@
 import os
 import pandas as pd
 import regex as re
+import yaml
 
 from abstract_page import AbstractPage
 from __init__ import INDEX_DICT
@@ -11,7 +12,7 @@ from __init__ import INDEX_DICT
 class TightSVG:
     '''This class alows to append a tree svg with notes, etc.
     '''
-    def __init__(self, svg_path, language="EN"):
+    def __init__(self, svg_path, language="EN", stop_rec=False):
         '''Initialize from svg_file.
         '''
         if not os.path.exists(svg_path):
@@ -19,6 +20,11 @@ class TightSVG:
         self.file = svg_path
         self.get_max_length()
         self.lang = language
+
+        file_texts = os.path.join(INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_TEXTS"], "profile.yml")
+        self.texts = yaml.safe_load(open(file_texts, "r"))
+        
+        if not stop_rec : self.en = TightSVG(svg_path, stop_rec=True)
         return
 
     def get_max_length(self):
@@ -88,14 +94,9 @@ class TightSVG:
     def build_profiles(self, image_scale_factor=4, font_size=20, max_character_per_line=40, correction=4):
         '''Build Bird profiles within a given svg image.
         '''
-        #TOPICS_KEYS = ["Distribution", "Wingspan", "Weight", "Diet", "Genome size"]
-        TOPICS_KEYS = ["Distribution", "Wingspan", "Weight", "Diet"]
-        if self.lang == "EN" :
-            topics =dict(zip(TOPICS_KEYS, TOPICS_KEYS))
-        else :
-            #TOPICS_GR = ["Κατανομή", "Ανοιγμα φτερών", "Βάρος", "Διατροφή", "Μέγεθος γονιδιώματος"]  # , "Καλό να γνωρίζω"]
-            TOPICS_GR = ["Κατανομή", "Ανοιγμα φτερών", "Βάρος", "Διατροφή"]
-            topics = dict(zip(TOPICS_KEYS, TOPICS_GR))
+        TOPICS_KEYS = self.en.texts["topickeys"]["FILL_IN"]
+        TOPICS_NATIVE = self.texts["topickeys"]["FILL_IN"]
+        topics =dict(zip(TOPICS_KEYS, TOPICS_NATIVE))
         first_line_correction = len(f'<tspan font-weight="bold">:</tspan>')
         
         profile_elements = []
@@ -143,11 +144,7 @@ class TightSVG:
             # add sequence
             y_shift += font_size+5
             seq = a_inst.get_sequence(bird_name=a_inst.bird_alias).strip().replace("<dd>","").replace("</dd>", "").replace("span", "tspan")
-            if self.lang == "EN" :
-                a_inst.add_text(f'<tspan font-weight="bold">DNA fragment:</tspan>  ..{seq}..', label="seq", x=a_inst.img_x, y=y_shift,
-                                color="black", font_size=f"{font_size}px", foregone_element=foregone_label)
-            else :
-                a_inst.add_text(f'<tspan font-weight="bold">κομμάτι του DNA:</tspan>  ..{seq}..', label="seq", x=a_inst.img_x, y=y_shift,
+            a_inst.add_text(f'<tspan font-weight="bold">{self.texts["dnafragment"]["FILL_IN"]}:</tspan>  ..{seq}..', label="seq", x=a_inst.img_x, y=y_shift,
                                 color="black", font_size=f"{font_size}px", foregone_element=foregone_label)
             y_shift += int((font_size+5)*1.2)+font_size
 

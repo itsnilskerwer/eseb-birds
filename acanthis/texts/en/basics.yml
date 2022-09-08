@@ -1,0 +1,35 @@
+changelang:
+  description:
+    Prompt to change language.
+  FILL_IN:
+    "Change language:"
+
+gr:
+  description:
+    Name of greek language.
+  FILL_IN:
+    Greek
+
+en:
+  description:
+    Name of english language.
+  FILL_IN:
+    English
+
+sp:
+  description:
+    Name of spanish language.
+  FILL_IN:
+    Spanish
+
+it:
+  description:
+    Name of italian language.
+  FILL_IN:
+    Italian
+
+de:
+  description:
+    Name of german language.
+  FILL_IN:
+    German

@@ -1,0 +1,55 @@
+urltitle:
+  description:
+    Title for html page declaring that it is all about birds' worldwide diversity.
+  FILL_IN:
+    Diversity of birds worldwide.
+
+header:
+  description:
+    Header stating it is about aerial collisions.
+  FILL_IN:
+    Εναέριες Συγκρούσεις
+
+subheader:
+  description:
+    A subtitle that elaborates that a team of researchers found out about the relationships of birds around the planet.
+  FILL_IN:
+    Μια ερευνητική ομάδα ανακάλυψε πώς σχετίζονται μεταξύ τους τα πουλιά σε όλο τον κόσμο.
+
+maintext1:
+  description:
+    Questions to invite reader to find out more about the birds in the tree.
+  FILL_IN:
+    Βλέπεις ποια πουλιά είναι συγγενικά μεταξύ τους; Αυτό είναι συναρπαστικό, σωστά; Κάνε κλικ στις εικόνες για να μάθεις περισσότερα για το πουλί στην εικόνα.
+
+button1:
+  description:
+    Button that links to a page about phylogenetic trees. Prompt asking for what a phyl. tree is.
+  FILL_IN:
+    Τι είναι ένα φυλογενετικό δέντρο;
+
+maintext2:
+  description:
+    Text that tells researchers found a bird sample form a plane and ask the reader to help in identification.
+  FILL_IN:
+    Το μοριακό εργαστήριο έλαβε δείγμα πουλιού από αεροπλάνο που πρέπει να αναγνωριστεί. Μπορείτε να τους βοηθήσετε;
+
+button2:
+  description:
+    Prompt as buttone text to become a researcher.
+  FILL_IN:
+    Γίνε ένας πραγματικός ερευνητής πουλιών
+
+maintext3:
+  description:
+    Invitation to find out more about where the samples come from; to watch the greek clip.
+  FILL_IN:
+    Από πού προέρχονται τα δείγματα DNA; Δες αυτή τη μικρή ταινία!
+
+imgtext:
+  description:
+    Caption for the tree image just stating that it is a tree full of birds.
+  FILL_IN:
+    Ένα δέντρο γεμάτο πουλιά.
+
+

@@ -1,0 +1,36 @@
+urltitle:
+  description:
+    Title of the html page that asks what a phylogenetic tree is.
+  FILL_IN:
+    What is a phylogenetic tree?
+
+header:
+  description:
+    The header tells that trees show evolutionary histories.
+  FILL_IN:
+    Δέντρα που αντικατοπτρίζουν την εξελικτική ιστορία
+
+subheader:
+  description:
+    Invitation to tell the reader more about phylogenies.
+  FILL_IN:
+    Ας σας πούμε μερικά πράγματα για τα φυλογενετικά δέντρα.
+
+maintext:
+  description:
+    Few sentences that descibe the idea of a phylogenetic tree.
+  FILL_IN:
+    Ένα φυλογενετικό δέντρο (επίσης φυλογένεση ή εξελικτικό δέντρο) είναι ένα διάγραμμα διακλάδωσης ή ένα δέντρο που δείχνει τις εξελικτικές σχέσεις μεταξύ διαφόρων βιολογικών ειδών ή άλλων οντοτήτων με βάση ομοιότητες και διαφορές στα φυσικά ή γενετικά χαρακτηριστικά τους. Όλη η ζωή στη Γη είναι μέρος ενός μόνο φυλογενετικού δέντρου, που υποδηλώνει κοινή καταγωγή.
+
+button:
+  description:
+    Button that leads back to the starting page.
+  FILL_IN:
+    Επιστρέψτε στην αρχική σελίδα.
+
+imgtext:
+  description:
+    Caption for the tree image just stating that it is a tree full of birds.
+  FILL_IN:
+    Ένα δέντρο γεμάτο πουλιά.
+

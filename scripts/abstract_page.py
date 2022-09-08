@@ -5,6 +5,7 @@ import dominate as dm
 from dominate.tags import *
 import os
 import pandas as pd
+import yaml
 
 from __init__ import INDEX_DICT
 
@@ -110,18 +111,18 @@ class AbstractPage(ABC):
                 undef_path.replace(f"/{self.lang.lower()}/", f"/{lg.lower()}/"), 
                 os.path.dirname(undef_path))
         undef_path = self.make_page_path()
-        
+       
+        # here we load the language texts for each language
+        file_basics = os.path.join(INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_TEXTS"], "basics.yml")
+        text_basics = yaml.safe_load(open(file_basics, "r"))
+        all_languages = [ln.lower() for ln in INDEX_DICT.keys() if len(ln)==2]
         with div(cls="language_choice"):
-            if self.lang == "EN" : p("Change language:")
-            else : p("Άλλαξε γλώσσα")
-            
-            with a(href=langlink("GR")):
-                if self.lang == "EN" : span("Greek")
-                else : span("Ελληνικά")
-            span(" 🐣 ")
-            with a(href=langlink("EN")):
-                if self.lang == "EN" : span("English")
-                else : span("Αγγλικά")
+            p(text_basics["changelang"]["FILL_IN"])
+
+            for i, lng in enumerate(all_languages):
+                with a(href=langlink(lng)):
+                    span(text_basics[lng]["FILL_IN"])
+                if i < len(all_languages)-1 : span(" 🐣 ")
         return
 
     def save_html(self, force=False):

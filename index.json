@@ -3,6 +3,7 @@
 		"PATHS_FROM_SCRIPTS": {
 			"BIRD_NAMES": "../acanthis/names.txt",
 			"BIRD_INFO": "../acanthis/texts/en/taxa.csv",
+			"BIRD_TEXTS": "../acanthis/texts/en",
 			"BIRD_TREE_IMG_DIR": "../acanthis/thumbs",
 			"BIRD_PLACEMENT_IMG_DIR": "../acanthis/trees/en",
 			"BIRD_PAGE_IMG_DIR_OLD": "../acanthis/images",
@@ -18,6 +19,7 @@
 		"PATHS_FROM_SCRIPTS": {
 			"BIRD_NAMES": "../acanthis/names.txt",
 			"BIRD_INFO": "../acanthis/texts/gr/taxa.csv",
+			"BIRD_TEXTS": "../acanthis/texts/gr",
 			"BIRD_TREE_IMG_DIR": "../acanthis/thumbs",
 			"BIRD_PLACEMENT_IMG_DIR": "../acanthis/trees/gr",
 			"BIRD_PAGE_IMG_DIR_OLD": "../acanthis/images",

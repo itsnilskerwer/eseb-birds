@@ -1,0 +1,23 @@
+urltitle:
+  description:
+    Encouraging title for the html page
+  FILL_IN:
+    Προσπάθησε ξανά ;-)    
+
+header:
+  description: 
+    Encouraging header, asking to try game again. With a smiley ;-).
+  FILL_IN:
+    Προσπάθησε ξανά ;-)
+
+subheader:
+  description:
+    Half sentence stating that it was the wrong bird chosen.
+  FILL_IN:
+    ... ήταν το λάθος πουλί.
+
+button:
+  description:
+    Invitation to try it again, because it ill work out next time.
+  FILL_IN:
+    Θα τα καταφέρεις την επόμενη φορά!

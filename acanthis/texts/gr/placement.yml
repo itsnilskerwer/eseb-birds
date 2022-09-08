@@ -1,0 +1,29 @@
+urltitle:
+  description:
+    Title of the html page to perform phylogenetic placement of bird.
+  FILL_IN:
+    Phylogenetic placement for a newly discovered bird.
+
+header:
+  description:
+    Header simply saying phylogenetic placement.
+  FILL_IN:
+    Φυλογενετική τοποθέτηση
+
+subheader:
+  description:
+    Prompt that asks which bird the sequence that was placed in the tree comes from.
+  FILL_IN:
+    Σε ποιο πουλί ανήκει αυτή η αλληλουχία; Η ομάδα Βιοπληροφορικής βρήκε μια τοποθέτηση στο δέντρο για σένα.
+
+maintext:
+  description:
+    Question which bird would fit into the given position.
+  FILL_IN:
+    Ποιο από τα παρακάτω πουλιά ταιριάζει στη σημειωμένη θέση στο δέντρο;
+
+imgtext:
+  description:
+    Caption for the image just stating that researchers made a placement.
+  FILL_IN:
+    Το μοριακό εργαστήριο μας έστειλε αυτά τα δεδομένα με το DNA του πουλιού.

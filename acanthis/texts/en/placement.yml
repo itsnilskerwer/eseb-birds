@@ -1,0 +1,30 @@
+urltitle:
+  description:
+    Title of the html page to perform phylogenetic placement of bird.
+  FILL_IN:
+    Phylogenetic placement for a newly discovered bird.
+
+header:
+  description:
+    Header simply saying phylogenetic placement.
+  FILL_IN:
+    Phylogenetic placement
+
+subheader:
+  description:
+    Prompt that asks which bird the sequence that was placed in the tree comes from.
+  FILL_IN:
+    To which bird does this sequence belong? Your Bioinformatics team found a placement in the tree.
+
+maintext:
+  description:
+    Question which bird would fit into the given position.
+  FILL_IN:
+    Which among the following birds might fit on the marked position in the tree?
+
+imgtext:
+  description:
+    Caption for the image just stating that researchers made a placement.
+  FILL_IN:
+    The molecular lab sent us this data after sequencing of the bird.
+

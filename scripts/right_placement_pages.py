@@ -6,6 +6,7 @@ import dominate as dm
 from dominate.tags import *
 import os
 import pandas as pd
+import yaml
 
 from abstract_page import AbstractPage
 from abstract_page import get_placement_species_list
@@ -45,6 +46,9 @@ class RightPlacementPage(AbstractPage):
     def make_title(self):
         '''Build a title for the HTML.
         '''
+        file_texts = os.path.join(INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_TEXTS"], "success.yml")
+        self.texts = yaml.safe_load(open(file_texts, "r"))
+
         # this can be edited.
         # so far, we simply take the latin name.
         if not hasattr(self, "data"):
@@ -93,21 +97,13 @@ class RightPlacementPage(AbstractPage):
         '''Make the second column, which includes the images of birds to place.
         '''
         # make subtitle
-        if self.lang == "EN" :
-            page_subtitle = ("You are a great researcher. Our computer analysis "
-                             "confirms that this bird fits into the marked position.")
-        else :
-             page_subtitle = ("Είσαι σπουδαίος ερευνητής. Η ανάλυσή μας στον υπολογιστή"
-                              "επιβεβαιώνει ότι αυτό το πουλί ταιριάζει στη σημειωμένη θέση.")
+        page_subtitle = self.texts["maintext1"]["FILL_IN"]
         
         
         with div(cls="column"):
             p(page_subtitle)
             self.define_infopagelink()
-            if self.lang == "EN" :
-                p("Do you want to continue doing research?")
-            else :
-                p("Θέλεις να συνεχίσεις την έρευνα;")
+            p(self.texts["maintext2"]["FILL_IN"])
             self.define_startplacmentlink()
         return
 
@@ -115,10 +111,7 @@ class RightPlacementPage(AbstractPage):
         '''Put together the name information about the bird species as header.
         '''
         # make a large title with name as species
-        if self.lang == "EN" :
-            page_title = f"Successfully placed: {self.data.loc['Name']}"
-        else :
-            page_title = f"Τοποθετήθηκε με επιτυχία: {self.data.loc['Name']}"
+        page_title = f"{self.texts['header']['FILL_IN']} {self.data.loc['Name']}"
         with div():
             attr(id="header")
             h1(page_title)
@@ -131,16 +124,9 @@ class RightPlacementPage(AbstractPage):
         from io import StringIO
         from dominate.util import raw
         # we use this as image alternativ text
-        if self.lang == "EN" :
-            license_info = "Correct placement in tree."
-        else :
-             license_info = "Σωστή τοποθέτηση σto δέντρο."
+        license_info = self.texts["imgalt"]["FILL_IN"]
         # this is the image caption
-
-        if self.lang == "EN" :
-            license_link = "The molecular lab sent us this data after sequencing of the bird."
-        else :
-            license_link = "Το μοριακό εργαστήριο μας έστειλε αυτά τα δεδομένα με το DNA του πουλιού."
+        license_link = self.texts["imgtext"]["FILL_IN"]
         
         # it is a tree
         img_content = "tree"
@@ -163,16 +149,10 @@ class RightPlacementPage(AbstractPage):
         bp = BirdPage(self.name, language=self.lang, stop_html_init=True)
         bp_path = os.path.relpath(bp.make_page_path(), os.path.dirname(self.make_page_path()))
         with form():
-            if self.lang == "EN" :
-                input_(
-                    type="button",
-                    value="Learn more about this bird...",
-                    onclick=f"window.location.href='{bp_path}'")
-            else :
-                input_(
-                    type="button",
-                    value="Μάθε περισσότερα για αυτό το πουλί...",
-                    onclick=f"window.location.href='{bp_path}'")
+            input_(
+                type="button",
+                value=self.texts["button1"]["FILL_IN"],
+                onclick=f"window.location.href='{bp_path}'")
         return
 
     def define_startplacmentlink(self):
@@ -182,16 +162,10 @@ class RightPlacementPage(AbstractPage):
         sp = StartPlacementPage(language=self.lang, stop_html_init=True)
         sp_path = os.path.relpath(sp.make_page_path(), os.path.dirname(self.make_page_path()))
         with form():
-             if self.lang == "EN" :
-                 input_(
-                     type="button",
-                     value="Continue with another phylogenetic placement.",
-                     onclick=f"window.location.href='{sp_path}'")
-             else :
-                 input_(
-                     type="button",
-                     value="Συνέχισε με άλλη φυλογενετική τοποθέτηση.",
-                     onclick=f"window.location.href='{sp_path}'") 
+            input_(
+                type="button",
+                value=self.texts["button2"]["FILL_IN"],
+                onclick=f"window.location.href='{sp_path}'")
         return
 
 # end RightPlacementPage
@@ -201,7 +175,7 @@ class RightPlacementPage(AbstractPage):
 
 ###############
 def main():
-    for lang in ["EN", "GR"]:
+    for lang in [ln for ln in INDEX_DICT.keys() if len(ln)==2]:
         bird_names = get_placement_species_list(language=lang)
         for bird_name in bird_names:
             bird_name = bird_name.strip()

@@ -5,6 +5,7 @@ import dominate as dm
 from dominate.tags import *
 import os
 import pandas as pd
+import yaml
 
 from abstract_page import AbstractPage
 from __init__ import INDEX_DICT
@@ -16,9 +17,12 @@ class ErrorPage(AbstractPage):
     def make_title(self):
         '''Build a title for the HTML.
         '''
+        file_texts = os.path.join(INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_TEXTS"], "error_page.yml")
+        self.texts = yaml.safe_load(open(file_texts, "r"))
+
         # this can be edited.
-        # so far, we simply take the latin name.
-        title = "try again ;-)"
+        # so far we take a simple title.
+        title = self.texts["urltitle"]["FILL_IN"]
         return title
     
     def make_page_path(self):
@@ -42,12 +46,8 @@ class ErrorPage(AbstractPage):
         '''Put together the name information about the bird species as header.
         '''
         # make a large title that encourages children
-        if self.lang == "EN" :
-            page_title = "Try again ;-)"
-            page_subtitle = "... it was the wrong bird."
-        else :
-            page_title = "Προσπάθησε ξανά ;-)"
-            page_subtitle = "... ήταν το λάθος πουλί."
+        page_title = self.texts["header"]["FILL_IN"]
+        page_subtitle = self.texts["subheader"]["FILL_IN"]
         
         with div():
             attr(id="header")
@@ -60,22 +60,16 @@ class ErrorPage(AbstractPage):
         '''Make a small button that returns the user to the last page.
         '''
         with form():
-            if self.lang == "EN" :
-                input_(
-                    type="button",
-                    value="You can do it next time!",
-                    onclick="history.back()")
-            else :
-                input_(
-                    type="button",
-                    value="Θα τα καταφέρεις την επόμενη φορά!",
-                    onclick="history.back()")
+            input_(
+                type="button",
+                value=self.texts["button"]["FILL_IN"],
+                onclick="history.back()")
         return
 # end ErrorPage
 
 ###############
 def main():
-    for lang in ["EN", "GR"]:
+    for lang in [ln for ln in INDEX_DICT.keys() if len(ln)==2]:
         ep = ErrorPage(language=lang)
         ep.build_html()
         ep.save_html(force=True)

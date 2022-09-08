@@ -5,6 +5,7 @@ import dominate as dm
 from dominate.tags import *
 import os
 import pandas as pd
+import yaml
 
 from abstract_page import AbstractPage
 from abstract_page import get_placement_species_list
@@ -16,9 +17,12 @@ class StartPlacementPage(AbstractPage):
     def make_title(self):
         '''Build a title for the HTML.
         '''
+        file_texts = os.path.join(INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_TEXTS"], "start_placement.yml")
+        self.texts = yaml.safe_load(open(file_texts, "r"))
+
         # this can be edited.
         # so far we take a simple title.
-        title = f"Welcome to the bird sequencing lab."
+        title = self.texts["urltitle"]["FILL_IN"]
         return title
     
 
@@ -68,18 +72,9 @@ class StartPlacementPage(AbstractPage):
     def define_header(self):
         '''Put together the name information about the bird species as header.
         '''
-        
-        if self.lang == "EN" :
-            # make a large title with name as species
-            page_title = f"Aerial Collisions"
-            page_subtitle = (
-                "A research team found out, how birds ",
-                "around the world are related to each other.")
-        else :
-            page_title = f"Εναέριες Συγκρούσεις"
-            page_subtitle = (
-                "Μια ερευνητική ομάδα ανακάλυψε πώς σχετίζονται ",
-                "μεταξύ τους τα πουλιά σε όλο τον κόσμο.")
+        # make a large title with name as species
+        page_title = self.texts["header"]["FILL_IN"]
+        page_subtitle = self.texts["subheader"]["FILL_IN"]
         
         with div():
             attr(id="header")
@@ -94,16 +89,10 @@ class StartPlacementPage(AbstractPage):
         ip_abspath = SequencesPage(language=self.lang).make_page_path()
         ip_path = os.path.relpath(ip_abspath, os.path.dirname(self.make_page_path()))
         with form():
-            if self.lang == "EN" :
-                input_(
-                    type="button",
-                    value="What are these sequences?",
-                    onclick=f"window.location.href='{ip_path}'")
-            else :
-                input_(
-                    type="button",
-                    value="Τι είναι αυτές οι ακολουθίες/γραμματοσειρές;",
-                    onclick=f"window.location.href='{ip_path}'")
+            input_(
+                type="button",
+                value="What are these sequences?",
+                onclick=f"window.location.href='{ip_path}'")
         return
 
     def plot_with_info(self, image_path):
@@ -115,10 +104,7 @@ class StartPlacementPage(AbstractPage):
         # we use this as image alternativ text
         license_info = "These are the birds we already know from greece."
         # this is the image caption
-        if self.lang == "EN" :
-            license_link = "A tree full of birds."
-        else :
-            license_link = "Ένα δέντρο γεμάτο πουλιά."
+        license_link = self.texts["imgtext"]["FILL_IN"]
         # it is a tree
         img_content = "tree"
         with div():
@@ -163,12 +149,7 @@ class StartPlacementPage(AbstractPage):
         '''
         from dominate.util import raw
         with div(cls="column"):
-            if self.lang == "EN" :
-                p("Our colleagues at the airport obtained a bird sample from an airplane. "
-                  "The molecular sequencing yielded the following DNA sequences:")
-            else :
-                p("Οι συνάδελφοί μας στο αεροδρόμιο έλαβαν δείγμα πουλιού από αεροπλάνο. "
-                   "Η μοριακή ανάλυση έδωσε τις ακόλουθες αλληλουχίες DNA:")
+            p(self.texts["maintext"]["FILL_IN"])
             self.show_sequences()
             self.define_seq_info_link()
         return
@@ -185,7 +166,7 @@ def make_seq(bird_name, language="EN"):
 
 ###############
 def main():
-    for lang in ["EN", "GR"]:
+    for lang in [ln for ln in INDEX_DICT.keys() if len(ln)==2]:
         sp = StartPlacementPage(language=lang)
         sp.build_html()
         sp.save_html(force=True)

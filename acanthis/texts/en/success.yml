@@ -1,0 +1,42 @@
+header:
+  description:
+    Header that is made from a success statement and the name of the bird (will be added automatically)
+  FILL_IN:
+    "Successfully placed: "
+
+maintext1:
+  description:
+    Some sentences telling that reader is great researcher and the result was approved by lab.
+  FILL_IN:
+    You are a great researcher. Our computer analysis confirms that this bird fits into the marked position.
+
+button1:
+  description:
+    Button text that invites to learn more about the bird.
+  FILL_IN:
+    Learn more about this bird...
+
+maintext2:
+  description:
+    Question if reader wants to continue with the game.
+  FILL_IN:
+    Do you want to continue doing research?
+
+button2:
+  description:
+    Button to continue playing.
+  FILL_IN:
+    Continue with another phylogenetic placement.
+
+imgalt:
+  description:
+    Alternative text for image saying that placement was correct.
+  FILL_IN:
+    The placement was correct.
+
+imgtext:
+  description:
+    Caption for image telling that molecular lab approved the placement.
+  FILL_IN:
+    The molecular lab sent us this data after sequencing of the bird.
+

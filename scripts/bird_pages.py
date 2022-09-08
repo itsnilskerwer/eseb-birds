@@ -6,6 +6,7 @@ from dominate.tags import *
 import os
 import pandas as pd
 from abstract_page import AbstractPage
+import yaml
 
 from __init__ import INDEX_DICT
 
@@ -39,6 +40,9 @@ class BirdPage(AbstractPage):
     def make_title(self):
         '''Build a title for the HTML.
         '''
+        file_texts = os.path.join(INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_TEXTS"], "birdpage.yml")
+        self.texts = yaml.safe_load(open(file_texts, "r"))
+
         # this can be edited.
         # so far, we simply take the latin name.
         if not hasattr(self, "data"):
@@ -72,11 +76,8 @@ class BirdPage(AbstractPage):
         # sequence
         try:
             with details():
-                 if self.lang == "EN" :
-                     summary("Show DNA sequence")
-                 else :
-                      summary("Εμφάνιση αλληλουχίας DNA")
-                 self.show_seq()
+                summary(self.texts["sequence"]["FILL_IN"])
+                self.show_seq()
         except ValueError : return
         return
 
@@ -84,12 +85,8 @@ class BirdPage(AbstractPage):
         '''Put together the name information about the bird species as header.
         '''
 
-        if self.lang == "EN" :
-            page_title = f"Species: {self.data.loc['Name']}"    
-            page_subtitle = self.data.loc["Latin"]
-        else :
-            page_title = f"Είδος: {self.data.loc['Name']}"    
-            page_subtitle = self.data.loc["Latin"]
+        page_title = f"{self.texts['header']['FILL_IN']} {self.data.loc['Name']}"    
+        page_subtitle = self.data.loc["Latin"]
         
         with div():
             attr(id="header")
@@ -125,7 +122,7 @@ class BirdPage(AbstractPage):
 
 ###############
 def main():
-    for lang in ["EN", "GR"]:
+    for lang in [ln for ln in INDEX_DICT.keys() if len(ln)==2]:
         names_file = INDEX_DICT[lang]["PATHS_FROM_SCRIPTS"]["BIRD_NAMES"]
         with open(names_file, "r") as nf:
             names = nf.readlines()

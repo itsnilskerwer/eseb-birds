@@ -1,0 +1,12 @@
+header:
+  description:
+    Just the word species with a colon. Speciesname will be added for each bird automatically.
+  FILL_IN:
+    "Είδος:"
+
+sequence:
+  description:
+    Prompt to hide/show DNA sequence.
+  FILL_IN:
+    Εμφάνιση αλληλουχίας DNA
+

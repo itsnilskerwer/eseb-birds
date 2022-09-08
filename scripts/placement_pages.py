@@ -6,6 +6,7 @@ import dominate as dm
 from dominate.tags import *
 import os
 import pandas as pd
+import yaml
 
 from abstract_page import AbstractPage
 from abstract_page import get_placement_species_list
@@ -47,11 +48,15 @@ class PlacementPage(AbstractPage):
     def make_title(self):
         '''Build a title for the HTML.
         '''
+        file_texts = os.path.join(INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_TEXTS"], "placement.yml")
+        self.texts = yaml.safe_load(open(file_texts, "r"))
+
         # this can be edited.
-        # so far, we simply take the latin name.
+        # so far we take a simple title.
+        title = self.texts["urltitle"]["FILL_IN"]
+        
         if not hasattr(self, "data"):
             self.get_data()
-        title = f"Phylogenetic placement for a newly discovered bird."
         return title
     
 
@@ -114,14 +119,10 @@ class PlacementPage(AbstractPage):
         '''
         from dominate.util import raw
 
-        if self.lang == "EN" :
-            # make a large title with name as species
-            page_title = f"Phylogenetic placement"
-            # make subtitle of latin name in italics
-            page_subtitle = "To which bird does this sequence belong? Your Bioinformatics team found a placement in the tree."
-        else :
-            page_title = f"Φυλογενετική τοποθέτηση"
-            page_subtitle = "Σε ποιο πουλί ανήκει αυτή η αλληλουχία; Η ομάδα Βιοπληροφορικής βρήκε μια τοποθέτηση στο δέντρο για σένα."
+        # make a large title with name as species
+        page_title = self.texts["header"]["FILL_IN"]
+        # make subtitle of latin name in italics
+        page_subtitle = self.texts["subheader"]["FILL_IN"]
         
         with div():
             attr(id="header")
@@ -155,10 +156,7 @@ class PlacementPage(AbstractPage):
             # we use this as image alternativ text            
             license_info = "Phylogenetic tree for placement."
             # this is the image caption
-            if self.lang == "EN" :
-                license_link = "The molecular lab sent us this data after sequencing of the bird."
-            else :
-                license_link = "Το μοριακό εργαστήριο μας έστειλε αυτά τα δεδομένα με το DNA του πουλιού."
+            license_link = self.texts["imgtext"]["FILL_IN"]
             # it is a tree
             img_content = "tree"
         with div():
@@ -195,10 +193,7 @@ class PlacementPage(AbstractPage):
         '''Make the second column, which includes the images of birds to place.
         '''
         with div(cls="column"):
-            if self.lang == "EN" :
-                p("Which among the following birds might fit on the marked position in the tree?")
-            else :
-                p("Ποιο από τα παρακάτω πουλιά ταιριάζει στη σημειωμένη θέση στο δέντρο;")
+            p(self.texts["maintext"]["FILL_IN"])
                 
             for i, bird_name in enumerate(get_placement_species_list(language=self.lang)):
                 img_path = self.make_img_path(bird_name)
@@ -212,7 +207,7 @@ class PlacementPage(AbstractPage):
 
 ###############
 def main():
-    for lang in ["EN", "GR"]:
+    for lang in [ln for ln in INDEX_DICT.keys() if len(ln)==2]:
         bird_names = get_placement_species_list(language=lang)
         for bird_name in bird_names:
             pp = PlacementPage(bird_name, language=lang)

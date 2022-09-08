@@ -1,0 +1,37 @@
+urltitle:
+  description:
+    Title of the website that asks about DNA sequences.
+  FILL_IN:
+    What are such DNA sequences?
+
+header:
+  description:
+    Header that asks about DNA sequences.
+  FILL_IN:
+    Τι είναι οι αλληλουχίες DNA;
+
+maintext:
+  description:
+    Few sentences that describe DNA and invite to see how a sequence of DNA looks like in the brown pelican. 
+  FILL_IN:
+    Μετά την αλληλουχίση μπορούμε να φανταστούμε το DNA σαν μια λέξη που περιλαμβάνει τα γράμματα A, C, G και T. Παρακάτω είναι ένα παράδειγμα ενός μέρους του DNA του καφέ πελεκάνου.
+
+sequenceinfo:
+  description:
+    Title of the details tag that shows/hides the sequence of the brown pelican.
+  FILL_IN:
+    Εμφάνιση αλληλουχίας DNA του καφέ πελεκάνου
+
+button:
+  description:
+    Button that admits to have learnt enough about DNA and to return to the previous page.
+  FILL_IN:
+    Εντάξει, τώρα ξέρω τι είναι το DNA, ας πάμε πίσω.
+
+imgtext:
+  description:
+    Caption for the tree image just stating that it is a tree full of birds.
+  FILL_IN:
+    Ένα δέντρο γεμάτο πουλιά.  
+
+

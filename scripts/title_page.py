@@ -5,6 +5,7 @@ import dominate as dm
 from dominate.tags import *
 import os
 import pandas as pd
+import yaml
 
 from abstract_page import AbstractPage
 from __init__ import INDEX_DICT
@@ -15,9 +16,12 @@ class TitlePage(AbstractPage):
     def make_title(self):
         '''Build a title for the HTML.
         '''
+        file_texts = os.path.join(INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_TEXTS"], "title.yml")
+        self.texts = yaml.safe_load(open(file_texts, "r"))
+
         # this can be edited.
         # so far we take a simple title.
-        title = f"Diversity of birds worldwide."
+        title = self.texts["urltitle"]["FILL_IN"]
         return title
     
 
@@ -67,18 +71,9 @@ class TitlePage(AbstractPage):
     def define_header(self):
         '''Put together the name information about the bird species as header.
         '''
-    
-        if self.lang == "EN" :
-            # make a large title with name as species
-            page_title = f"Aerial Collisions"
-            page_subtitle = (
-                "A research team found out, how birds ",
-                "around the world are related to each other.")
-        else :
-            page_title = f"Εναέριες Συγκρούσεις"
-            page_subtitle = (
-                "Μια ερευνητική ομάδα ανακάλυψε πώς σχετίζονται ",
-                "μεταξύ τους τα πουλιά σε όλο τον κόσμο.")
+        # make a large title with name as species
+        page_title = self.texts["header"]["FILL_IN"]
+        page_subtitle = self.texts["subheader"]["FILL_IN"]
         
         with div():
             attr(id="header")
@@ -95,10 +90,7 @@ class TitlePage(AbstractPage):
         # we use this as image alternativ text
         license_info = "Phylogeny of birds with outgroup."
         # this is the image caption
-        if self.lang == "EN" :
-            license_link = "A tree full of birds."
-        else :
-            license_link = "Ένα δέντρο γεμάτο πουλιά."
+        license_link = self.texts["imgtext"]["FILL_IN"]
         # it is a tree
         img_content = "tree"
         with div():
@@ -118,17 +110,10 @@ class TitlePage(AbstractPage):
         ip_abspath = PhylogeneticsPage(language=self.lang, stop_html_init=True).make_page_path()
         ip_path = os.path.relpath(ip_abspath, os.path.dirname(self.make_page_path()))
         with form():
-            if self.lang == "EN" :
-                input_(
-                    type="button",
-                    value="What is a phylogenetic tree?",
-                    onclick=f"window.location.href='{ip_path}'")
-            else :
-                input_(
-                    type="button",
-                    value="Τι είναι ένα φυλογενετικό δέντρο;",
-                    onclick=f"window.location.href='{ip_path}'")
-                
+            input_(
+                type="button",
+                value=self.texts["button1"]["FILL_IN"],
+                onclick=f"window.location.href='{ip_path}'")
         return
 
     def start_placement_game(self):
@@ -137,38 +122,21 @@ class TitlePage(AbstractPage):
         from start_placement_page import StartPlacementPage
         from dominate.util import raw
 
-        if self.lang == "EN" :
-            p("The molecular laboratory received a bird sample from a plane"
-              " that should be identified. Can you help them?")
-        else :
-            p("Το μοριακό εργαστήριο έλαβε δείγμα πουλιού από αεροπλάνο"
-              " που πρέπει να αναγνωριστεί. Μπορείτε να τους βοηθήσετε;")
+        p(self.texts["maintext2"]["FILL_IN"])
          
         sp_abspath = StartPlacementPage(language=self.lang, stop_html_init=True).make_page_path()
         sp_path = os.path.relpath(sp_abspath, os.path.dirname(self.make_page_path()))
         with form():
-            if self.lang == "EN" :
-                input_(
-                    type="button",
-                    value="Become a real bird researcher",                                
-                    onclick=f"window.location.href='{sp_path}'")
-            else :
-               input_(
-                    type="button",
-                    value="Γίνε ένας πραγματικός ερευνητής πουλιών",                                
-                    onclick=f"window.location.href='{sp_path}'") 
+            input_(
+                type="button",
+                value=self.texts["button2"]["FILL_IN"],                                
+                onclick=f"window.location.href='{sp_path}'")
                 
         # sequence video
-        if self.lang == "EN":
-            p("Where do the DNA samples come from? Watch this short movie!")
-            raw('<iframe width="560" height="315" src="https://www.youtube.com/embed/jXPf-nHdoxo?cc_load_policy=1&cc_lang_pref=en" '
-                'title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; '
-                'clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
-        else:
-            p("Από πού προέρχονται τα δείγματα DNA; Δες αυτή τη μικρή ταινία!")            
-            raw('<iframe width="560" height="315" src="https://www.youtube.com/embed/jXPf-nHdoxo?cc_load_policy=1&cc_lang_pref=gr" '
-                'title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; '
-                'clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
+        p(self.texts["maintext3"]["FILL_IN"])
+        raw('<iframe width="560" height="315" src="https://www.youtube.com/embed/jXPf-nHdoxo?cc_load_policy=1&cc_lang_pref=en" '
+            'title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; '
+            'clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
         return
 
 
@@ -186,16 +154,7 @@ class TitlePage(AbstractPage):
         '''Make the second column, which includes the images of birds to place.
         '''
         with div(cls="column"):
-            if self.lang == "EN" : 
-                p("Do you see, which birds are closely realted to each other? "
-                  "That is fascinating, right? "
-                  "Click on the images to find out more about the "
-                  "bird on the image.")
-            else:
-                p("Βλέπεις ποια πουλιά είναι συγγενικά μεταξύ τους; "
-                  "Αυτό είναι συναρπαστικό, σωστά; "
-                  "Κάνε κλικ στις εικόνες για να μάθεις περισσότερα "
-                  "για το πουλί στην εικόνα.")
+            p(self.texts["maintext1"]["FILL_IN"])
             self.link_phylogenetics_info()
             self.start_placement_game()
         return
@@ -204,7 +163,7 @@ class TitlePage(AbstractPage):
 
 ###############
 def main():
-    for lang in ["EN", "GR"]:
+    for lang in [ln for ln in INDEX_DICT.keys() if len(ln)==2]:
         tp = TitlePage(language=lang)
         tp.build_html()
         tp.save_html(force=True)

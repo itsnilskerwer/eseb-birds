@@ -1,0 +1,41 @@
+header:
+  description:
+    Header that is made from a success statement and the name of the bird (will be added automatically)
+  FILL_IN:
+    "Τοποθετήθηκε με επιτυχία: "
+
+maintext1:
+  description:
+    Some sentences telling that reader is great researcher and the result was approved by lab.
+  FILL_IN:
+    Είσαι σπουδαίος ερευνητής. Η ανάλυσή μας στον υπολογιστή επιβεβαιώνει ότι αυτό το πουλί ταιριάζει στη σημειωμένη θέση.
+
+button1:
+  description:
+    Button text that invites to learn more about the bird.
+  FILL_IN:
+    Μάθε περισσότερα για αυτό το πουλί...
+
+maintext2:
+  description:
+    Question if reader wants to continue with the game.
+  FILL_IN:
+    Θέλεις να συνεχίσεις την έρευνα;
+
+button2:
+  description:
+    Button to continue playing.
+  FILL_IN:
+    Συνέχισε με άλλη φυλογενετική τοποθέτηση.
+
+imgalt:
+  description:
+    Alternative text for image saying that placement was correct.
+  FILL_IN:
+    Σωστή τοποθέτηση σto δέντρο.
+
+imgtext:
+  description:
+    Caption for image telling that molecular lab approved the placement.
+  FILL_IN:
+    Το μοριακό εργαστήριο μας έστειλε αυτά τα δεδομένα με το DNA του πουλιού.

@@ -5,6 +5,7 @@ import dominate as dm
 from dominate.tags import *
 import os
 import pandas as pd
+import yaml
 
 from abstract_page import AbstractPage
 from __init__ import INDEX_DICT
@@ -15,9 +16,12 @@ class PhylogeneticsPage(AbstractPage):
     def make_title(self):
         '''Build a title for the HTML.
         '''
+        file_texts = os.path.join(INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_TEXTS"], "phylogenetic_tree.yml")
+        self.texts = yaml.safe_load(open(file_texts, "r"))
+
         # this can be edited.
         # so far we take a simple title.
-        title = f"What is a phylogenetic tree?"
+        title = self.texts["urltitle"]["FILL_IN"]
         return title
     
 
@@ -67,17 +71,8 @@ class PhylogeneticsPage(AbstractPage):
     def define_header(self):
         '''Put together the name information about the bird species as header.
         '''
-        if self.lang == "EN" :
-            page_title = f"Trees that reflect evolutionary history"
-        else :
-             page_title = f"Δέντρα που αντικατοπτρίζουν την εξελικτική ιστορία"
-        # make subtitle of latin name in italics
-        if self.lang == "EN" :
-            page_subtitle = (
-                "Let us tell you some things about phylogenetic trees.")
-        else :
-            page_subtitle = (
-                "Ας σας πούμε μερικά πράγματα για τα φυλογενετικά δέντρα.")
+        page_title = self.texts["header"]["FILL_IN"]
+        page_subtitle = self.texts["subheader"]["FILL_IN"]
         
         with div():
             attr(id="header")
@@ -89,16 +84,10 @@ class PhylogeneticsPage(AbstractPage):
         '''Make a small button that returns the user to the last page.
         '''
         with form():
-            if self.lang == "EN" :
-                input_(
-                    type="button",
-                    value="Go back to the start page.",
-                    onclick="history.back()")
-            else :
-               input_(
-                    type="button",
-                    value="Επιστρέψτε στην αρχική σελίδα.",
-                    onclick="history.back()") 
+            input_(
+                type="button",
+                value=self.texts["button"]["FILL_IN"],
+                onclick="history.back()")
         return
 
 
@@ -111,10 +100,7 @@ class PhylogeneticsPage(AbstractPage):
         # we use this as image alternativ text
         license_info = "Phylogeny of birds with outgroup."
         # this is the image caption
-        if self.lang == "EN" :
-            license_link = "A tree full of birds."
-        else :
-            license_link = "Ένα δέντρο γεμάτο πουλιά."
+        license_link = self.texts["imgtext"]["FILL_IN"]
         # it is a tree
         img_content = "tree"
         with div():
@@ -139,19 +125,7 @@ class PhylogeneticsPage(AbstractPage):
         '''Make the second column, which includes the images of birds to place.
         '''
         with div(cls="column"):
-            if self.lang == "EN" :
-                p("A phylogenetic tree (also phylogeny or evolutionary tree) is a branching diagram "
-                  "or a tree showing the evolutionary relationships among various biological species "
-                  "or other entities based upon similarities and differences in their physical or "
-                  "genetic characteristics. All life on Earth is part of a single phylogenetic tree, "
-                  "indicating common ancestry.")
-            else :
-                p("Ένα φυλογενετικό δέντρο (επίσης φυλογένεση ή εξελικτικό δέντρο) είναι ένα διάγραμμα "
-                  "διακλάδωσης ή ένα δέντρο που δείχνει τις εξελικτικές σχέσεις μεταξύ διαφόρων βιολογικών "
-                  "ειδών ή άλλων οντοτήτων με βάση ομοιότητες και διαφορές στα φυσικά ή γενετικά "
-                  "χαρακτηριστικά τους. Όλη η ζωή στη Γη είναι μέρος ενός μόνο φυλογενετικού δέντρου, "
-                  "που υποδηλώνει κοινή καταγωγή.")
-            
+            p(self.texts["maintext"]["FILL_IN"]) 
             self.define_backlink()
 
         return
@@ -160,7 +134,7 @@ class PhylogeneticsPage(AbstractPage):
 
 ###############
 def main():
-    for lang in ["EN", "GR"]:
+    for lang in [ln for ln in INDEX_DICT.keys() if len(ln)==2]:
         pp = PhylogeneticsPage(language=lang)
         pp.build_html()
         pp.save_html(force=True)
