@@ -1,0 +1,35 @@
+urltitle:
+  description:
+    Title of the website that asks about DNA sequences.
+  FILL_IN:
+    What are such DNA sequences?
+
+header:
+  description:
+    Header that asks about DNA sequences.
+  FILL_IN:
+    What are DNA sequences?
+
+maintext:
+  description:
+    Few sentences that describe DNA and invite to see how a sequence of DNA looks like in the brown pelican. 
+  FILL_IN:
+    After sequencing we can imagine the DNA like a word comprising the letters A, C, G, and T. Here is an example of a part of the DNA of the brown pelican.
+
+sequenceinfo:
+  description:
+    Title of the details tag that shows/hides the sequence of the brown pelican.
+  FILL_IN:
+    Show DNA sequence of brown pelican
+
+button:
+  description:
+    Button that admits to have learnt enough about DNA and to return to the previous page.
+  FILL_IN:
+    Okay, now I know what DNA is, let's go back.
+
+imgtext:
+  description:
+    Caption for the tree image just stating that it is a tree full of birds.
+  FILL_IN:
+    A tree full of birds.

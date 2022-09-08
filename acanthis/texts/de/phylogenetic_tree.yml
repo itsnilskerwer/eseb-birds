@@ -1,0 +1,37 @@
+urltitle:
+  description:
+    Title of the html page that asks what a phylogenetic tree is.
+  FILL_IN:
+    What is a phylogenetic tree?
+
+header:
+  description:
+    The header tells that trees show evolutionary histories.
+  FILL_IN:
+    Trees that reflect evolutionary history
+
+subheader:
+  description:
+    Invitation to tell the reader more about phylogenies.
+  FILL_IN:
+    Let us tell you some things about phylogenetic trees.
+
+maintext:
+  description:
+    Few sentences that descibe the idea of a phylogenetic tree.
+  FILL_IN:
+    A phylogenetic tree (also phylogeny or evolutionary tree) is a branching diagram or a tree showing the evolutionary relationships among various biological species or other entities based upon similarities and differences in their physical or genetic characteristics. All life on Earth is part of a single phylogenetic tree, indicating common ancestry.
+
+button:
+  description:
+    Button that leads back to the starting page.
+  FILL_IN:
+    Go back to the start page.
+
+imgtext:
+  description:
+    Caption for the tree image just stating that it is a tree full of birds.
+  FILL_IN:
+    A tree full of birds.
+
+
