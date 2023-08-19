@@ -53,8 +53,9 @@ class AbstractPage(ABC):
         '''
         self.html_head()
         with self.doc:
-            self.html_body()
             self.make_lang_links()
+            self.html_body()
+            self.define_back()
         return
 
 
@@ -116,7 +117,7 @@ class AbstractPage(ABC):
         file_basics = os.path.join(INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_TEXTS"], "basics.yml")
         text_basics = yaml.safe_load(open(file_basics, "r"))
         all_languages = [ln.lower() for ln in INDEX_DICT.keys() if len(ln)==2]
-        with div(cls="language_choice"):
+        with div(cls="language_choice", align="right"):
             p(text_basics["changelang"]["FILL_IN"])
 
             for i, lng in enumerate(all_languages):
@@ -212,6 +213,19 @@ class AbstractPage(ABC):
                 if body_bool : body.append(line)
                 elif line.startswith("<body>") : body_bool = True
         raise RuntimeError("Html file is not proper in its structure.")
+
+
+    def define_back(self):
+        '''Make a small button that returns the user to the last page.
+        '''
+        file_basics = os.path.join(INDEX_DICT[self.lang]["PATHS_FROM_SCRIPTS"]["BIRD_TEXTS"], "basics.yml")
+        text_basics = yaml.safe_load(open(file_basics, "r"))
+        with form():
+            input_(
+                type="button",
+                value=text_basics["back"]["FILL_IN"],
+                onclick="history.back()")
+        return
 # end AbstractPage
 
 ###############
