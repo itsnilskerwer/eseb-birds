@@ -134,9 +134,10 @@ class TitlePage(AbstractPage):
                 
         # sequence video
         p(self.texts["maintext3"]["FILL_IN"])
-        raw('<iframe width="560" height="315" src="https://www.youtube.com/embed/jXPf-nHdoxo?cc_load_policy=1&cc_lang_pref=en" '
-            'title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; '
-            'clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
+        moviefile_name = os.path.abspath(
+                os.path.join(
+                    INDEX_DICT["IMAGE_SOURCE_FILES"]["MOVIE"]))
+        raw(f'<iframe width="560" height="315" src="{moviefile_name}"></iframe>')
         return
 
 
