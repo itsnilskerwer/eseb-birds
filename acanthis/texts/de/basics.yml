@@ -8,13 +8,13 @@ gr:
   description:
     Name of greek language.
   FILL_IN:
-    Griechisch
+    Ελληνικά
 
 en:
   description:
     Name of english language.
   FILL_IN:
-    Englisch
+    English
 
 sp:
   description:
@@ -33,3 +33,9 @@ de:
     Name of german language.
   FILL_IN:
     Deutsch
+
+back:
+  description:
+    Prompt for button to return to last page.
+  FILL_IN:
+    ⇦ Zurück

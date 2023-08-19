@@ -14,7 +14,7 @@ en:
   description:
     Name of english language.
   FILL_IN:
-    Αγγλικά
+    English
 
 sp:
   description:
@@ -32,4 +32,10 @@ de:
   description:
     Name of german language.
   FILL_IN:
-    German
+    Deutsch
+
+back:
+  description:
+    Prompt for button to return to last page.
+  FILL_IN:
+    ⇦ Πλάτη 
