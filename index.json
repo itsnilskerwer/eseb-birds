@@ -51,7 +51,8 @@
         "ROOT": "../acanthis/images_source",
         "WIKI": "../acanthis/images_source/ESEB gia web game_WIKI_photos",
         "NHMC": "../acanthis/images_source/ESEB gia web game _NHMC photos",
-        "CROPPED_IMGS": "../acanthis"
+        "CROPPED_IMGS": "../acanthis",
+	"MOVIE": "../acanthis/movieclip/bird_collisions.mp4"
     },
     "IMAGE_CROPPED_FILES": {
         "CROPPED_IMGS": "../acanthis/images_std",
