@@ -254,12 +254,16 @@ class ATeam(AbstractPage):
         else : indx = [i for i, k in enumerate(self.index) if k==key][0]
         return indx
 
-    def write_str(self):
+    def write_str(self, avoid_newtab=True):
         '''Write a string to print out.
         '''
         if self.ext:
             out = "\n".join([self.lines[i] for i in self.ext_index])
         else : out = "\n".join([self.lines[i] for i in self.index])
+        
+        # in the svg we have default new tab links; 
+        # by default we want to avoid this in the webpage
+        if avoid_newtab : out = out.replace("_blank", "_self")
         return out
 
     def change_position(self, new_x, new_y, element_name="g2"):
