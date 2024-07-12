@@ -1,13 +1,12 @@
-Bird Phylogeney Visualization from Phylogenetic Placements
+# Bird Phylogeney Visualization from Phylogenetic Placements
 
-##### Step 0
-Optionally on macOS run brew update && upgrade
+
 
 ##### Step 1: Installing dependencies using a virtual environment
 
-create venv with Python version 3.12
+create venv with Python version 3.11
 
-```python3.12 -m venv venv```
+```python3.11 -m venv venv```
 
 activate virtual environment
 
@@ -15,29 +14,19 @@ activate virtual environment
 
 install dependencies
 
-```pip install pandas regex PyYAML dominate```
+```pip install pandas regex PyYAML dominate numpy```
 
 install inkscape (installed as program on my machine)
 
-##### Step 2: Run scripts to build pages
+##### Step 2: Make sure all files are included
 
-in scripts dir, run build_pages.sh. 
+Added images_std/ and thumbs/ folders to acanthis/ directory. Created data/ directory and added background image (bg.jpg).
 
-This generates the html files.
+##### Step 3: Run scripts to build pages
 
-run test-images.sh
+in scripts dir, run build_pages.sh. This generates the html files.
 
--> This returns an error: cat: ../data/names.txt: No such file or directory
-Since i can see names.txt file in acanthis folder, the path is updated to point to acanthis directory.
-
--> at this point console errors indicate GET request errors, so the images and thumbs directories are copied from data/ into acanthis/ (and an images_std dir is created and populated with example images).
-
-run convert.sh
-
--> at this point convert.sh does not find svg files. No fix for this yet.
-
-
-##### Step 3: Prepare for deployment and start local development
+##### Step 4: Prepare for deployment and start local development
 
 run zip_page.sh script to save files in deployment directory
 
@@ -48,6 +37,18 @@ start http server in deployment/ directory
 ```python3 -m http.server 8000```
 
 
+
+
+##### optional:
+run test-images.sh
+
+-> This returns an error: cat: ../data/names.txt: No such file or directory
+Since i can see names.txt file in acanthis folder, the path is updated to point to acanthis directory.
+
+##### optional:
+run convert.sh
+
+-> at this point convert.sh does not find svg files. No fix for this yet.
 
 
 Minor fixes to remove warnings:
