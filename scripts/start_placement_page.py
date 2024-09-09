@@ -49,7 +49,7 @@ class StartPlacementPage(AbstractPage):
         '''Build the body of the html document.
         '''
         self.define_header()
-        with div(cls="row"):
+        with div(cls="row", id="main-content"):
             self.column1()
             self.column2()
         return
@@ -74,14 +74,42 @@ class StartPlacementPage(AbstractPage):
         '''
         # make a large title with name as species
         page_title = self.texts["header"]["FILL_IN"]
-        page_subtitle = self.texts["subheader"]["FILL_IN"]
-        
+        # page_subtitle = self.texts["subheader"]["FILL_IN"]
+
         with div():
             attr(id="header")
             h1(page_title)
-            h2(em(page_subtitle))
+            # h2(em(page_subtitle))
         return
 
+    def link_phylogenetics_info(self):
+        '''Link out to page that informs about phylogenetics.
+        '''
+        from phylogenetics_page import PhylogeneticsPage
+        ip_abspath = PhylogeneticsPage(language=self.lang, stop_html_init=True).make_page_path()
+        ip_path = os.path.relpath(ip_abspath, os.path.dirname(self.make_page_path()))
+        with form():
+            input_(
+                type="button",
+                value=self.texts["button1"]["FILL_IN"],
+                onclick=f"window.location.href='{ip_path}'")
+        return
+
+    def start_game_link(self):
+        '''Link to start the game.
+        '''
+        from placement_pages import PlacementPage
+        new_birds = get_placement_species_list(language=self.lang)
+        pp = PlacementPage(new_birds[1], language=self.lang, stop_html_init=True)
+        pp_path = os.path.relpath(pp.make_page_path(), os.path.dirname(self.make_page_path()))
+        with form():
+            input_(
+                type="button",
+                value=self.texts["button2"]["FILL_IN"],
+                onclick=f"window.location.href='{pp_path}'"
+            )
+        return
+    
     def define_seq_info_link(self):
         '''Link to information page about DNA and sequencing.
         '''
@@ -91,7 +119,7 @@ class StartPlacementPage(AbstractPage):
         with form():
             input_(
                 type="button",
-                value="What are these sequences?",
+                value=self.texts["button"]["FILL_IN"],
                 onclick=f"window.location.href='{ip_path}'")
         return
 
@@ -104,7 +132,7 @@ class StartPlacementPage(AbstractPage):
         # we use this as image alternativ text
         license_info = "These are the birds we already know from greece."
         # this is the image caption
-        license_link = self.texts["imgtext"]["FILL_IN"]
+        license_link = self.texts["imgtext"]["FILL_IN"] # TODO edit text
         # it is a tree
         img_content = "tree"
         with div():
@@ -115,43 +143,70 @@ class StartPlacementPage(AbstractPage):
             self.paste_svg_io(image_path, svg_io)
             figcaption(raw(license_link))
         return
+    
+    def add_divider(self):
+        '''Add a div-divider element with three centrally aligned dots.'''
+        with div(cls="div-divider"):
+            span("•")
+            span("•")
+            span("•")
+        return
 
     def show_sequences(self):
-        '''Plot the unknown sequences.
+        '''Plot the unknown sequences. Edited to one sequence for dev purpose.
         '''
         from dominate.util import raw
         from placement_pages import PlacementPage
         new_birds = get_placement_species_list(language=self.lang)
-        for i, bird in enumerate(new_birds, start=1):
+        for i, bird in enumerate(new_birds[:1], start=1): # edited to display only one sequence for now
             pp = PlacementPage(bird, language=self.lang, stop_html_init=True)
             pp_path = os.path.relpath(pp.make_page_path(), os.path.dirname(self.make_page_path()))
-            with a(href=pp_path):
+            with p(href=pp_path): # edited to remove dynamic build and switch to static content
                 #p(make_seq(bird))
                 sequence = self.get_sequence(bird_name=bird)
                 sequence = sequence.replace('<dd><span',
                         '<dd>~~~<span')
                 sequence = sequence.replace('</span></dd>',
                         '</span>~~~</dd>')
-                raw(f"{i}) {sequence}<br>")
+                raw(f"{sequence}<br>") # raw(f"{i}) {sequence}<br>")
         return
 
-    def column1(self):
+    def column1(self): # todo all text convos
         '''Make the first column, which includes the tree image.
         '''
         with div(cls="column"):
-            tree_path = self.make_tree_img_path(non_relative=True)
-            self.plot_with_info(tree_path)
+            with div(cls="text-container"):
+                p("Learning about local birds is important information for airport safety staff. They have provided a small sample from a dead bird, which they couldn't yet identify. After thorough analysis of the sample, the lab has identified a short DNA sequence that is highly conserved among birds all over the world - and therefore very useful to identify bird species:") # todo edit text
+            with div(cls="sequence-container"):
+                self.show_sequences()
+            with div(cls="sequence-container"):
+                self.define_seq_info_link()
+            self.add_divider()
+            with div(cls="text-container"):
+                p("With your help, this sequence needs to be correctly placed in a phylogenetic tree.")
+            with div(cls="text-container"):    
+                self.link_phylogenetics_info()
+            self.add_divider()
+            with div(cls="text-container"): 
+                p("You remember that your team recently developed an algorithm (a mathematical computer program), which can help you identify the right bird. It can analyze DNA sequences and place the unknown species among its closest relatives in the tree of life.")
+            # p(self.texts["maintext"]["FILL_IN"]) # TODO sequences info text
+            self.add_divider()
+            with div(cls="text-container"):
+                p("Your colleague says:") # todo add something like "game texts"
+            # self.add_divider()
+            with div(cls="text-container"):
+                p("I've been looking at bird sequences all week... I could really use some rest.")
+            self.add_divider()
+            
+            with div(cls="text-container"):
+                self.start_game_link()
         return
 
 
     def column2(self):
         '''Make the second column, which includes the images of birds to place.
         '''
-        from dominate.util import raw
-        with div(cls="column"):
-            p(self.texts["maintext"]["FILL_IN"])
-            self.show_sequences()
-            self.define_seq_info_link()
+        # from dominate.util import raw
         return
 # end TitlePage
 

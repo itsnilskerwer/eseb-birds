@@ -66,19 +66,15 @@ class BirdPage(AbstractPage):
         '''
         # header
         self.define_header()
-        
-        # image
-        self.plot_with_info()
-
-        # text
-        p(self.data.loc["text"])
-
-        # sequence
-        try:
-            with details():
-                summary(self.texts["sequence"]["FILL_IN"])
-                self.show_seq()
-        except ValueError : return
+        with div(id="main-content"):
+            with div(cls="bird-page-info"):
+                self.plot_with_info()
+                p(self.data.loc["text"])
+                try:
+                    with details():
+                        summary(self.texts["sequence"]["FILL_IN"])
+                        self.show_seq()
+                except ValueError : return
         return
 
     def define_header(self):
@@ -111,12 +107,12 @@ class BirdPage(AbstractPage):
             with figure():
                 attr(id="habitus")
                 img(src=image_file,
-                        style="max-width: 60%;",
+                        style="width: 100%;",
                         alt=license_info)
                 if isinstance(license_link, str):
                     figcaption(raw(license_link))
                 else:  # for missing data
-                    figcaption("Missing.")
+                    figcaption("")
         return
 # end BirdPage
 

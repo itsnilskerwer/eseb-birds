@@ -14,7 +14,7 @@ button1:
   description:
     Button text that invites to learn more about the bird.
   FILL_IN:
-    Μάθε περισσότερα για αυτό το πουλί...
+    Μάθε περισσότερα για αυτό το πουλί
 
 maintext2:
   description:
@@ -24,10 +24,16 @@ maintext2:
 
 button2:
   description:
-    Button to continue playing.
+    Button to title page.
   FILL_IN:
-    Συνέχισε με άλλη φυλογενετική τοποθέτηση.
+    πίσω στην αρχή
 
+button3:
+  description:
+    Button to continue learning and researching.
+  FILL_IN:
+    Θέλετε να μάθετε για τον αλγόριθμο τοποθέτησης;
+    
 imgalt:
   description:
     Alternative text for image saying that placement was correct.

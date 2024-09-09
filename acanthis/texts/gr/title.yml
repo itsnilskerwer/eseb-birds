@@ -12,9 +12,15 @@ header:
 
 subheader:
   description:
-    A subtitle that elaborates that a team of researchers found out about the relationships of birds around the planet.
+    A subtitle that elaborates on the problem at Crete airport.
   FILL_IN:
-    Μια ερευνητική ομάδα ανακάλυψε πώς σχετίζονται μεταξύ τους τα πουλιά σε όλο τον κόσμο.
+    Το αεροδρόμιο της Κρήτης έχει πρόβλημα - τα τοπικά πουλιά συγκρούονται συνεχώς με αεροπλάνα. 
+
+subheader1:
+  description:
+    A subtitle that elaborates on the problem at Crete airport.
+  FILL_IN:
+    Το προσωπικό του αεροδρομίου επικοινώνησε με μια ομάδα βιολόγων για να βοηθήσει.
 
 maintext1:
   description:

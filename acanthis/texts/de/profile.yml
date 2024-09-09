@@ -2,10 +2,10 @@ topickeys:
   description:
     Name of the topics that whould be dealt as in the profile of the birds. Should be translated to >Distribution<, >Wingspan<, >Weight<, >Diet< respectively.
   FILL_IN:
-    - Distribution
-    - Wingspan
-    - Weight
-    - Diet
+    - Verteilung
+    - Flügelspannweite
+    - Gewicht
+    - Nahrung
 
 dnafragment:
   description:

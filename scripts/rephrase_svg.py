@@ -318,11 +318,11 @@ class ATeam(AbstractPage):
         self.add_line_after(text_str, foregone_element, label, tabbed=True) 
         return
 
-    def add_rectangle(self, x=0, y=0, width=100, height=100, edge_radius=20, color="black", stroke_color="grey", opacity=0.95, foregone_element="img2"):
+    def add_rectangle(self, x=0, y=0, width=100, height=100, edge_radius=20, color="black", stroke_color="#007BFF", opacity=0.95, foregone_element="img2"):
         '''Add a reactangle shape after a given element.
         '''
         rect_str = (f'<rect x="{x}" y="{y}" rx="{edge_radius}" ry="{edge_radius}" width="{width}" height="{height}"'
-                f' style="fill:{color};stroke:{stroke_color};stroke-width:5;opacity:{opacity}" />')
+                f' style="fill:{color};stroke:{stroke_color};stroke-width:8;opacity:{opacity}" />')
         self.add_line_after(rect_str, foregone_element, "rectangle", tabbed=True)
         return
 # end ATeam

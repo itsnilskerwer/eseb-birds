@@ -1,6 +1,4 @@
-# Bird Phylogeney Visualization from Phylogenetic Placements
-
-
+# Bird Phylogeney from Phylogenetic Placements (Development Guide)
 
 ##### Step 1: Installing dependencies using a virtual environment
 
@@ -10,7 +8,7 @@ create venv with Python version 3.11
 
 activate virtual environment
 
-```source venv/bin/activate```
+```source venv/bin/activate``` (deactivate with ```deactivate``` once finished)
 
 install dependencies
 
@@ -20,11 +18,11 @@ install inkscape (installed as program on my machine)
 
 ##### Step 2: Make sure all files are included
 
-Added images_std/ and thumbs/ folders to acanthis/ directory. Created data/ directory and added background image (bg.jpg).
+Added images_std/ and thumbs/ folders to acanthis/ directory. Created data/ directory and added background image (bg.jpg). Moved data/ directory into acanthis/ directory and changed path in meta/two_columns.css.
 
 ##### Step 3: Run scripts to build pages
 
-in scripts dir, run build_pages.sh. This generates the html files.
+Cd into scripts directory, and run ```./build_pages.sh```. This generates the html files.
 
 ##### Step 4: Prepare for deployment and start local development
 
@@ -32,16 +30,15 @@ run zip_page.sh script to save files in deployment directory
 
 ```./zip_page.sh deployment```
 
-start http server in deployment/ directory
+start http server after cd into deployment/ directory
 
 ```python3 -m http.server 8000```
 
-
-
+##### Further info
+On encountering dependency errors, try to deactivate, delete and re-create the virtual environment (including a new install of dependencies). Then re-run the build scripts and re-start server.
 
 ##### optional:
-run test-images.sh
-
+On run test-images.sh
 -> This returns an error: cat: ../data/names.txt: No such file or directory
 Since i can see names.txt file in acanthis folder, the path is updated to point to acanthis directory.
 
@@ -64,9 +61,3 @@ images_std directory doesnt seem to be created correctly. Pasting the example im
 syntax warning for abstract_page.py line 181 
 (minor error: SyntaxWarning: invalid escape sequence '\='
 (minor error: rephrase_svg.py line 218, 225, 226 -> error: again invalid escape sequences
-
-moved files generated into data directory into acanthis (build error with filepaths)
-
-duplicated and renamed images to acanthis/images_std as hacky fix.
-
-Try to re-run the build scripts and re-start server.

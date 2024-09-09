@@ -14,7 +14,7 @@ subheader:
   description:
     Prompt that asks which bird the sequence that was placed in the tree comes from.
   FILL_IN:
-    To which bird does this sequence belong? Your Bioinformatics team found a placement in the tree.
+    Zu welcher Vogelart gehört diese DNA Sequenz?
 
 maintext:
   description:

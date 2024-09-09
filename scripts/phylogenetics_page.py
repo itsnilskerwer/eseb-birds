@@ -48,7 +48,7 @@ class PhylogeneticsPage(AbstractPage):
         '''Build the body of the html document.
         '''
         self.define_header()
-        with div(cls="row"):
+        with div(cls="row", id="main-content"):
             self.column1()
             self.column2()
         return
@@ -115,9 +115,9 @@ class PhylogeneticsPage(AbstractPage):
     def column1(self):
         '''Make the first column, which includes the tree image.
         '''
-        with div(cls="column"):
-            tree_path = self.make_tree_img_path(non_relative=True)
-            self.plot_with_info(tree_path)
+        # with div(cls="column"):
+        #     tree_path = self.make_tree_img_path(non_relative=True)
+        #     self.plot_with_info(tree_path)
         return
 
 
@@ -125,9 +125,16 @@ class PhylogeneticsPage(AbstractPage):
         '''Make the second column, which includes the images of birds to place.
         '''
         with div(cls="column"):
-            p(self.texts["maintext"]["FILL_IN"]) 
+            p(self.texts["maintext"]["FILL_IN"])
             self.define_backlink()
-
+            with div(cls="tree-container"):
+                h2(self.texts["heading1"]["FILL_IN"])
+                script(type="text/javascript", src="../../../javascript/toggle-tree.js")
+                button("Expand / Collapse", onclick="toggleTree()")
+                with div(cls="tree", id="tree"):
+                    tree_path = self.make_tree_img_path(non_relative=True)
+                    self.plot_with_info(tree_path)
+                button("Expand / Collapse", id="bottom-toggle-button", onclick="toggleTree()")
         return
 # end TitlePage
 

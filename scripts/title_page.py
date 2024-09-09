@@ -48,11 +48,23 @@ class TitlePage(AbstractPage):
         '''Build the body of the html document.
         '''
         self.define_header()
-        with div(cls="row"):
+        with div(id="main-content"):
             self.column1()
             self.column2()
         return
-
+    
+    def define_header(self):
+        '''Define the header section of the HTML.'''
+        page_title = self.texts["header"]["FILL_IN"] 
+        page_subtitle0 = self.texts["subheader"]["FILL_IN"]
+        page_subtitle1 = self.texts["subheader1"]["FILL_IN"]
+        with div():
+            attr(id="header")
+            h1(page_title)
+            h2(em(page_subtitle0))
+            h2(em(page_subtitle1))
+        return
+    
     def define_stylesheet(self):
         '''Define the style sheet for the html head.
         '''
@@ -65,21 +77,7 @@ class TitlePage(AbstractPage):
                 os.path.dirname(self.make_page_path()))
         # set stylesheet for two columns
         link(rel='stylesheet', href=css_path)
-        return
-
-    
-    def define_header(self):
-        '''Put together the name information about the bird species as header.
-        '''
-        # make a large title with name as species
-        page_title = self.texts["header"]["FILL_IN"]
-        page_subtitle = self.texts["subheader"]["FILL_IN"]
-        
-        with div():
-            attr(id="header")
-            h1(page_title)
-            h2(em(page_subtitle))
-        return
+        return 
 
     def plot_with_info(self, image_path):
         '''Add image to html document and annotate it with background info.
@@ -103,61 +101,40 @@ class TitlePage(AbstractPage):
             figcaption(raw(license_link))
         return
 
-    def link_phylogenetics_info(self):
-        '''Link out to page that informs about phylogenetics.
-        '''
-        from phylogenetics_page import PhylogeneticsPage
-        ip_abspath = PhylogeneticsPage(language=self.lang, stop_html_init=True).make_page_path()
-        ip_path = os.path.relpath(ip_abspath, os.path.dirname(self.make_page_path()))
-        with form():
-            input_(
-                type="button",
-                value=self.texts["button1"]["FILL_IN"],
-                onclick=f"window.location.href='{ip_path}'")
-        return
-
     def start_placement_game(self):
         '''Forward to the start page of the placement game.
         '''
         from start_placement_page import StartPlacementPage
         from dominate.util import raw
-
-        p(self.texts["maintext2"]["FILL_IN"])
-         
         sp_abspath = StartPlacementPage(language=self.lang, stop_html_init=True).make_page_path()
         sp_path = os.path.relpath(sp_abspath, os.path.dirname(self.make_page_path()))
         with form():
             input_(
                 type="button",
-                value=self.texts["button2"]["FILL_IN"],                                
+                value=self.texts["button2"]["FILL_IN"],  # TODO edit text ? doesnt have to...                              
                 onclick=f"window.location.href='{sp_path}'")
                 
-        # sequence video
-        p(self.texts["maintext3"]["FILL_IN"])
+        # TODO relocate this to a different page or remove video entirely
+        """  p(self.texts["maintext3"]["FILL_IN"])
         moviefile_name = os.path.abspath(
                 os.path.join(
                     INDEX_DICT["IMAGE_SOURCE_FILES"]["MOVIE"]))
         raw(f'<iframe width="560" height="315" src="{moviefile_name}"></iframe>')
+        return """
+
+
+    def column2(self):
+        '''Make the first column, which includes the tree image.
+        '''
         return
 
 
     def column1(self):
-        '''Make the first column, which includes the tree image.
-        '''
-        with div(cls="column"):
-            # tree_path = self.make_tree_img_path(non_relative=False)
-            tree_path = self.make_tree_img_path(non_relative=True)
-            self.plot_with_info(tree_path)
-        return
-
-
-    def column2(self):
         '''Make the second column, which includes the images of birds to place.
         '''
         with div(cls="column"):
-            p(self.texts["maintext1"]["FILL_IN"])
-            self.link_phylogenetics_info()
-            self.start_placement_game()
+            with div(cls="text-container"):
+                self.start_placement_game()
         return
 # end TitlePage
 

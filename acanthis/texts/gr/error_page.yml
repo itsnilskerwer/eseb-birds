@@ -2,19 +2,19 @@ urltitle:
   description:
     Encouraging title for the html page
   FILL_IN:
-    Προσπάθησε ξανά ;-)    
+    Προσπάθησε ξανά :-)    
 
 header:
   description: 
-    Encouraging header, asking to try game again. With a smiley ;-).
+    Encouraging header, asking to try game again. With a smiley :-).
   FILL_IN:
-    Προσπάθησε ξανά ;-)
+    Προσπάθησε ξανά :-)
 
 subheader:
   description:
     Half sentence stating that it was the wrong bird chosen.
   FILL_IN:
-    ... ήταν το λάθος πουλί.
+    ... ήταν το λάθος πουλί. Η σύγκριση με διάφορες διαδικτυακές βάσεις δεδομένων δεν έδωσε κανένα αποτέλεσμα.
 
 button:
   description:

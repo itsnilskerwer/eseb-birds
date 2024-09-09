@@ -14,7 +14,7 @@ subheader:
   description:
     Prompt that asks which bird the sequence that was placed in the tree comes from.
   FILL_IN:
-    Σε ποιο πουλί ανήκει αυτή η αλληλουχία; Η ομάδα Βιοπληροφορικής βρήκε μια τοποθέτηση στο δέντρο για σένα.
+    Σε ποιο πουλί ανήκει αυτή η αλληλουχία;
 
 maintext:
   description:

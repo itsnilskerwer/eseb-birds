@@ -135,7 +135,10 @@ class PlacementPage(AbstractPage):
                     '<dd>~~~<span')
             sequence = sequence.replace('</span></dd>',
                     '</span>~~~</dd>')
-            h2(raw(f"{sequence}<br>"))
+            h2(raw(f"{sequence}<br>")) # todo edit text below
+            p("On the phylogenetic tree, check out where the algorithm predicted a placement for this sequence. It is indicated by a '?'.")
+            # p(“Compare the bird species from the phylogenetic tree with the possible candidates list.”)
+            p("Pick and select one of the bird species from the candidate list, if you are sure it matches the placement.")
         return
 
     def plot_with_info(self, image_path, bird_name=None, tree=False, count=None):
@@ -183,7 +186,9 @@ class PlacementPage(AbstractPage):
     def column1(self):
         '''Make the first column, which includes the tree image.
         '''
-        with div(cls="column"):
+        with div(cls="column tree"):
+            script(type="text/javascript", src="../../../javascript/tree-viewer.js") 
+            script(type="text/javascript", src="../../../javascript/card-viewer.js")
             tree_path = self.make_tree_img_path(self.name, non_relative=True)
             self.plot_with_info(tree_path, tree=True)
         return
@@ -191,15 +196,120 @@ class PlacementPage(AbstractPage):
 
     def column2(self):
         '''Make the second column, which includes the images of birds to place.
+            Added some more data for bird selection list (static, and single game)
+            This should be reverted to make multiple games possible again
         '''
-        with div(cls="column"):
-            p(self.texts["maintext"]["FILL_IN"])
-                
-            for i, bird_name in enumerate(get_placement_species_list(language=self.lang)):
-                img_path = self.make_img_path(bird_name)
-                img_link = self.make_img_link(bird_name)
-                with a(href=img_link):
-                    self.plot_with_info(img_path, bird_name=bird_name, count=i+1)
+        with div(cls="column bird-cards selection"):
+            # p(self.texts["maintext"]["FILL_IN"])
+            with section(id="bird-cards"): 
+                bird_names = get_placement_species_list(language=self.lang)
+                bird_info_list = [
+                    {
+                                   "data_bird": "ex name bird 1",
+                                   "common_name": "Adelie penguin",
+                                   "scientific_name": "Pygoscelis adeliae",
+                                   "distribution": "Coasts of Antarctica",
+                                   "wingspan": "35 - 70 cm",
+                                   "weight": "3.8 - 8.2 kg",
+                                   "diet": "Krill, small fish"
+                    },
+                    {
+                                   "data_bird": "ex name bird 2",
+                                   "common_name": "Barn owl",
+                                   "scientific_name": "Tyto alba",
+                                   "distribution": "South-central Europe, non-desert Africa",
+                                   "wingspan": "80-95 cm",
+                                   "weight": "300-500 g",
+                                   "diet": "Mice, rats, small birds and amphibia"
+                    },
+                    {
+                                   "data_bird": "ex name bird 3",
+                                   "common_name": "Great-crested grebe",
+                                   "scientific_name": "Posiceps cristatus",
+                                   "distribution": "Pallearctic freshwater lakes",
+                                   "wingspan": "59-73 cm",
+                                   "weight": "800 - 1400 g",
+                                   "diet": "Small fish"
+                    },
+                    {
+                                   "data_bird": "ex name bird 4",
+                                   "common_name": "Red-crested turaco",
+                                   "scientific_name": "Tauraco erythrolophus",
+                                   "distribution": "Western Angola",
+                                   "wingspan": "approx. 20 cm",
+                                   "weight": "210-335 g",
+                                   "diet": "Fruits, roots, shoots, nuts, seeds"
+                    },
+                    {
+                                   "data_bird": "ex name bird 5",
+                                   "common_name": "White-throated tinamou",
+                                   "scientific_name": "Tinamus guttus",
+                                   "distribution": "Lowland Amazon forest",
+                                   "wingspan": "approx. 23-26 cm",
+                                   "weight": "620-800 g",
+                                   "diet": "Fruits, seeds, invertebrates"
+                    },
+                    {
+                                   "data_bird": "ex name bird 6",
+                                   "common_name": "Yellow-throated sandgrouse",
+                                   "scientific_name": "Pterocles gutturalis",
+                                   "distribution": "Semi-deserts of South Africa",
+                                   "wingspan": "53 - 65 cm",
+                                   "weight": "285-400 g",
+                                   "diet": "Seeds and grains"
+                    },
+                    {
+                                   "data_bird": "ex bird name 7",
+                                   "common_name": "Common ostrich",
+                                   "scientific_name": "Struthio camelus",
+                                   "distribution": "West and North Africa",
+                                   "wingspan": "2m (but cannot fly)",
+                                   "weight": "90-154 kg",
+                                   "diet": "Plants, invertebrates, small reptiles"
+                    },
+                    {
+                                   "data_bird": "ex name bird 8",
+                                   "common_name": "Zebra finch",
+                                   "scientific_name": "Taeniopygia guttata",
+                                   "distribution": "Australia and Indonesia",
+                                   "wingspan": "approx. 22 cm",
+                                   "weight": "9-16 g",
+                                   "diet": "Seeds"
+                   }
+                ]
+                # bird_names = get_placement_species_list(language=self.lang)
+                for i, bird_name in enumerate(bird_names):
+                    img_path = self.make_img_path(bird_name)
+                    img_link = self.make_img_link(bird_name)
+                    # bird_info = self.get_bird_info(i)
+                    bird_info = bird_info_list[i]  # Access the correct dictionary using index `i`
+                    with div(cls="card", **{"data-bird": bird_name}):
+                        with a(href=img_link):
+                            img(src=img_path, alt=bird_info["common_name"])
+                        with div(cls="bird-info"):
+                            h2(bird_info["common_name"])
+                            em(bird_info["scientific_name"])
+                            p(f"Distribution: {bird_info['distribution']}")
+                            p(f"Wingspan: {bird_info['wingspan']}")
+                            p(f"Weight: {bird_info['weight']}")
+                            p(f"Diet: {bird_info['diet']}")
+                    #  with a(href=img_link):
+                    #     self.plot_with_info(img_path, bird_name=bird_name, count=i+1)
+                """ for bird in bird_info:
+                    for i, bird_name in enumerate(get_placement_species_list(language=self.lang)):
+                        img_path = self.make_img_path(bird["bird_name"])
+                        img_link = self.make_img_link(bird["bird_name"])
+                        with div(cls="card", **{"data-bird": bird["bird_name"]}):
+                            with a(href=img_link):
+                                img(src=img_path, alt=bird["common_name"])
+                            with div(cls="bird-info"):
+                                h2(bird["common_name"])
+                                em(bird["scientific_name"])
+                                p(f"Distribution: {bird['distribution']}")
+                                p(f"Wingspan: {bird['wingspan']}")
+                                p(f"Weight: {bird['weight']}")
+                                p(f"Diet: {bird['diet']}")
+                                p(f"DNA fragment: {bird['dna_fragment']}") """
         return
 # end PlacementPage
 

@@ -26,7 +26,13 @@ button:
   description:
     Button that leads back to the starting page.
   FILL_IN:
-    Επιστρέψτε στην αρχική σελίδα.
+    Φοβερό, τώρα ξέρω τι είναι τα φυλογενετικά δέντρα. Ας πάμε πίσω.
+
+heading1:
+  description:
+    Title for the phylogenetic tree example.
+  FILL_IN:
+    Παράδειγμα φυλογενετικού δέντρου
 
 imgtext:
   description:

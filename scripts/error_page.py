@@ -38,8 +38,11 @@ class ErrorPage(AbstractPage):
     def html_body(self):
         '''Build the body of the html document.
         '''
+        page_subtitle = self.texts["subheader"]["FILL_IN"]
         self.define_header()
-        self.define_backlink()
+        with div(id="main-content"):
+            h2(em(page_subtitle))
+            # self.define_backlink()
         return
 
     def define_header(self):
@@ -47,12 +50,10 @@ class ErrorPage(AbstractPage):
         '''
         # make a large title that encourages children
         page_title = self.texts["header"]["FILL_IN"]
-        page_subtitle = self.texts["subheader"]["FILL_IN"]
         
         with div():
             attr(id="header")
             h1(page_title)
-            h2(em(page_subtitle))
         return
 
 

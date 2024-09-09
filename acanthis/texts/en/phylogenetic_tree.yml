@@ -26,7 +26,13 @@ button:
   description:
     Button that leads back to the starting page.
   FILL_IN:
-    Go back to the start page.
+    Awesome, now i know what phylogenetic trees are. Let's go back.
+
+heading1:
+  description:
+    Title for the phylogenetic tree example.
+  FILL_IN:
+    Example of a phylogenetic tree
 
 imgtext:
   description:

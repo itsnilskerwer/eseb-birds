@@ -7,14 +7,14 @@ header:
 maintext1:
   description:
     Some sentences telling that reader is great researcher and the result was approved by lab.
-  FILL_IN:
-    You are a great researcher. Our computer analysis confirms that this bird fits into the marked position.
+  FILL_IN:    
+    Good job! I didn't know you are such a great researcher.
 
 button1:
   description:
     Button text that invites to learn more about the bird.
   FILL_IN:
-    Learn more about this bird...
+    Learn more about this bird
 
 maintext2:
   description:
@@ -24,9 +24,15 @@ maintext2:
 
 button2:
   description:
-    Button to continue playing.
+    Button to title page.
   FILL_IN:
-    Continue with another phylogenetic placement.
+    Return to start page
+    
+button3:
+  description:
+    Button to continue learning and researching.
+  FILL_IN:
+    Want to learn more about the placement algorithm?
 
 imgalt:
   description:

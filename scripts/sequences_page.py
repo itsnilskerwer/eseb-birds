@@ -64,7 +64,7 @@ class SequencesPage(AbstractPage):
         '''Build the body of the html document.
         '''
         self.define_header()
-        with div(cls="row"):
+        with div(cls="row", id="main-content"):
             self.column1()
             self.column2()
         return
@@ -77,7 +77,7 @@ class SequencesPage(AbstractPage):
         
         with div():
             attr(id="header")
-            h1(page_title)        
+            h1(page_title)   
         return
 
     def define_backlink(self):

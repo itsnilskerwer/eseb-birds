@@ -6,9 +6,9 @@ urltitle:
 
 header:
   description:
-    Header stating it is about aerial collisions.
+    Header welcoming to the bird sequencing lab.
   FILL_IN:
-    Εναέριες Συγκρούσεις
+    Καλώς ήρθατε στο εργαστήριο αλληλούχισης πουλιών
 
 subheader:
   description:
@@ -27,6 +27,18 @@ button:
     Button that asks what these sequences are.
   FILL_IN:
     Τι είναι αυτές οι ακολουθίες/γραμματοσειρές;
+
+button1:
+  description:
+    Button that asks what these sequences are.
+  FILL_IN:
+    Τι είναι το φυλογενετικό δέντρο;
+
+button2:
+  description:
+    Button that asks what these sequences are.
+  FILL_IN:
+    Προσδιορίστε τα είδη πουλιών χρησιμοποιώντας τον νέο αλγόριθμο
 
 imgtext:
   description:

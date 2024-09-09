@@ -2,36 +2,42 @@ urltitle:
   description:
     Title of the html page that asks what a phylogenetic tree is.
   FILL_IN:
-    What is a phylogenetic tree?
+    Was ist ein phylogenetischer Baum?
 
 header:
   description:
     The header tells that trees show evolutionary histories.
   FILL_IN:
-    Trees that reflect evolutionary history
+    Bäume, die die Evolutionsgeschichte widerspiegeln
 
 subheader:
   description:
     Invitation to tell the reader more about phylogenies.
   FILL_IN:
-    Let us tell you some things about phylogenetic trees.
+    Wir wollen Ihnen einige Dinge über phylogenetische Bäume erzählen.
 
 maintext:
   description:
     Few sentences that descibe the idea of a phylogenetic tree.
   FILL_IN:
-    A phylogenetic tree (also phylogeny or evolutionary tree) is a branching diagram or a tree showing the evolutionary relationships among various biological species or other entities based upon similarities and differences in their physical or genetic characteristics. All life on Earth is part of a single phylogenetic tree, indicating common ancestry.
+    Ein phylogenetischer Baum (auch Phylogenie oder Evolutionsbaum) ist ein Verzweigungsdiagramm oder ein Baum, der die evolutionären Beziehungen zwischen verschiedenen biologischen Arten oder anderen Entitäten auf der Grundlage von Ähnlichkeiten und Unterschieden in ihren physischen oder genetischen Merkmalen zeigt. Alles Leben auf der Erde ist Teil eines einzigen phylogenetischen Baums, was auf eine gemeinsame Abstammung hinweist.
 
 button:
   description:
     Button that leads back to the starting page.
   FILL_IN:
-    Go back to the start page.
+    Perfekt. jetzt weiß ich, was phylogenetische Bäume sind. Lass uns zurückgehen.
+
+heading1:
+  description:
+    Title for the phylogenetic tree example.
+  FILL_IN:
+    Beispiel für einen phylogenetischen Baum
 
 imgtext:
   description:
     Caption for the tree image just stating that it is a tree full of birds.
   FILL_IN:
-    A tree full of birds.
+    Ein Baum voller Vögel
 
 

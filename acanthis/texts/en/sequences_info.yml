@@ -8,13 +8,16 @@ header:
   description:
     Header that asks about DNA sequences.
   FILL_IN:
-    What are DNA sequences?
+    DNA sequences
 
 maintext:
   description:
     Few sentences that describe DNA and invite to see how a sequence of DNA looks like in the brown pelican. 
-  FILL_IN:
-    After sequencing we can imagine the DNA like a word comprising the letters A, C, G, and T. Here is an example of a part of the DNA of the brown pelican.
+  FILL_IN: # TODO
+    When analyzing a biological sample, researchers first isolate the material that makes up the genetic code inside living cells (also called DNA). This genetic material is then fragmented (broken up into little bits). Then, the researchers make use of algorithms to puzzle together these small bits of DNA and find the entire sequence of a birds' DNA (this process is called sequencing). After sequencing, we can imagine our genetic material to look like a sequence of molecules, similar to a word comprising the letters A, C, G, and T. 
+# Here is an example of a part of the DNA of the brown pelican.
+# For identifying the species to which the DNA sequence belongs, we can use a small part of the sequence and compare it with the DNA of other species.
+
 
 sequenceinfo:
   description:
@@ -26,7 +29,7 @@ button:
   description:
     Button that admits to have learnt enough about DNA and to return to the previous page.
   FILL_IN:
-    Okay, now I know what DNA is, let's go back.
+    Okay, now I know what DNA is, let's go back
 
 imgtext:
   description:

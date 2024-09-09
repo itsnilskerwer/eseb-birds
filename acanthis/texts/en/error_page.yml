@@ -2,19 +2,19 @@ urltitle:
   description:
     Encouraging title for the html page
   FILL_IN:
-    try again ;-)
+    try again :-)
 
 header:
   description: 
-    Encouraging header, asking to try game again. With a smiley ;-).
+    Encouraging header, asking to try game again. With a smiley :-).
   FILL_IN:
-    Try again ;-)
+    Try again :-)
 
 subheader:
   description:
     Half sentence stating that it was the wrong bird chosen.
   FILL_IN:
-    ... it was the wrong bird.
+    ... it was the wrong bird. Comparison with several online databases yielded no results.
 
 button:
   description:

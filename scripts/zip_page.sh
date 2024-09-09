@@ -20,8 +20,13 @@ done
 
 [[ ! -d "${PDIR}/meta" ]] && mkdir "${PDIR}/meta"
 [[ ! -d "${PDIR}/public" ]] && mkdir "${PDIR}/public"
+[[ ! -d "${PDIR}/javascript" ]] && mkdir "${PDIR}/javascript"
 cp -r ../meta/* "${PDIR}/meta/"
 cp -r ../public/* "${PDIR}/public/"
+cp -r ../javascript/* "${PDIR}/javascript/"
+
+# Optionally, ensure other JS dependencies or assets are included
+# cp ../path/to/other/assets "${PDIR}/path/in/deployment"
 
 # zip -r -Z bzip2 "${PDIR}.zip" ${PDIR}
 

@@ -53,11 +53,21 @@ class AbstractPage(ABC):
         '''
         self.html_head()
         with self.doc:
-            self.make_lang_links()
+            with header():
+                self.make_lang_links()
             self.html_body()
-            self.define_back()
+        self.html_footer()
         return
 
+    def html_footer(self):
+        '''Build the footer of the html document.
+        '''
+        with self.doc.footer:
+            with footer():
+                p("2024 Bird Phylogeny Project")
+                # TODO Add footer info like KIT HITS info etc or Remove
+                self.define_back()
+        return
 
     def html_head(self):
         '''Build the head of the html document.

@@ -12,9 +12,15 @@ header:
 
 subheader:
   description:
-    A subtitle that elaborates that a team of researchers found out about the relationships of birds around the planet.
+    A subtitle that elaborates on the problem at Crete airport.
   FILL_IN:
-    A research team found out, how birds around the world are related to each other.
+    Crete airport has a problem - local birds keep crashing with airplanes.
+
+subheader1:
+  description:
+    A subtitle that elaborates on the problem at Crete airport.
+  FILL_IN:
+    The airport staff has asked a team of biologists for help.
 
 maintext1:
   description:

@@ -12,45 +12,51 @@ header:
 
 subheader:
   description:
-    A subtitle that elaborates that a team of researchers found out about the relationships of birds around the planet.
+    A subtitle that elaborates on the problem at Crete airport.
   FILL_IN:
-    A research team found out, how birds around the world are related to each other.
+    Der Flughafen auf Kreta hat ein Problem - lokale Vögel kollidieren ständig mit Flugzeugen.
+
+subheader1:
+  description:
+    A subtitle that elaborates on the problem at Crete airport.
+  FILL_IN:
+    Das Flughafenpersonal hat ein Team von Biologen nach Hilfe gefragt.
 
 maintext1:
   description:
     Questions to invite reader to find out more about the birds in the tree.
   FILL_IN:
-    Do you see, which birds are closely realted to each other? That is fascinating, right? Click on the images to find out more about the bird on the image.
+    Siehst du, welche Vögel eng miteinander verwandt sind? Das ist doch faszinierend, oder? Klicken Sie auf die Bilder, um mehr über den Vogel auf dem Bild zu erfahren.
 
 button1:
   description:
     Button that links to a page about phylogenetic trees. Prompt asking for what a phyl. tree is.
   FILL_IN:
-    What is a phylogenetic tree?
+    Was ist ein phylogenetischer Baum?
 
 maintext2:
   description:
     Text that tells researchers found a bird sample form a plane and ask the reader to help in identification.
   FILL_IN:
-    The molecular laboratory received a bird sample from a plane that should be identified. Can you help them?
+    Das Molekularlabor hat eine Vogelprobe aus einem Flugzeug erhalten, die identifiziert werden soll. Können Sie ihnen helfen?
 
 button2:
   description:
-    Prompt as buttone text to become a researcher.
+    Prompt as button text to become a researcher.
   FILL_IN:
-    Become a real bird researcher
+    Werde zum Vogelforscher
 
 maintext3:
   description:
     Invitation to find out more about where the samples come from; to watch the greek clip.
   FILL_IN:
-    Where do the DNA samples come from? Watch this short movie!
+    Woher kommen die DNA-Proben? Sehen Sie sich diesen kurzen Film an!
 
 imgtext:
   description:
     Caption for the tree image just stating that it is a tree full of birds.
   FILL_IN:
-    A tree full of birds.
+    Ein Baum voller Vögel.
 
 
 

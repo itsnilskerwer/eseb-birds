@@ -2,37 +2,43 @@ header:
   description:
     Header that is made from a success statement and the name of the bird (will be added automatically)
   FILL_IN:
-    "Successfully placed: "
+    "Richtig platziert: "
 
 maintext1:
   description:
     Some sentences telling that reader is great researcher and the result was approved by lab.
   FILL_IN:
-    You are a great researcher. Our computer analysis confirms that this bird fits into the marked position.
+    Gute Arbeit! Ich wusste nicht, dass Sie so ein großartiger Forscher sind.
 
 button1:
   description:
     Button text that invites to learn more about the bird.
   FILL_IN:
-    Learn more about this bird...
+    Erfahre mehr über diesen Vogel
 
 maintext2:
   description:
     Question if reader wants to continue with the game.
   FILL_IN:
-    Do you want to continue doing research?
+    Möchten Sie weiter forschen?
 
 button2:
   description:
-    Button to continue playing.
+    Button to title page.
   FILL_IN:
-    Continue with another phylogenetic placement.
+    Zurück zur Startseite
+
+button3:
+  description:
+    Button to continue learning and researching.
+  FILL_IN:
+    Mehr über den Platzierungs-algorithmus erfahren?
 
 imgalt:
   description:
     Alternative text for image saying that placement was correct.
   FILL_IN:
-    The placement was correct.
+    Das placement ist korrekt.
 
 imgtext:
   description:
