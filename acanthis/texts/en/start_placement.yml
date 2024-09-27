@@ -2,13 +2,13 @@ urltitle:
   description:
     Title for html page welcoming to the lab.
   FILL_IN:
-    Welcome to the bird sequencing lab.
+    Welcome to the research lab
 
 header:
   description:
     Header welcoming to the bird sequencing lab.
   FILL_IN:
-    Welcome to the bird sequencing lab
+    Welcome to the research lab
 
 subheader:
   description:
@@ -38,7 +38,7 @@ button2:
   description:
     Button that asks what these sequences are.
   FILL_IN:
-    Identify the bird species using the new algorithm
+    Start bird identification Game
 
 imgtext:
   description:

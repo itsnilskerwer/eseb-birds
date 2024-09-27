@@ -75,64 +75,6 @@ class RightPlacementPage(AbstractPage):
         if non_relative : return os.path.abspath(file_name)
         return os.path.relpath(file_name, os.path.dirname(self.make_page_path()))
 
-    def make_sequence_div(self): # todo refactor and add to seq info page
-        '''Create the sequence div with the lines connecting the character strings.
-        '''
-        seq1 = "TGTGACAGCC" # TODO edit
-        seq2 = "TGTGACAGCCGTCGGT" # TODO edit
-        with div(id='sequence'):
-            self.add_sequence_with_lines(seq1, seq2)
-        return
-    
-    def add_sequence_with_lines(self, seq1, seq2):
-        '''Add sequences with connecting lines to the HTML.
-        '''
-        table_content = self.generate_sequence_table(seq1, seq2)
-        with table():
-            for row_index, row in enumerate(table_content):
-                with tr():
-                    for cell in row:
-                        if row_index == 1:
-                            if cell == '|':
-                                td(cls='line')
-                            elif cell == '':
-                                td(cls='no-border')
-                            else:
-                                td(cell, cls='sequence-char')
-                        else:
-                            if cell == '':
-                                td(cls='no-border')
-                            else:
-                                td(cell, cls='no-box')
-                    """ for cell in row:
-                        if cell == '|':
-                            td(cls='line')
-                        elif cell == '':
-                            td(cls='no-border')
-                        else:
-                            td(cell, cls='sequence-char') """
-
-    def generate_sequence_table(self, seq1, seq2):
-        '''Generate a table-like structure with sequences and lines.
-        '''
-        max_len = max(len(seq1), len(seq2))
-        seq1 = seq1.ljust(max_len, '-')
-        seq2 = seq2.ljust(max_len, '-')
-        
-        table_content = [[], [], []]  # Three rows: seq1, lines, seq2
-        for c1, c2 in zip(seq1, seq2):
-            table_content[0].append(c1)
-            
-            if c1 == c2 or c1 == '-' or c2 == '-':
-                table_content[1].append('|')
-                table_content[2].append(c2)
-            else:
-                table_content[1].append('')  # Placeholder for the line
-                table_content[2].append(c2)
-
-
-        return table_content
-    
     # HTML functions
     def html_body(self):
         '''Build the body of the html document.
@@ -160,9 +102,7 @@ class RightPlacementPage(AbstractPage):
         
         with div(cls="column"):
             self.add_divider()
-            self.make_sequence_div()
-            self.add_divider()
-            p("Our computer analysis confirms that this bird fits into the marked position.") # TODO text
+            p("It seems that this bird fits into the marked position!")
             h2(page_subtitle)
             # p(self.texts["maintext2"]["FILL_IN"])
             self.define_infopagelink()

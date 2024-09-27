@@ -77,7 +77,7 @@ class PhylogeneticsPage(AbstractPage):
         with div():
             attr(id="header")
             h1(page_title)
-            h2(em(page_subtitle))
+            # h2(em(page_subtitle))
         return
 
     def define_backlink(self):
@@ -126,7 +126,6 @@ class PhylogeneticsPage(AbstractPage):
         '''
         with div(cls="column"):
             p(self.texts["maintext"]["FILL_IN"])
-            self.define_backlink()
             with div(cls="tree-container"):
                 h2(self.texts["heading1"]["FILL_IN"])
                 script(type="text/javascript", src="../../../javascript/toggle-tree.js")
@@ -135,6 +134,7 @@ class PhylogeneticsPage(AbstractPage):
                     tree_path = self.make_tree_img_path(non_relative=True)
                     self.plot_with_info(tree_path)
                 button("Expand / Collapse", id="bottom-toggle-button", onclick="toggleTree()")
+            self.define_backlink()
         return
 # end TitlePage
 

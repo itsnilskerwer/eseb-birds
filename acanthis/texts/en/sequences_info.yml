@@ -2,7 +2,7 @@ urltitle:
   description:
     Title of the website that asks about DNA sequences.
   FILL_IN:
-    What are such DNA sequences?
+    What are these DNA sequences?
 
 header:
   description:
@@ -13,8 +13,9 @@ header:
 maintext:
   description:
     Few sentences that describe DNA and invite to see how a sequence of DNA looks like in the brown pelican. 
-  FILL_IN: # TODO
-    When analyzing a biological sample, researchers first isolate the material that makes up the genetic code inside living cells (also called DNA). This genetic material is then fragmented (broken up into little bits). Then, the researchers make use of algorithms to puzzle together these small bits of DNA and find the entire sequence of a birds' DNA (this process is called sequencing). After sequencing, we can imagine our genetic material to look like a sequence of molecules, similar to a word comprising the letters A, C, G, and T. 
+  FILL_IN: 
+    DNA is the name for the genetic code which determines the physical characteristics of biological species. DNA is made up of 4 different building blocks. Adenine (A), Guanine (G), Thymine (T) and Cytosine (C). The bird's DNA has been analyzed by using DNA sequencing techniques. A sequencing machine reads out the bird's DNA in short sequences.These sequences are first tried to match with the DNA of other species. We noticed a sequence that could not yet be matched to a known bird species.
+# When analyzing a biological sample, researchers first isolate the material that makes up the genetic code inside living cells (also called DNA). This genetic material is then fragmented (broken up into little bits). Then, the researchers make use of algorithms to puzzle together these small bits of DNA and find the entire sequence of a birds' DNA (this process is called sequencing). After sequencing, we can imagine our genetic material to look like a sequence of molecules, similar to a word comprising the letters A, C, G, and T. 
 # Here is an example of a part of the DNA of the brown pelican.
 # For identifying the species to which the DNA sequence belongs, we can use a small part of the sequence and compare it with the DNA of other species.
 
@@ -23,7 +24,7 @@ sequenceinfo:
   description:
     Title of the details tag that shows/hides the sequence of the brown pelican.
   FILL_IN:
-    Show DNA sequence of brown pelican
+    Show me an example DNA sequence (Brown Pelican)
 
 button:
   description:

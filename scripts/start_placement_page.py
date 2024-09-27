@@ -132,7 +132,7 @@ class StartPlacementPage(AbstractPage):
         # we use this as image alternativ text
         license_info = "These are the birds we already know from greece."
         # this is the image caption
-        license_link = self.texts["imgtext"]["FILL_IN"] # TODO edit text
+        license_link = self.texts["imgtext"]["FILL_IN"]
         # it is a tree
         img_content = "tree"
         with div():
@@ -171,31 +171,31 @@ class StartPlacementPage(AbstractPage):
                 raw(f"{sequence}<br>") # raw(f"{i}) {sequence}<br>")
         return
 
-    def column1(self): # todo all text convos
+    def column1(self): # todo Move all text convos
         '''Make the first column, which includes the tree image.
         '''
         with div(cls="column"):
             with div(cls="text-container"):
-                p("Learning about local birds is important information for airport safety staff. They have provided a small sample from a dead bird, which they couldn't yet identify. After thorough analysis of the sample, the lab has identified a short DNA sequence that is highly conserved among birds all over the world - and therefore very useful to identify bird species:") # todo edit text
+                p("Learning about local birds is important information for airport safety staff. They have provided the lab with a small sample from a dead bird to analyze. The lab has analyzed the bird sample and found a short DNA sequence that couldn't be identified.")
             with div(cls="sequence-container"):
                 self.show_sequences()
             with div(cls="sequence-container"):
                 self.define_seq_info_link()
             self.add_divider()
             with div(cls="text-container"):
-                p("With your help, this sequence needs to be correctly placed in a phylogenetic tree.")
+                p("Luckily, your lab has developed a special computer program. It can calculate the most likely placement of the unknown bird sequence, amongst its evolutionary relatives (a phylogenetic tree).")
             with div(cls="text-container"):    
                 self.link_phylogenetics_info()
             self.add_divider()
             with div(cls="text-container"): 
-                p("You remember that your team recently developed an algorithm (a mathematical computer program), which can help you identify the right bird. It can analyze DNA sequences and place the unknown species among its closest relatives in the tree of life.")
-            # p(self.texts["maintext"]["FILL_IN"]) # TODO sequences info text
+                p("Help to identify which bird species belongs to the unknown sequence.")
+            # p(self.texts["maintext"]["FILL_IN"]) 
             self.add_divider()
             with div(cls="text-container"):
-                p("Your colleague says:") # todo add something like "game texts"
+                p("Your colleague says:")
             # self.add_divider()
             with div(cls="text-container"):
-                p("I've been looking at bird sequences all week... I could really use some rest.")
+                p("I've been looking at bird pictures all week... I really need some rest.")
             self.add_divider()
             
             with div(cls="text-container"):

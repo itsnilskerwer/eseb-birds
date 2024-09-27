@@ -14,13 +14,13 @@ subheader:
   description:
     Prompt that asks which bird the sequence that was placed in the tree comes from.
   FILL_IN:
-    To which bird does this sequence belong?
+    Which bird belongs to this sequence?
 
 maintext:
   description:
     Question which bird would fit into the given position.
   FILL_IN:
-    Which among the following birds might fit on the marked position in the tree?
+    Which among the birds from the bird list might fit on the marked position in the tree?
 
 imgtext:
   description:

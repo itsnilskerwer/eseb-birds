@@ -10,8 +10,8 @@ html, body {
   height: 100%;
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
-  font-size: 24px;
-  color: #333;
+  font-size: 28px;
+  color: #f8f8f8;
   line-height: 1.8;
 }
 
@@ -103,7 +103,7 @@ a, .tree-container button, form input {
 }
 
 a:focus, a:hover, .tree-container button:hover, form input:hover {
-  background-color: #0056b3; /* Darker hue for better visibility on hover */
+  background-color: #00b314; /* Darker hue for better visibility on hover */
 }
 
 /* Hover Effects */
@@ -220,6 +220,7 @@ a:focus, a:hover, .tree-container button:hover, form input:hover {
   text-align: center;
   width: 100%;
   padding: 0.5rem;
+  color: #333;
 }
 
 .card h2 {
@@ -240,7 +241,7 @@ a:focus, a:hover, .tree-container button:hover, form input:hover {
 }
 
 .sequence {
-  font-size: 20px;
+  font-size: 28px;
 }
 
 .fixed-card {

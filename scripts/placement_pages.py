@@ -135,10 +135,9 @@ class PlacementPage(AbstractPage):
                     '<dd>~~~<span')
             sequence = sequence.replace('</span></dd>',
                     '</span>~~~</dd>')
-            h2(raw(f"{sequence}<br>")) # todo edit text below
-            p("On the phylogenetic tree, check out where the algorithm predicted a placement for this sequence. It is indicated by a '?'.")
-            # p(“Compare the bird species from the phylogenetic tree with the possible candidates list.”)
-            p("Pick and select one of the bird species from the candidate list, if you are sure it matches the placement.")
+            h2(raw(f"{sequence}<br>")) 
+            p("The computer program has provided us with a phylogenetic tree. Check out where this sequence is predicted to be placed. It is indicated by a '?'.")
+            p("Select one of the birds from the candidate list, if you think it matches the placement in the tree. HINT: Look for bird facts that are similar to the closest relatives of the predicted sequence placement.")
         return
 
     def plot_with_info(self, image_path, bird_name=None, tree=False, count=None):

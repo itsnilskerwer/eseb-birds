@@ -14,19 +14,19 @@ subheader:
   description:
     Invitation to tell the reader more about phylogenies.
   FILL_IN:
-    Let us tell you some things about phylogenetic trees.
+    
 
 maintext:
   description:
     Few sentences that descibe the idea of a phylogenetic tree.
   FILL_IN:
-    A phylogenetic tree (also phylogeny or evolutionary tree) is a branching diagram or a tree showing the evolutionary relationships among various biological species or other entities based upon similarities and differences in their physical or genetic characteristics. All life on Earth is part of a single phylogenetic tree, indicating common ancestry.
+    All life on Earth is part of a single phylogenetic tree, indicating common ancestry. Phylogenetic trees detail the evolutionary relationships among biological species based upon similarities and differences in their genetic or physical characteristics. 
 
 button:
   description:
     Button that leads back to the starting page.
   FILL_IN:
-    Awesome, now i know what phylogenetic trees are. Let's go back.
+    Awesome, now I know what phylogenetic trees are. Let's go back.
 
 heading1:
   description:
